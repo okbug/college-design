@@ -2,6 +2,7 @@
   <div class="pptist-editor">
     <EditorHeader class="layout-header" />
     <div class="layout-content">
+      <!-- 左边的缩略图 -->
       <Thumbnails class="layout-content-left" />
       <div class="layout-content-center">
         <CanvasTool class="center-top" />

@@ -2,7 +2,7 @@
   <div
     class="canvas"
     ref="canvasRef"
-    @mousewheel="$event => handleMousewheelCanvas($event)"
+    @mousewheel="($event: WheelEvent) => handleMousewheelCanvas($event)"
     @mousedown="$event => handleClickBlankArea($event)"
     v-contextmenu="contextmenus"
     v-click-outside="removeEditorAreaFocus"
