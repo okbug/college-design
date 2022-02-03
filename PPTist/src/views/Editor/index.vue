@@ -8,8 +8,8 @@
         <CanvasTool class="center-top" />
         <Canvas class="center-body" :style="{ height: `calc(100% - ${remarkHeight + 40}px)` }" />
         <Remark
-          class="center-bottom" 
-          v-model:height="remarkHeight" 
+          class="center-bottom"
+          v-model:height="remarkHeight"
           :style="{ height: `${remarkHeight}px` }"
         />
       </div>
@@ -18,8 +18,8 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
 import useGlobalHotkey from '@/hooks/useGlobalHotkey'
 import usePasteEvent from '@/hooks/usePasteEvent'
@@ -31,27 +31,12 @@ import Thumbnails from './Thumbnails/index.vue'
 import Toolbar from './Toolbar/index.vue'
 import Remark from './Remark/index.vue'
 
-export default defineComponent({
-  name: 'editor',
-  components: {
-    EditorHeader,
-    Canvas,
-    CanvasTool,
-    Thumbnails,
-    Toolbar,
-    Remark,
-  },
-  setup() {
-    const remarkHeight = ref(40)
 
-    useGlobalHotkey()
-    usePasteEvent()
+const remarkHeight = ref(40)
 
-    return {
-      remarkHeight,
-    }
-  },
-})
+useGlobalHotkey()
+usePasteEvent()
+
 </script>
 
 <style lang="scss" scoped>

@@ -10,18 +10,14 @@
     />
     <div class="thumbnail-list">
       <div class="thumbnail-item" v-for="(slide, index) in slides" :key="slide.id">
-        <ThumbnailSlide 
-          :slide="slide" 
-          :size="slideWidth" 
-          :visible="index < slidesLoadLimit" 
-        />
+        <ThumbnailSlide :slide="slide" :size="slideWidth" :visible="index < slidesLoadLimit" />
       </div>
     </div>
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, onMounted, ref } from 'vue'
+<script lang="ts" setup>
+import { onMounted, ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useSlidesStore } from '@/store'
 import useScreening from '@/hooks/useScreening'
@@ -29,33 +25,18 @@ import useLoadSlides from '@/hooks/useLoadSlides'
 
 import ThumbnailSlide from '@/views/components/ThumbnailSlide/index.vue'
 
-export default defineComponent({
-  name: 'thumbnails',
-  components: {
-    ThumbnailSlide,
-  },
-  setup() {
-    const { slides } = storeToRefs(useSlidesStore())
+const { slides } = storeToRefs(useSlidesStore())
 
-    const { slidesLoadLimit } = useLoadSlides()
-    const { enterScreening } = useScreening()
+const { slidesLoadLimit } = useLoadSlides()
+// eslint-disable-next-line
+const { enterScreening } = useScreening()
 
-    const mobileRef = ref<HTMLElement>()
-    const slideWidth = ref(0)
+const mobileRef = ref<HTMLElement>()
+const slideWidth = ref(0)
 
-    onMounted(() => {
-      if (!mobileRef.value) return
-      slideWidth.value = mobileRef.value.clientWidth - 10
-    })
-
-    return {
-      slides,
-      slidesLoadLimit,
-      mobileRef,
-      slideWidth,
-      enterScreening,
-    }
-  },
+onMounted(() => {
+  if (!mobileRef.value) return
+  slideWidth.value = mobileRef.value.clientWidth - 10
 })
 </script>
 
