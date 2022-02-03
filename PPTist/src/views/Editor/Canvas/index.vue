@@ -1,6 +1,6 @@
 <template>
-  <div 
-    class="canvas" 
+  <div
+    class="canvas"
     ref="canvasRef"
     @mousewheel="$event => handleMousewheelCanvas($event)"
     @mousedown="$event => handleClickBlankArea($event)"
@@ -11,7 +11,7 @@
       v-if="creatingElement"
       @created="data => insertElementFromCreateSelection(data)"
     />
-    <div 
+    <div
       class="viewport-wrapper"
       :style="{
         width: viewportStyles.width * canvasScale + 'px',
@@ -21,20 +21,20 @@
       }"
     >
       <div class="operates">
-        <AlignmentLine 
-          v-for="(line, index) in alignmentLines" 
-          :key="index" 
-          :type="line.type" 
-          :axis="line.axis" 
+        <AlignmentLine
+          v-for="(line, index) in alignmentLines"
+          :key="index"
+          :type="line.type"
+          :axis="line.axis"
           :length="line.length"
         />
-        <MultiSelectOperate 
+        <MultiSelectOperate
           v-if="activeElementIdList.length > 1"
           :elementList="elementList"
           :scaleMultiElement="scaleMultiElement"
         />
         <Operate
-          v-for="element in elementList" 
+          v-for="element in elementList"
           :key="element.id"
           :elementInfo="element"
           :isSelected="activeElementIdList.includes(element.id)"
@@ -49,21 +49,17 @@
         <ViewportBackground />
       </div>
 
-      <div 
-        class="viewport" 
-        ref="viewportRef"
-        :style="{ transform: `scale(${canvasScale})` }"
-      >
-        <MouseSelection 
+      <div class="viewport" ref="viewportRef" :style="{ transform: `scale(${canvasScale})` }">
+        <MouseSelection
           v-if="mouseSelectionState.isShow"
-          :top="mouseSelectionState.top" 
-          :left="mouseSelectionState.left" 
-          :width="mouseSelectionState.width" 
-          :height="mouseSelectionState.height" 
+          :top="mouseSelectionState.top"
+          :left="mouseSelectionState.left"
+          :width="mouseSelectionState.width"
+          :height="mouseSelectionState.height"
           :quadrant="mouseSelectionState.quadrant"
-        />      
-        <EditableElement 
-          v-for="(element, index) in elementList" 
+        />
+        <EditableElement
+          v-for="(element, index) in elementList"
           :key="element.id"
           :elementInfo="element"
           :elementIndex="index + 1"
@@ -74,13 +70,7 @@
       </div>
     </div>
 
-    <Modal
-      v-model:visible="linkDialogVisible" 
-      :footer="null" 
-      centered
-      :width="540"
-      destroyOnClose
-    >
+    <Modal v-model:visible="linkDialogVisible" :footer="null" centered :width="540" destroyOnClose>
       <LinkDialog @close="linkDialogVisible = false" />
     </Modal>
   </div>
@@ -194,7 +184,11 @@ export default defineComponent({
 
     // 移除画布编辑区域焦点
     const removeEditorAreaFocus = () => {
-      if (editorAreaFocus.value) mainStore.setEditorareaFocus(false)
+      if (!editorAreaFocus.value) {
+        return
+      }
+
+      mainStore.setEditorareaFocus(false)
     }
 
     // 滚动鼠标
@@ -225,6 +219,7 @@ export default defineComponent({
     // 在鼠标绘制的范围插入元素
     const { insertElementFromCreateSelection } = useInsertFromCreateSelection(viewportRef)
 
+    // 右键菜单
     const contextmenus = (): ContextmenuItem[] => {
       return [
         {
