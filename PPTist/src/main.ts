@@ -1,6 +1,7 @@
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import App from './App.vue'
+import {router} from './router'
 
 import '@icon-park/vue-next/styles/index.css'
 import 'prosemirror-view/style/prosemirror.css'
@@ -63,6 +64,7 @@ app.component('Drawer', Drawer)
 app.component('Spin', Spin)
 app.component('Alert', Alert)
 
+app.use(router)
 app.use(Icon)
 app.use(Component)
 app.use(Directive)
