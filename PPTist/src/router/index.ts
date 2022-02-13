@@ -14,6 +14,6 @@ const routes = [
 ]
 
 export const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHashHistory('ppt'),
   routes,
 })

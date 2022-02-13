@@ -29,13 +29,13 @@ const props = defineProps({
 // }
 
 
-
-fetch('http://localhost:3000/test1').then(j => j.json())
-  .then((res) => {
-    console.log(res)
-    const slides = useImport()
-    slides.value = res
-  })
+// 获得当前URL下的PPT
+// fetch('http://localhost:3000/test1').then(j => j.json())
+//   .then((res) => {
+//     console.log(res)
+//     const slides = useImport()
+//     slides.value = res
+//   })
 const mainStore = useMainStore()
 const snapshotStore = useSnapshotStore()
 const { screening } = storeToRefs(useScreenStore())

@@ -11,3 +11,11 @@ interface Document {
   mozCancelFullScreen(): Promise<void>;
   webkitCancelFullScreen(): Promise<void>;
 }
+
+interface Window {
+  __POWERED_BY_QIANKUN__: boolean;
+}
+
+interface globalThis {
+  __POWERED_BY_QIANKUN__: boolean;
+}

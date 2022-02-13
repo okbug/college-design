@@ -35,7 +35,11 @@ import {
   Spin,
   Alert,
 } from 'ant-design-vue'
+declare const window: {
+  __POWERED_BY_QIANKUN__: boolean;
+}
 
+const flag = window.__POWERED_BY_QIANKUN__
 const app = createApp(App)
 
 app.component('InputNumber', InputNumber)
@@ -64,10 +68,39 @@ app.component('Drawer', Drawer)
 app.component('Spin', Spin)
 app.component('Alert', Alert)
 
+
+
 app.use(router)
 app.use(Icon)
 app.use(Component)
 app.use(Directive)
 
 app.use(createPinia())
-app.mount('#app')
+
+if (flag) {
+  console.log('at qiankun!')
+}
+else {
+  app.mount('#app')
+}
+
+
+export async function bootstrap() {
+  await console.log('vue app bootstraped')
+}
+
+export async function mount(props: any) {
+  console.log('props from main app', props)
+  // render();
+  await app.mount('#app')
+
+  const a = props.a
+  a()
+}
+
+export async function unmount() {
+  await console.log('unmount')
+}
+export async function update(props: any) {
+  await console.log('update props', props)
+}

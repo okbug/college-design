@@ -1,7 +1,8 @@
-const StyleLintPlugin = require('stylelint-webpack-plugin')
+const StyleLintPlugin = require("stylelint-webpack-plugin");
+const packageName = require('./package.json').name;
 
 module.exports = {
-  publicPath: './',
+  publicPath: "./",
   css: {
     loaderOptions: {
       sass: {
@@ -13,10 +14,10 @@ module.exports = {
       less: {
         lessOptions: {
           modifyVars: {
-            'primary-color': '#d14424',
-            'text-color': '#41464b',
-            'font-size-base': '13px',
-            'border-radius-base': '2px',
+            "primary-color": "#d14424",
+            "text-color": "#41464b",
+            "font-size-base": "13px",
+            "border-radius-base": "2px",
           },
           javascriptEnabled: true,
         },
@@ -26,11 +27,22 @@ module.exports = {
   configureWebpack: {
     plugins: [
       new StyleLintPlugin({
-        files: ['src/**/*.{vue,html,css,scss,sass,less}'],
+        files: ["src/**/*.{vue,html,css,scss,sass,less}"],
         failOnError: false,
         cache: false,
         fix: false,
       }),
     ],
+    // 微前端配置
+    output: {
+      library: `${packageName}-[name]`,
+      libraryTarget: "umd",
+      jsonpFunction: `webpackJsonp_${packageName}`,
+    },
   },
-}
+  devServer: {
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+    },
+  },
+};
