@@ -15,15 +15,20 @@ registerMicroApps([
         }
     }
   },
+  {
+    name: 'docute', // 和子应用 package.json 中name字段相同
+    entry: '//localhost:3000',
+    container: '#main',
+    activeRule: '#/doc',
+    props: {
+        a() {
+            console.log('this is a function in main app');
+        }
+    }
+  },
 ]);
 
 start();
-
-window.addEventListener('popstate', () => {
-    console.log('popstate')
-})
-
-
 
 ReactDOM.render(<App />, document.getElementById("react-app"))
 
