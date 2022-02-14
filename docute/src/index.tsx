@@ -11,23 +11,21 @@ if (!flag) {
   render()
 }
 
-render()
+console.log('react child app')
+
+// render()
 export async function bootstrap() {
-  await console.log("vue app bootstraped");
+  console.log("react app bootstraped");
 }
 
 export async function mount(props: any) {
   console.log("props from main app", props);
-  await render();
-  // await app.mount('#app')
-
-  const a = props.a;
-  a();
+  render();
 }
 
 export async function unmount() {
-  await console.log("unmount");
+  console.log("unmount");
 }
 export async function update(props: any) {
-  await console.log("update props", props);
+  console.log("update props", props);
 }
