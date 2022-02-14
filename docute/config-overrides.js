@@ -1,6 +1,5 @@
 const {
     override,
-    addPostcssPlugins,
     overrideDevServer
   } = require('customize-cra')
   const path = require('path')
@@ -17,7 +16,8 @@ const {
       'devServer': overrideDevServer(
         (config) => {
           config.headers = config.headers || {}
-          config.headers['Access-Control-Allow-Origin'] = '*'
+          config.headers['Access-Control-Allow-Origin'] = '*';
+          config.historyApiFallback = true;
           return config
         }
       )
