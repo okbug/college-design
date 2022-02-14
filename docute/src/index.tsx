@@ -1,17 +1,38 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 import App from "./App";
+import Vditor from "vditor";
+import "vditor/src/assets/scss/index.scss";
 
 async function render() {
-  ReactDOM.render(<App />, document.getElementById("root"));
+  ReactDOM.render(
+    <HashRouter basename="/">
+      <Routes>
+        <Route path="/" element={<App />} />
+      </Routes>
+    </HashRouter>,
+    document.getElementById("root")
+  );
+
+  const vditor = new Vditor('editor', {
+    height: 360,
+    toolbarConfig: {
+      pin: true,
+    },
+    cache: {
+      enable: false,
+    },
+    after () {
+      vditor.setValue('Hello, Vditor + React!')
+    },
+  })
 }
 const flag = window.__POWERED_BY_QIANKUN__;
 
 if (!flag) {
-  render()
+  render();
 }
-
-console.log('react child app')
 
 // render()
 export async function bootstrap() {
