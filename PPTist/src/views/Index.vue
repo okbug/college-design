@@ -19,23 +19,12 @@ const props = defineProps({
   id: String
 })
 
-// if (props.id) {
-//   const num = Number(props.id)
-//   if (!isNaN(num)) {
-//     for (let i = 0; i < num; i++) {
-//       useImport()
-//     }
-//   }
-// }
+const fetchPPTContent = () => {
+  if (!props.id) return
+  const { id } = props
+  console.log(id)
+}
 
-
-// 获得当前URL下的PPT
-// fetch('http://localhost:3000/test1').then(j => j.json())
-//   .then((res) => {
-//     console.log(res)
-//     const slides = useImport()
-//     slides.value = res
-//   })
 const mainStore = useMainStore()
 const snapshotStore = useSnapshotStore()
 const { screening } = storeToRefs(useScreenStore())

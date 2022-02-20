@@ -1,4 +1,4 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 import Index from '../views/Index.vue'
 
 const routes = [
@@ -14,6 +14,6 @@ const routes = [
 ]
 
 export const router = createRouter({
-  history: createWebHashHistory('ppt'),
+  history: createWebHistory('/'),
   routes,
 })
