@@ -1,17 +1,20 @@
 import { registerMicroApps, start } from 'qiankun';
 import React from 'react'
 import ReactDOM from 'react-dom';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
 import App from './App.js';
+import User from './views/User/index.js'
 
 registerMicroApps([
   {
     name: 'pptist', // 和子应用 package.json 中name字段相同
     entry: '//localhost:8080',
     container: '#main',
-    activeRule: '#/ppt',
+    activeRule: '/ppt',
     props: {
         a() {
-            console.log('this is a function in main app');
+            console.log('this is a function in main app to ppt');
         }
     }
   },
@@ -22,7 +25,7 @@ registerMicroApps([
     activeRule: '/doc',
     props: {
         a() {
-            console.log('this is a function in main app');
+            console.log('this is a function in main app to doc');
         }
     }
   },
@@ -30,7 +33,18 @@ registerMicroApps([
 
 start();
 
-ReactDOM.render(<App />, document.getElementById("react-app"))
+ReactDOM.render(
+  <Router>
+    <Routes>
+      <Route path="/" element={<App />} />
+      <Route path="/ppt" element={<App />} />
+      <Route path="/doc" element={<App />} />
+      <Route path="/user" element={<User />} />
+    </Routes>
+  </Router>,
+  document.getElementById("react-app")
+);
+
 
 // loadMicroApp({
 //     name: 'pptist',

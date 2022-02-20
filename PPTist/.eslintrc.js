@@ -18,7 +18,7 @@ module.exports = {
   rules: {
     'curly': ['error', 'multi-line'],
     'eqeqeq': ['error', 'always'],
-    'semi': ['error', 'never'],
+    'semi': ['error', 'always'],
     'indent': ['error', 2, { 
       'SwitchCase': 1,
     }],

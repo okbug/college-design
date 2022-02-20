@@ -33,6 +33,10 @@ module.exports = {
         fix: false,
       }),
     ],
+    // historyRouter适配
+    devServer: {
+      historyApiFallback: true,
+    },
     // 微前端配置
     output: {
       library: `${packageName}-[name]`,
