@@ -82,18 +82,18 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, PropType, ref, watch } from 'vue'
-import { storeToRefs } from 'pinia'
-import { useMainStore, useSlidesStore } from '@/store'
-import { PPTShapeElement, ShapeText } from '@/types/slides'
-import { ContextmenuItem } from '@/components/Contextmenu/types'
-import useElementOutline from '@/views/components/element/hooks/useElementOutline'
-import useElementShadow from '@/views/components/element/hooks/useElementShadow'
-import useElementFlip from '@/views/components/element/hooks/useElementFlip'
-import useHistorySnapshot from '@/hooks/useHistorySnapshot'
+import { computed, defineComponent, PropType, ref, watch } from 'vue';
+import { storeToRefs } from 'pinia';
+import { useMainStore, useSlidesStore } from '@/store';
+import { PPTShapeElement, ShapeText } from '@/types/slides';
+import { ContextmenuItem } from '@/components/Contextmenu/types';
+import useElementOutline from '@/views/components/element/hooks/useElementOutline';
+import useElementShadow from '@/views/components/element/hooks/useElementShadow';
+import useElementFlip from '@/views/components/element/hooks/useElementFlip';
+import useHistorySnapshot from '@/hooks/useHistorySnapshot';
 
-import GradientDefs from './GradientDefs.vue'
-import ProsemirrorEditor from '@/views/components/element/ProsemirrorEditor.vue'
+import GradientDefs from './GradientDefs.vue';
+import ProsemirrorEditor from '@/views/components/element/ProsemirrorEditor.vue';
 
 export default defineComponent({
   name: 'editable-element-shape',
@@ -115,46 +115,46 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const mainStore = useMainStore()
-    const slidesStore = useSlidesStore()
-    const { handleElementId } = storeToRefs(mainStore)
+    const mainStore = useMainStore();
+    const slidesStore = useSlidesStore();
+    const { handleElementId } = storeToRefs(mainStore);
 
-    const { addHistorySnapshot } = useHistorySnapshot()
+    const { addHistorySnapshot } = useHistorySnapshot();
 
     const handleSelectElement = (e: MouseEvent) => {
-      if (props.elementInfo.lock) return
-      e.stopPropagation()
+      if (props.elementInfo.lock) return;
+      e.stopPropagation();
 
-      props.selectElement(e, props.elementInfo)
-    }
+      props.selectElement(e, props.elementInfo);
+    };
 
-    const outline = computed(() => props.elementInfo.outline)
-    const { outlineWidth, outlineStyle, outlineColor } = useElementOutline(outline)
+    const outline = computed(() => props.elementInfo.outline);
+    const { outlineWidth, outlineStyle, outlineColor } = useElementOutline(outline);
     
-    const shadow = computed(() => props.elementInfo.shadow)
-    const { shadowStyle } = useElementShadow(shadow)
+    const shadow = computed(() => props.elementInfo.shadow);
+    const { shadowStyle } = useElementShadow(shadow);
 
-    const flipH = computed(() => props.elementInfo.flipH)
-    const flipV = computed(() => props.elementInfo.flipV)
-    const { flipStyle } = useElementFlip(flipH, flipV)
+    const flipH = computed(() => props.elementInfo.flipH);
+    const flipV = computed(() => props.elementInfo.flipV);
+    const { flipStyle } = useElementFlip(flipH, flipV);
 
-    const editable = ref(false)
+    const editable = ref(false);
 
     const enterEditing = () => {
-      editable.value = true
-      mainStore.setEditingShapeElementId(props.elementInfo.id)
-    }
+      editable.value = true;
+      mainStore.setEditingShapeElementId(props.elementInfo.id);
+    };
 
     const exitEditing = () => {
-      editable.value = false
-      mainStore.setEditingShapeElementId('')
-    }
+      editable.value = false;
+      mainStore.setEditingShapeElementId('');
+    };
     
     watch(handleElementId, () => {
       if (handleElementId.value !== props.elementInfo.id) {
-        if (editable.value) exitEditing()
+        if (editable.value) exitEditing();
       }
-    })
+    });
 
     const text = computed<ShapeText>(() => {
       const defaultText: ShapeText = {
@@ -162,21 +162,21 @@ export default defineComponent({
         defaultFontName: '微软雅黑',
         defaultColor: '#000',
         align: 'middle',
-      }
-      if (!props.elementInfo.text) return defaultText
+      };
+      if (!props.elementInfo.text) return defaultText;
 
-      return props.elementInfo.text
-    })
+      return props.elementInfo.text;
+    });
 
     const updateText = (content: string) => {
-      const _text = { ...text.value, content }
+      const _text = { ...text.value, content };
       slidesStore.updateElement({
         id: props.elementInfo.id, 
         props: { text: _text },
-      })
+      });
       
-      addHistorySnapshot()
-    }
+      addHistorySnapshot();
+    };
 
     return {
       shadowStyle,
@@ -189,9 +189,9 @@ export default defineComponent({
       handleSelectElement,
       updateText,
       enterEditing,
-    }
+    };
   },
-})
+});
 </script>
 
 <style lang="scss" scoped>

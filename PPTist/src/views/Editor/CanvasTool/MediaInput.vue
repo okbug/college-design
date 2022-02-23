@@ -29,34 +29,34 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
-import { message } from 'ant-design-vue'
+import { defineComponent, ref } from 'vue';
+import { message } from 'ant-design-vue';
 
 export default defineComponent({
   name: 'media-input',
   emits: ['insertVideo', 'insertAudio', 'close'],
   setup(props, { emit }) {
-    const type = ref<'video' | 'audio'>('video')
+    const type = ref<'video' | 'audio'>('video');
 
-    const videoSrc = ref('https://mazwai.com/videvo_files/video/free/2019-01/small_watermarked/181004_04_Dolphins-Whale_06_preview.webm')
-    const audioSrc = ref('https://freesound.org/data/previews/614/614107_11861866-lq.mp3')
+    const videoSrc = ref('https://mazwai.com/videvo_files/video/free/2019-01/small_watermarked/181004_04_Dolphins-Whale_06_preview.webm');
+    const audioSrc = ref('https://freesound.org/data/previews/614/614107_11861866-lq.mp3');
 
     const tabs = [
       { key: 'video', label: '视频' },
       { key: 'audio', label: '音频' },
-    ]
+    ];
 
     const insertVideo = () => {
-      if (!videoSrc.value) return message.error('请先输入正确的视频地址')
-      emit('insertVideo', videoSrc.value)
-    }
+      if (!videoSrc.value) return message.error('请先输入正确的视频地址');
+      emit('insertVideo', videoSrc.value);
+    };
 
     const insertAudio = () => {
-      if (!audioSrc.value) return message.error('请先输入正确的音频地址')
-      emit('insertAudio', audioSrc.value)
-    }
+      if (!audioSrc.value) return message.error('请先输入正确的音频地址');
+      emit('insertAudio', audioSrc.value);
+    };
 
-    const close = () => emit('close')
+    const close = () => emit('close');
 
     return {
       type,
@@ -66,9 +66,9 @@ export default defineComponent({
       insertVideo,
       insertAudio,
       close,
-    }
+    };
   },
-})
+});
 </script>
 
 <style lang="scss" scoped>

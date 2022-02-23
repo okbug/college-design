@@ -1,5 +1,5 @@
-import { marks } from 'prosemirror-schema-basic'
-import { MarkSpec } from 'prosemirror-model'
+import { marks } from 'prosemirror-schema-basic';
+import { MarkSpec } from 'prosemirror-model';
 
 const subscript: MarkSpec = {
   excludes: 'subscript',
@@ -11,7 +11,7 @@ const subscript: MarkSpec = {
     },
   ],
   toDOM: () => ['sub', 0],
-}
+};
 
 const superscript: MarkSpec = {
   excludes: 'superscript',
@@ -23,7 +23,7 @@ const superscript: MarkSpec = {
     },
   ],
   toDOM: () => ['sup', 0],
-}
+};
 
 const strikethrough: MarkSpec = {
   parseDOM: [
@@ -38,7 +38,7 @@ const strikethrough: MarkSpec = {
     },
   ],
   toDOM: () => ['span', { style: 'text-decoration-line: line-through' }, 0],
-}
+};
 
 const underline: MarkSpec = {
   parseDOM: [
@@ -53,7 +53,7 @@ const underline: MarkSpec = {
     },
   ],
   toDOM: () => ['span', { style: 'text-decoration: underline' }, 0],
-}
+};
 
 const forecolor: MarkSpec = {
   attrs: {
@@ -66,12 +66,12 @@ const forecolor: MarkSpec = {
     },
   ],
   toDOM: mark => {
-    const { color } = mark.attrs
-    let style = ''
-    if (color) style += `color: ${color};`
-    return ['span', { style }, 0]
+    const { color } = mark.attrs;
+    let style = '';
+    if (color) style += `color: ${color};`;
+    return ['span', { style }, 0];
   },
-}
+};
 
 const backcolor: MarkSpec = {
   attrs: {
@@ -86,12 +86,12 @@ const backcolor: MarkSpec = {
     },
   ],
   toDOM: mark => {
-    const { backcolor } = mark.attrs
-    let style = ''
-    if (backcolor) style += `background-color: ${backcolor};`
-    return ['span', { style }, 0]
+    const { backcolor } = mark.attrs;
+    let style = '';
+    if (backcolor) style += `background-color: ${backcolor};`;
+    return ['span', { style }, 0];
   },
-}
+};
 
 const fontsize: MarkSpec = {
   attrs: {
@@ -106,12 +106,12 @@ const fontsize: MarkSpec = {
     },
   ],
   toDOM: mark => {
-    const { fontsize } = mark.attrs
-    let style = ''
-    if (fontsize) style += `font-size: ${fontsize}`
-    return ['span', { style }, 0]
+    const { fontsize } = mark.attrs;
+    let style = '';
+    if (fontsize) style += `font-size: ${fontsize}`;
+    return ['span', { style }, 0];
   },
-}
+};
 
 const fontname: MarkSpec = {
   attrs: {
@@ -123,17 +123,17 @@ const fontname: MarkSpec = {
     {
       style: 'font-family',
       getAttrs: fontname => {
-        return { fontname: fontname && typeof fontname === 'string' ? fontname.replace(/[\"\']/g, '') : '' }
+        return { fontname: fontname && typeof fontname === 'string' ? fontname.replace(/[\"\']/g, '') : '' };
       }
     },
   ],
   toDOM: mark => {
-    const { fontname } = mark.attrs
-    let style = ''
-    if (fontname) style += `font-family: ${fontname}`
-    return ['span', { style }, 0]
+    const { fontname } = mark.attrs;
+    let style = '';
+    if (fontname) style += `font-family: ${fontname}`;
+    return ['span', { style }, 0];
   },
-}
+};
 
 export default {
   ...marks,
@@ -145,4 +145,4 @@ export default {
   backcolor,
   fontsize,
   fontname,
-}
+};

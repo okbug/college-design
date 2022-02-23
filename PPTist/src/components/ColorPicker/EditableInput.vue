@@ -9,8 +9,8 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, PropType } from 'vue'
-import tinycolor, { ColorFormats } from 'tinycolor2'
+import { computed, defineComponent, PropType } from 'vue';
+import tinycolor, { ColorFormats } from 'tinycolor2';
 
 export default defineComponent({
   name: 'editable-input',
@@ -23,23 +23,23 @@ export default defineComponent({
   },
   setup(props, { emit }) {
     const val = computed(() => {
-      let _hex = ''
-      if (props.value.a < 1) _hex = tinycolor(props.value).toHex8String().toUpperCase()
-      else _hex = tinycolor(props.value).toHexString().toUpperCase()
-      return _hex.replace('#', '')
-    })
+      let _hex = '';
+      if (props.value.a < 1) _hex = tinycolor(props.value).toHex8String().toUpperCase();
+      else _hex = tinycolor(props.value).toHexString().toUpperCase();
+      return _hex.replace('#', '');
+    });
 
     const handleInput = (e: InputEvent) => {
-      const value = (e.target as HTMLInputElement).value
-      if (value.length >= 6) emit('colorChange', tinycolor(value).toRgb())
-    }
+      const value = (e.target as HTMLInputElement).value;
+      if (value.length >= 6) emit('colorChange', tinycolor(value).toRgb());
+    };
 
     return {
       val,
       handleInput,
-    }
+    };
   },
-})
+});
 </script>
 
 <style lang="scss" scoped>

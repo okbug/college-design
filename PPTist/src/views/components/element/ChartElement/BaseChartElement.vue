@@ -40,11 +40,11 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, PropType } from 'vue'
-import { PPTChartElement } from '@/types/slides'
+import { computed, defineComponent, PropType } from 'vue';
+import { PPTChartElement } from '@/types/slides';
 
-import ElementOutline from '@/views/components/element/ElementOutline.vue'
-import Chart from './Chart.vue'
+import ElementOutline from '@/views/components/element/ElementOutline.vue';
+import Chart from './Chart.vue';
 
 export default defineComponent({
   name: 'base-element-chart',
@@ -66,9 +66,9 @@ export default defineComponent({
     return {
       chartWidth: computed(() => props.needScaleSize ? props.elementInfo.width * 10 : props.elementInfo.width),
       chartHeight: computed(() => props.needScaleSize ? props.elementInfo.height * 10 : props.elementInfo.height),
-    }
+    };
   },
-})
+});
 </script>
 
 <style lang="scss" scoped>

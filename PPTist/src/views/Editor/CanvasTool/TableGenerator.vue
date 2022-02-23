@@ -52,36 +52,36 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { defineComponent, ref } from 'vue';
 
-import { message } from 'ant-design-vue'
+import { message } from 'ant-design-vue';
 
 export default defineComponent({
   name: 'table-generator',
   emits: ['insert', 'close'],
   setup(props, { emit }) {
-    const endCell = ref<number[]>([])
-    const customRow = ref(3)
-    const customCol = ref(3)
-    const isCustom = ref(false)
+    const endCell = ref<number[]>([]);
+    const customRow = ref(3);
+    const customCol = ref(3);
+    const isCustom = ref(false);
 
     const handleClickTable = () => {
-      if (!endCell.value.length) return
-      const [row, col] = endCell.value
-      emit('insert', { row, col })
-    }
+      if (!endCell.value.length) return;
+      const [row, col] = endCell.value;
+      emit('insert', { row, col });
+    };
 
     const insertCustomTable = () => {
-      if (customRow.value < 1 || customRow.value > 20) return message.warning('行数/列数必须在0~20之间！')
-      if (customCol.value < 1 || customCol.value > 20) return message.warning('行数/列数必须在0~20之间！')
-      emit('insert', { row: customRow.value, col: customCol.value })
-      isCustom.value = false
-    }
+      if (customRow.value < 1 || customRow.value > 20) return message.warning('行数/列数必须在0~20之间！');
+      if (customCol.value < 1 || customCol.value > 20) return message.warning('行数/列数必须在0~20之间！');
+      emit('insert', { row: customRow.value, col: customCol.value });
+      isCustom.value = false;
+    };
 
     const close = () => {
-      emit('close')
-      isCustom.value = false
-    }
+      emit('close');
+      isCustom.value = false;
+    };
 
     return {
       endCell,
@@ -91,9 +91,9 @@ export default defineComponent({
       insertCustomTable,
       isCustom,
       close,
-    }
+    };
   },
-})
+});
 </script>
 
 <style lang="scss" scoped>

@@ -14,13 +14,13 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, PropType } from 'vue'
-import { storeToRefs } from 'pinia'
-import { useMainStore } from '@/store'
-import { PPTLineElement } from '@/types/slides'
-import { OperateLineHandler, OperateLineHandlers } from '@/types/edit'
+import { computed, defineComponent, PropType } from 'vue';
+import { storeToRefs } from 'pinia';
+import { useMainStore } from '@/store';
+import { PPTLineElement } from '@/types/slides';
+import { OperateLineHandler, OperateLineHandlers } from '@/types/edit';
 
-import ResizeHandler from './ResizeHandler.vue'
+import ResizeHandler from './ResizeHandler.vue';
 
 export default defineComponent({
   name: 'text-element-operate',
@@ -43,7 +43,7 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const { canvasScale } = storeToRefs(useMainStore())
+    const { canvasScale } = storeToRefs(useMainStore());
 
     const resizeHandlers = computed(() => {
       const handlers = [
@@ -61,10 +61,10 @@ export default defineComponent({
             top: props.elementInfo.end[1] * canvasScale.value + 'px',
           }
         },
-      ]
+      ];
 
       if (props.elementInfo.curve || props.elementInfo.broken) {
-        const midHandler = (props.elementInfo.curve || props.elementInfo.broken) as [number, number]
+        const midHandler = (props.elementInfo.curve || props.elementInfo.broken) as [number, number];
 
         handlers.push({
           handler: OperateLineHandlers.MID,
@@ -72,14 +72,14 @@ export default defineComponent({
             left: midHandler[0] * canvasScale.value + 'px',
             top: midHandler[1] * canvasScale.value + 'px',
           }
-        })
+        });
       }
-      return handlers
-    })
+      return handlers;
+    });
 
     return {
       resizeHandlers,
-    }
+    };
   },
-})
+});
 </script>

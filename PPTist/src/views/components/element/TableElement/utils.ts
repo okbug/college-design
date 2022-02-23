@@ -1,11 +1,11 @@
-import { TableCellStyle } from '@/types/slides'
+import { TableCellStyle } from '@/types/slides';
 
 /**
  * 计算单元格文本样式
  * @param style 单元格文本样式原数据
  */
 export const getTextStyle = (style?: TableCellStyle) => {
-  if (!style) return {}
+  if (!style) return {};
   const {
     bold,
     em,
@@ -16,10 +16,10 @@ export const getTextStyle = (style?: TableCellStyle) => {
     fontsize,
     fontname,
     align,
-  } = style
+  } = style;
 
-  let textDecoration = `${underline ? 'underline' : ''} ${strikethrough ? 'line-through' : ''}`
-  if (textDecoration === ' ') textDecoration = 'none'
+  let textDecoration = `${underline ? 'underline' : ''} ${strikethrough ? 'line-through' : ''}`;
+  if (textDecoration === ' ') textDecoration = 'none';
   
   return {
     fontWeight: bold ? 'bold' : 'normal',
@@ -30,9 +30,9 @@ export const getTextStyle = (style?: TableCellStyle) => {
     fontSize: fontsize || '14px',
     fontFamily: fontname || '微软雅黑',
     textAlign: align || 'left',
-  }
-}
+  };
+};
 
 export const formatText = (text: string) => {
-  return text.replace(/\n/g, '</br>').replace(/ /g, '&nbsp;')
-}
+  return text.replace(/\n/g, '</br>').replace(/ /g, '&nbsp;');
+};

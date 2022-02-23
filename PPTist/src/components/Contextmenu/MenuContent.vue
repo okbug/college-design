@@ -31,8 +31,8 @@
 </template>
 
 <script lang="ts">
-import { PropType, defineComponent } from 'vue'
-import { ContextmenuItem } from './types'
+import { PropType, defineComponent } from 'vue';
+import { ContextmenuItem } from './types';
 
 export default defineComponent({
   name: 'menu-content',
@@ -46,7 +46,7 @@ export default defineComponent({
       required: true,
     },
   },
-})
+});
 </script>
 
 <style lang="scss" scoped>

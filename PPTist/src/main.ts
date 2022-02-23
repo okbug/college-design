@@ -1,20 +1,20 @@
-import { createApp } from 'vue'
-import { createPinia } from 'pinia'
-import App from './App.vue'
-import {router} from './router'
+import { createApp } from 'vue';
+import { createPinia } from 'pinia';
+import App from './App.vue';
+import { router } from './router';
 
-import '@icon-park/vue-next/styles/index.css'
-import 'prosemirror-view/style/prosemirror.css'
-import 'animate.css'
+import '@icon-park/vue-next/styles/index.css';
+import 'prosemirror-view/style/prosemirror.css';
+import 'animate.css';
 
-import '@/assets/styles/prosemirror.scss'
-import '@/assets/styles/global.scss'
-import '@/assets/styles/antd.scss'
-import '@/assets/styles/font.scss'
+import '@/assets/styles/prosemirror.scss';
+import '@/assets/styles/global.scss';
+import '@/assets/styles/antd.scss';
+import '@/assets/styles/font.scss';
 
-import Icon from '@/plugins/icon'
-import Component from '@/plugins/component'
-import Directive from '@/plugins/directive'
+import Icon from '@/plugins/icon';
+import Component from '@/plugins/component';
+import Directive from '@/plugins/directive';
 
 import {
   InputNumber,
@@ -34,73 +34,70 @@ import {
   Drawer,
   Spin,
   Alert,
-} from 'ant-design-vue'
+} from 'ant-design-vue';
 declare const window: {
   __POWERED_BY_QIANKUN__: boolean;
-}
+};
 
-const flag = window.__POWERED_BY_QIANKUN__
-const app = createApp(App)
+const flag = window.__POWERED_BY_QIANKUN__;
+const app = createApp(App);
 
-app.component('InputNumber', InputNumber)
-app.component('Divider', Divider)
-app.component('Button', Button)
-app.component('ButtonGroup', Button.Group)
-app.component('Tooltip', Tooltip)
-app.component('Popover', Popover)
-app.component('Slider', Slider)
-app.component('Select', Select)
-app.component('SelectOption', Select.Option)
-app.component('SelectOptGroup', Select.OptGroup)
-app.component('Switch', Switch)
-app.component('Radio', Radio)
-app.component('RadioGroup', Radio.Group)
-app.component('RadioButton', Radio.Button)
-app.component('Input', Input)
-app.component('InputGroup', Input.Group)
-app.component('TextArea', Input.TextArea)
-app.component('Modal', Modal)
-app.component('Dropdown', Dropdown)
-app.component('Menu', Menu)
-app.component('MenuItem', Menu.Item)
-app.component('Checkbox', Checkbox)
-app.component('Drawer', Drawer)
-app.component('Spin', Spin)
-app.component('Alert', Alert)
+app.component('InputNumber', InputNumber);
+app.component('Divider', Divider);
+app.component('Button', Button);
+app.component('ButtonGroup', Button.Group);
+app.component('Tooltip', Tooltip);
+app.component('Popover', Popover);
+app.component('Slider', Slider);
+app.component('Select', Select);
+app.component('SelectOption', Select.Option);
+app.component('SelectOptGroup', Select.OptGroup);
+app.component('Switch', Switch);
+app.component('Radio', Radio);
+app.component('RadioGroup', Radio.Group);
+app.component('RadioButton', Radio.Button);
+app.component('Input', Input);
+app.component('InputGroup', Input.Group);
+app.component('TextArea', Input.TextArea);
+app.component('Modal', Modal);
+app.component('Dropdown', Dropdown);
+app.component('Menu', Menu);
+app.component('MenuItem', Menu.Item);
+app.component('Checkbox', Checkbox);
+app.component('Drawer', Drawer);
+app.component('Spin', Spin);
+app.component('Alert', Alert);
 
+app.use(router);
+app.use(Icon);
+app.use(Component);
+app.use(Directive);
 
-
-app.use(router)
-app.use(Icon)
-app.use(Component)
-app.use(Directive)
-
-app.use(createPinia())
+app.use(createPinia());
 
 if (flag) {
-  console.log('at qiankun!')
+  console.log('at qiankun!');
 }
 else {
-  app.mount('#app')
+  app.mount('#app');
 }
 
-
 export async function bootstrap() {
-  await console.log('vue app bootstraped')
+  await console.log('vue app bootstraped');
 }
 
 export async function mount(props: any) {
-  console.log('props from main app', props)
+  console.log('props from main app', props);
   // render();
-  await app.mount('#app')
+  await app.mount('#app');
 
-  const a = props.a
-  a()
+  const a = props.a;
+  a();
 }
 
 export async function unmount() {
-  await console.log('unmount')
+  await app.unmount();
 }
 export async function update(props: any) {
-  await console.log('update props', props)
+  await console.log('update props', props);
 }

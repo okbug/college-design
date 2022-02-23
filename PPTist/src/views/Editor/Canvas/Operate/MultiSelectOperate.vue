@@ -21,16 +21,16 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, reactive, PropType, watchEffect, toRefs } from 'vue'
-import { storeToRefs } from 'pinia'
-import { useMainStore } from '@/store'
-import { PPTElement } from '@/types/slides'
-import { getElementListRange } from '@/utils/element'
-import { OperateResizeHandler, MultiSelectRange } from '@/types/edit'
-import useCommonOperate from '../hooks/useCommonOperate'
+import { computed, defineComponent, reactive, PropType, watchEffect, toRefs } from 'vue';
+import { storeToRefs } from 'pinia';
+import { useMainStore } from '@/store';
+import { PPTElement } from '@/types/slides';
+import { getElementListRange } from '@/utils/element';
+import { OperateResizeHandler, MultiSelectRange } from '@/types/edit';
+import useCommonOperate from '../hooks/useCommonOperate';
 
-import ResizeHandler from './ResizeHandler.vue'
-import BorderLine from './BorderLine.vue'
+import ResizeHandler from './ResizeHandler.vue';
+import BorderLine from './BorderLine.vue';
 
 export default defineComponent({
   name: 'multi-select-operate',
@@ -49,31 +49,31 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const { activeElementIdList, canvasScale } = storeToRefs(useMainStore())
+    const { activeElementIdList, canvasScale } = storeToRefs(useMainStore());
 
-    const localActiveElementList = computed(() => props.elementList.filter(el => activeElementIdList.value.includes(el.id)))
+    const localActiveElementList = computed(() => props.elementList.filter(el => activeElementIdList.value.includes(el.id)));
 
     const range = reactive({
       minX: 0,
       maxX: 0,
       minY: 0,
       maxY: 0,
-    })
+    });
 
     // 根据多选元素整体在画布中的范围，计算边框线和缩放点的位置信息
-    const width = computed(() => (range.maxX - range.minX) * canvasScale.value)
-    const height = computed(() => (range.maxY - range.minY) * canvasScale.value)
-    const { resizeHandlers, borderLines } = useCommonOperate(width, height)
+    const width = computed(() => (range.maxX - range.minX) * canvasScale.value);
+    const height = computed(() => (range.maxY - range.minY) * canvasScale.value);
+    const { resizeHandlers, borderLines } = useCommonOperate(width, height);
 
     // 计算多选元素整体在画布中的范围
     const setRange = () => {
-      const { minX, maxX, minY, maxY } = getElementListRange(localActiveElementList.value)
-      range.minX = minX
-      range.maxX = maxX
-      range.minY = minY
-      range.maxY = maxY
-    }
-    watchEffect(setRange)
+      const { minX, maxX, minY, maxY } = getElementListRange(localActiveElementList.value);
+      range.minX = minX;
+      range.maxX = maxX;
+      range.minY = minY;
+      range.maxY = maxY;
+    };
+    watchEffect(setRange);
 
     // 禁用多选状态下缩放：仅未旋转的图片和形状可以在多选状态下缩放
     const disableResize = computed(() => {
@@ -81,10 +81,10 @@ export default defineComponent({
         if (
           (item.type === 'image' || item.type === 'shape') && 
           !item.rotate
-        ) return false
-        return true
-      })
-    })
+        ) return false;
+        return true;
+      });
+    });
 
     return {
       ...toRefs(range),
@@ -92,9 +92,9 @@ export default defineComponent({
       borderLines,
       disableResize,
       resizeHandlers,
-    }
+    };
   },
-})
+});
 </script>
 
 <style lang="scss" scoped>

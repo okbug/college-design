@@ -22,6 +22,20 @@ module.exports = {
           },
         },
       },
+      {
+        test: /\.less$/i,
+        use: [
+          // compiles Less to CSS
+          'style-loader',
+          'css-loader',
+          'less-loader',
+        ],
+      },
+      {
+        test: /\.css$/,
+        exclude: /node_modules/,
+        use: ['style-loader', 'css-loader'],
+      }
     ],
   },
   plugins: [

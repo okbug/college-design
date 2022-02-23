@@ -3,8 +3,8 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from 'vue'
-import { hfmath } from './hfmath'
+import { computed, defineComponent } from 'vue';
+import { hfmath } from './hfmath';
 
 export default defineComponent({
   name: 'symbol-content',
@@ -16,16 +16,16 @@ export default defineComponent({
   },
   setup(props) {
     const svg = computed(() => {
-      const eq = new hfmath(props.latex)
+      const eq = new hfmath(props.latex);
       return eq.svg({
         SCALE_X: 10,
         SCALE_Y: 10,
-      })
-    })
+      });
+    });
 
     return {
       svg,
-    }
+    };
   },
-})
+});
 </script>

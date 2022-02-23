@@ -7,7 +7,7 @@
 <script lang="ts">
 export default {
   name: 'checkbox-button-group',
-}
+};
 </script>
 
 <style lang="scss" scoped>

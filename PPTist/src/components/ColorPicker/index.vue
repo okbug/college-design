@@ -71,17 +71,17 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onMounted, ref, watch } from 'vue'
-import tinycolor, { ColorFormats } from 'tinycolor2'
-import { debounce } from 'lodash'
+import { computed, defineComponent, onMounted, ref, watch } from 'vue';
+import tinycolor, { ColorFormats } from 'tinycolor2';
+import { debounce } from 'lodash';
 
-import Alpha from './Alpha.vue'
-import Checkboard from './Checkboard.vue'
-import Hue from './Hue.vue'
-import Saturation from './Saturation.vue'
-import EditableInput from './EditableInput.vue'
+import Alpha from './Alpha.vue';
+import Checkboard from './Checkboard.vue';
+import Hue from './Hue.vue';
+import Saturation from './Saturation.vue';
+import EditableInput from './EditableInput.vue';
 
-const RECENT_COLORS = 'RECENT_COLORS'
+const RECENT_COLORS = 'RECENT_COLORS';
 
 const presetColorConfig = [
   ['#7f7f7f', '#f2f2f2'],
@@ -94,35 +94,35 @@ const presetColorConfig = [
   ['#3f3150', '#e6e0ec'],
   ['#1e5867', '#d9eef3'],
   ['#99490f', '#fee9da'],
-]
+];
 
 const gradient = (startColor: string, endColor: string, step: number) => {
-  const _startColor = tinycolor(startColor).toRgb()
-  const _endColor = tinycolor(endColor).toRgb()
+  const _startColor = tinycolor(startColor).toRgb();
+  const _endColor = tinycolor(endColor).toRgb();
 
-  const rStep = (_endColor.r - _startColor.r) / step
-  const gStep = (_endColor.g - _startColor.g) / step
-  const bStep = (_endColor.b - _startColor.b) / step
-  const gradientColorArr = []
+  const rStep = (_endColor.r - _startColor.r) / step;
+  const gStep = (_endColor.g - _startColor.g) / step;
+  const bStep = (_endColor.b - _startColor.b) / step;
+  const gradientColorArr = [];
 
   for (let i = 0; i < step; i++) {
     const gradientColor = tinycolor({
       r: _startColor.r + rStep * i,
       g: _startColor.g + gStep * i,
       b: _startColor.b + bStep * i,
-    }).toRgbString()
-    gradientColorArr.push(gradientColor)
+    }).toRgbString();
+    gradientColorArr.push(gradientColor);
   }
-  return gradientColorArr
-}
+  return gradientColorArr;
+};
 
 const getPresetColors = () => {
-  const presetColors = []
+  const presetColors = [];
   for (const color of presetColorConfig) {
-    presetColors.push(gradient(color[1], color[0], 5))
+    presetColors.push(gradient(color[1], color[0], 5));
   }
-  return presetColors
-}
+  return presetColors;
+};
 
 export default defineComponent({
   name: 'color-picker',
@@ -141,67 +141,67 @@ export default defineComponent({
     },
   },
   setup(props, { emit }) {
-    const hue = ref(-1)
-    const recentColors = ref<string[]>([])
+    const hue = ref(-1);
+    const recentColors = ref<string[]>([]);
 
     const color = computed({
       get() {
-        return tinycolor(props.modelValue).toRgb()
+        return tinycolor(props.modelValue).toRgb();
       },
       set(rgba: ColorFormats.RGBA) {
-        const rgbaString = `rgba(${[rgba.r, rgba.g, rgba.b, rgba.a].join(',')})`
-        emit('update:modelValue', rgbaString)
+        const rgbaString = `rgba(${[rgba.r, rgba.g, rgba.b, rgba.a].join(',')})`;
+        emit('update:modelValue', rgbaString);
       },
-    })
+    });
 
-    const themeColors = ['#000000', '#ffffff', '#eeece1', '#1e497b', '#4e81bb', '#e2534d', '#9aba60', '#8165a0', '#47acc5', '#f9974c']
-    const standardColors = ['#c21401', '#ff1e02', '#ffc12a', '#ffff3a', '#90cf5b', '#00af57', '#00afee', '#0071be', '#00215f', '#72349d']
-    const presetColors = getPresetColors()
+    const themeColors = ['#000000', '#ffffff', '#eeece1', '#1e497b', '#4e81bb', '#e2534d', '#9aba60', '#8165a0', '#47acc5', '#f9974c'];
+    const standardColors = ['#c21401', '#ff1e02', '#ffc12a', '#ffff3a', '#90cf5b', '#00af57', '#00afee', '#0071be', '#00215f', '#72349d'];
+    const presetColors = getPresetColors();
 
     const currentColor = computed(() => {
-      return `rgba(${[color.value.r, color.value.g, color.value.b, color.value.a].join(',')})`
-    })
+      return `rgba(${[color.value.r, color.value.g, color.value.b, color.value.a].join(',')})`;
+    });
 
     const selectPresetColor = (colorString: string) => {
-      hue.value = tinycolor(colorString).toHsl().h
-      emit('update:modelValue', colorString)
-    }
+      hue.value = tinycolor(colorString).toHsl().h;
+      emit('update:modelValue', colorString);
+    };
 
     // 每次选择非预设颜色时，需要将该颜色加入到最近使用列表中
     const updateRecentColorsCache = debounce(function() {
-      const _color = tinycolor(color.value).toRgbString()
+      const _color = tinycolor(color.value).toRgbString();
       if (!recentColors.value.includes(_color)) {
-        recentColors.value = [_color, ...recentColors.value]
+        recentColors.value = [_color, ...recentColors.value];
 
-        const maxLength = 10
+        const maxLength = 10;
         if (recentColors.value.length > maxLength) {
-          recentColors.value = recentColors.value.slice(0, maxLength)
+          recentColors.value = recentColors.value.slice(0, maxLength);
         }
       }
-    }, 300, { trailing: true })
+    }, 300, { trailing: true });
 
     onMounted(() => {
-      const recentColorsCache = localStorage.getItem(RECENT_COLORS)
-      if (recentColorsCache) recentColors.value = JSON.parse(recentColorsCache)
-    })
+      const recentColorsCache = localStorage.getItem(RECENT_COLORS);
+      if (recentColorsCache) recentColors.value = JSON.parse(recentColorsCache);
+    });
 
     watch(recentColors, () => {
-      const recentColorsCache = JSON.stringify(recentColors.value)
-      localStorage.setItem(RECENT_COLORS, recentColorsCache)
-    })
+      const recentColorsCache = JSON.stringify(recentColors.value);
+      localStorage.setItem(RECENT_COLORS, recentColorsCache);
+    });
 
     const changeColor = (value: ColorFormats.RGBA | ColorFormats.HSLA | ColorFormats.HSVA) => {
       if ('h' in value) {
-        hue.value = value.h
-        color.value = tinycolor(value).toRgb()
+        hue.value = value.h;
+        color.value = tinycolor(value).toRgb();
       }
       else {
-        hue.value = tinycolor(value).toHsl().h
-        color.value = value
+        hue.value = tinycolor(value).toHsl().h;
+        color.value = value;
       }
 
-      updateRecentColorsCache()
-    }
+      updateRecentColorsCache();
+    };
 
     return {
       themeColors,
@@ -213,9 +213,9 @@ export default defineComponent({
       changeColor,
       selectPresetColor,
       recentColors,
-    }
+    };
   },
-})
+});
 </script>
 
 <style lang="scss" scoped>

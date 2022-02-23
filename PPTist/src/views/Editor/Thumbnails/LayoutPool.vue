@@ -12,12 +12,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import { storeToRefs } from 'pinia'
-import { useSlidesStore } from '@/store'
-import { Slide } from '@/types/slides'
+import { defineComponent } from 'vue';
+import { storeToRefs } from 'pinia';
+import { useSlidesStore } from '@/store';
+import { Slide } from '@/types/slides';
 
-import ThumbnailSlide from '@/views/components/ThumbnailSlide/index.vue'
+import ThumbnailSlide from '@/views/components/ThumbnailSlide/index.vue';
 
 export default defineComponent({
   name: 'layout-pool',
@@ -26,18 +26,18 @@ export default defineComponent({
     ThumbnailSlide,
   },
   setup(props, { emit }) {
-    const { layouts } = storeToRefs(useSlidesStore())
+    const { layouts } = storeToRefs(useSlidesStore());
 
     const selectSlideTemplate = (slide: Slide) => {
-      emit('select', slide)
-    }
+      emit('select', slide);
+    };
 
     return {
       layouts,
       selectSlideTemplate,
-    }
+    };
   },
-})
+});
 </script>
 
 <style lang="scss" scoped>

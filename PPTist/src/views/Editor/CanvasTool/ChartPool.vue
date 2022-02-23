@@ -11,24 +11,24 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent } from 'vue';
 
 export default defineComponent({
   name: 'chart-pool',
   emits: ['select'],
   setup(props, { emit }) {
-    const chartList = ['bar', 'line', 'pie']
+    const chartList = ['bar', 'line', 'pie'];
 
     const selectChart = (chart: string) => {
-      emit('select', chart)
-    }
+      emit('select', chart);
+    };
 
     return {
       chartList,
       selectChart,
-    }
+    };
   },
-})
+});
 </script>
 
 <style lang="scss" scoped>

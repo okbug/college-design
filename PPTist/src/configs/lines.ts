@@ -1,4 +1,4 @@
-import { LinePoint } from '@/types/slides'
+import { LinePoint } from '@/types/slides';
 
 
 export interface LinePoolItem {
@@ -32,4 +32,4 @@ export const LINE_LIST: PresetLine[] = [
       { path: 'M 0 0 Q 0 20 20 20', style: 'solid', points: ['', 'arrow'], isCurve: true },
     ],
   },
-]
+];

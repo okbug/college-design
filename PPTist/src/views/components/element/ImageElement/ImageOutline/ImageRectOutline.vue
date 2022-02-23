@@ -24,9 +24,9 @@
 </template>
 
 <script lang="ts">
-import { PropType, defineComponent, toRef } from 'vue'
-import { PPTElementOutline } from '@/types/slides'
-import useElementOutline from '@/views/components/element/hooks/useElementOutline'
+import { PropType, defineComponent, toRef } from 'vue';
+import { PPTElementOutline } from '@/types/slides';
+import useElementOutline from '@/views/components/element/hooks/useElementOutline';
 
 export default defineComponent({
   name: 'image-rect-outline',
@@ -52,15 +52,15 @@ export default defineComponent({
       outlineWidth,
       outlineStyle,
       outlineColor,
-    } = useElementOutline(toRef(props, 'outline'))
+    } = useElementOutline(toRef(props, 'outline'));
 
     return {
       outlineWidth,
       outlineStyle,
       outlineColor,
-    }
+    };
   },
-})
+});
 </script>
 
 <style lang="scss" scoped>

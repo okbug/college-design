@@ -87,4 +87,4 @@ export const ANIMATIONS = [
       { name: '从左飞入', value: 'lightSpeedInLeft' },
     ],
   },
-]
+];

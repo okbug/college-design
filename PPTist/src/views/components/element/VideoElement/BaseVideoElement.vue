@@ -19,8 +19,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue'
-import { PPTVideoElement } from '@/types/slides'
+import { defineComponent, PropType } from 'vue';
+import { PPTVideoElement } from '@/types/slides';
 
 export default defineComponent({
   name: 'base-element-video',
@@ -30,7 +30,7 @@ export default defineComponent({
       required: true,
     },
   },
-})
+});
 </script>
 
 <style lang="scss" scoped>

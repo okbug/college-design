@@ -26,12 +26,12 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, inject, PropType, Ref, ref } from 'vue'
-import { storeToRefs } from 'pinia'
-import { useSlidesStore } from '@/store'
-import { PPTVideoElement } from '@/types/slides'
+import { computed, defineComponent, inject, PropType, Ref, ref } from 'vue';
+import { storeToRefs } from 'pinia';
+import { useSlidesStore } from '@/store';
+import { PPTVideoElement } from '@/types/slides';
 
-import VideoPlayer from './VideoPlayer/index.vue'
+import VideoPlayer from './VideoPlayer/index.vue';
 
 export default defineComponent({
   name: 'screen-element-video',
@@ -45,19 +45,19 @@ export default defineComponent({
     },
   },
   setup() {
-    const { currentSlide } = storeToRefs(useSlidesStore())
+    const { currentSlide } = storeToRefs(useSlidesStore());
 
-    const scale: Ref<number> = inject('slideScale') || ref(1)
-    const slideId: Ref<string> = inject('slideId') || ref('')
+    const scale: Ref<number> = inject('slideScale') || ref(1);
+    const slideId: Ref<string> = inject('slideId') || ref('');
 
-    const inCurrentSlide = computed(() => currentSlide.value.id === slideId.value)
+    const inCurrentSlide = computed(() => currentSlide.value.id === slideId.value);
 
     return {
       scale,
       inCurrentSlide,
-    }
+    };
   },
-})
+});
 </script>
 
 <style lang="scss" scoped>

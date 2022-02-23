@@ -38,13 +38,13 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onMounted, ref } from 'vue'
-import { storeToRefs } from 'pinia'
-import { useMainStore, useSlidesStore } from '@/store'
-import { PPTElementLink } from '@/types/slides'
-import useLink from '@/hooks/useLink'
+import { computed, defineComponent, onMounted, ref } from 'vue';
+import { storeToRefs } from 'pinia';
+import { useMainStore, useSlidesStore } from '@/store';
+import { PPTElementLink } from '@/types/slides';
+import useLink from '@/hooks/useLink';
 
-import ThumbnailSlide from '@/views/components/ThumbnailSlide/index.vue'
+import ThumbnailSlide from '@/views/components/ThumbnailSlide/index.vue';
 
 export default defineComponent({
   name: 'link-dialog',
@@ -53,48 +53,48 @@ export default defineComponent({
     ThumbnailSlide,
   },
   setup(props, { emit }) {
-    const { handleElement } = storeToRefs(useMainStore())
-    const { slides } = storeToRefs(useSlidesStore())
+    const { handleElement } = storeToRefs(useMainStore());
+    const { slides } = storeToRefs(useSlidesStore());
 
-    const type = ref<'web' | 'slide'>('web')
-    const address = ref('')
-    const slideId = ref('')
+    const type = ref<'web' | 'slide'>('web');
+    const address = ref('');
+    const slideId = ref('');
 
     const selectedSlide = computed(() => {
-      if (!slideId.value) return null
+      if (!slideId.value) return null;
 
-      return slides.value.find(item => item.id === slideId.value) || null
-    })
+      return slides.value.find(item => item.id === slideId.value) || null;
+    });
 
     const tabs = [
       { key: 'web', label: '网页链接' },
       { key: 'slide', label: '幻灯片页面' },
-    ]
+    ];
 
-    const { setLink } = useLink()
+    const { setLink } = useLink();
 
     onMounted(() => {
       if (handleElement.value?.link) {
-        if (handleElement.value.link.type === 'web') address.value = handleElement.value.link.target
-        else if (handleElement.value.link.type === 'slide') slideId.value = handleElement.value.link.target
+        if (handleElement.value.link.type === 'web') address.value = handleElement.value.link.target;
+        else if (handleElement.value.link.type === 'slide') slideId.value = handleElement.value.link.target;
 
-        type.value = handleElement.value.link.type
+        type.value = handleElement.value.link.type;
       }
-    })
+    });
 
-    const close = () => emit('close')
+    const close = () => emit('close');
 
     const save = () => {
       const link: PPTElementLink = {
         type: type.value,
         target: type.value === 'web' ? address.value : slideId.value,
-      }
+      };
       if (handleElement.value) {
-        const success = setLink(handleElement.value, link)
-        if (success) close()
-        else address.value = ''
+        const success = setLink(handleElement.value, link);
+        if (success) close();
+        else address.value = '';
       }
-    }
+    };
 
     return {
       slides,
@@ -105,9 +105,9 @@ export default defineComponent({
       selectedSlide,
       close,
       save,
-    }
+    };
   },
-})
+});
 </script>
 
 <style lang="scss" scoped>

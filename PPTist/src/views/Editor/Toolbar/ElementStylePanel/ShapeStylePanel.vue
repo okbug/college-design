@@ -195,21 +195,21 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref, watch } from 'vue'
-import { storeToRefs } from 'pinia'
-import { useMainStore, useSlidesStore } from '@/store'
-import { PPTShapeElement, ShapeGradient, ShapeText } from '@/types/slides'
-import { WEB_FONTS } from '@/configs/font'
-import emitter, { EmitterEvents } from '@/utils/emitter'
-import useHistorySnapshot from '@/hooks/useHistorySnapshot'
+import { computed, defineComponent, ref, watch } from 'vue';
+import { storeToRefs } from 'pinia';
+import { useMainStore, useSlidesStore } from '@/store';
+import { PPTShapeElement, ShapeGradient, ShapeText } from '@/types/slides';
+import { WEB_FONTS } from '@/configs/font';
+import emitter, { EmitterEvents } from '@/utils/emitter';
+import useHistorySnapshot from '@/hooks/useHistorySnapshot';
 
-import ElementOpacity from '../common/ElementOpacity.vue'
-import ElementOutline from '../common/ElementOutline.vue'
-import ElementShadow from '../common/ElementShadow.vue'
-import ElementFlip from '../common/ElementFlip.vue'
-import ColorButton from '../common/ColorButton.vue'
+import ElementOpacity from '../common/ElementOpacity.vue';
+import ElementOutline from '../common/ElementOutline.vue';
+import ElementShadow from '../common/ElementShadow.vue';
+import ElementFlip from '../common/ElementFlip.vue';
+import ColorButton from '../common/ColorButton.vue';
 
-const webFonts = WEB_FONTS
+const webFonts = WEB_FONTS;
 
 export default defineComponent({
   name: 'shape-style-panel',
@@ -221,76 +221,76 @@ export default defineComponent({
     ColorButton,
   },
   setup() {
-    const mainStore = useMainStore()
-    const slidesStore = useSlidesStore()
-    const { handleElement, handleElementId, editingShapeElementId, richTextAttrs, availableFonts } = storeToRefs(mainStore)
+    const mainStore = useMainStore();
+    const slidesStore = useSlidesStore();
+    const { handleElement, handleElementId, editingShapeElementId, richTextAttrs, availableFonts } = storeToRefs(mainStore);
 
-    const showTextTools = computed(() => editingShapeElementId.value === handleElementId.value)
+    const showTextTools = computed(() => editingShapeElementId.value === handleElementId.value);
 
-    const fill = ref<string>()
-    const gradient = ref<ShapeGradient>()
-    const fillType = ref('fill')
-    const textAlign = ref('middle')
+    const fill = ref<string>();
+    const gradient = ref<ShapeGradient>();
+    const fillType = ref('fill');
+    const textAlign = ref('middle');
 
     watch(handleElement, () => {
-      if (!handleElement.value || handleElement.value.type !== 'shape') return
+      if (!handleElement.value || handleElement.value.type !== 'shape') return;
 
-      fill.value = handleElement.value.fill || '#000'
-      gradient.value = handleElement.value.gradient || { type: 'linear', rotate: 0, color: [fill.value, '#fff'] }
-      fillType.value = handleElement.value.gradient ? 'gradient' : 'fill'
-      textAlign.value = handleElement.value?.text?.align || 'middle'
-    }, { deep: true, immediate: true })
+      fill.value = handleElement.value.fill || '#000';
+      gradient.value = handleElement.value.gradient || { type: 'linear', rotate: 0, color: [fill.value, '#fff'] };
+      fillType.value = handleElement.value.gradient ? 'gradient' : 'fill';
+      textAlign.value = handleElement.value?.text?.align || 'middle';
+    }, { deep: true, immediate: true });
 
-    const { addHistorySnapshot } = useHistorySnapshot()
+    const { addHistorySnapshot } = useHistorySnapshot();
 
     const updateElement = (props: Partial<PPTShapeElement>) => {
-      slidesStore.updateElement({ id: handleElementId.value, props })
-      addHistorySnapshot()
-    }
+      slidesStore.updateElement({ id: handleElementId.value, props });
+      addHistorySnapshot();
+    };
 
     // 设置填充类型：渐变、纯色
     const updateFillType = (type: 'gradient' | 'fill') => {
       if (type === 'fill') {
-        slidesStore.removeElementProps({ id: handleElementId.value, propName: 'gradient' })
-        addHistorySnapshot()
+        slidesStore.removeElementProps({ id: handleElementId.value, propName: 'gradient' });
+        addHistorySnapshot();
       }
-      else updateElement({ gradient: gradient.value })
-    }
+      else updateElement({ gradient: gradient.value });
+    };
 
     // 设置渐变填充
     const updateGradient = (gradientProps: Partial<ShapeGradient>) => {
-      if (!gradient.value) return
-      const _gradient: ShapeGradient = { ...gradient.value, ...gradientProps }
-      updateElement({ gradient: _gradient })
-    }
+      if (!gradient.value) return;
+      const _gradient: ShapeGradient = { ...gradient.value, ...gradientProps };
+      updateElement({ gradient: _gradient });
+    };
 
     // 设置填充色
     const updateFill = (value: string) => {
-      updateElement({ fill: value })
-    }
+      updateElement({ fill: value });
+    };
 
     const updateTextAlign = (align: 'top' | 'middle' | 'bottom') => {
-      const _handleElement = handleElement.value as PPTShapeElement
+      const _handleElement = handleElement.value as PPTShapeElement;
       
       const defaultText: ShapeText = {
         content: '',
         defaultFontName: '微软雅黑',
         defaultColor: '#000',
         align: 'middle',
-      }
-      const _text = _handleElement.text || defaultText
-      updateElement({ text: { ..._text, align } })
-    }
+      };
+      const _text = _handleElement.text || defaultText;
+      updateElement({ text: { ..._text, align } });
+    };
 
     const fontSizeOptions = [
       '12px', '14px', '16px', '18px', '20px', '22px', '24px', '28px', '32px',
       '36px', '40px', '44px', '48px', '54px', '60px', '66px', '72px', '76px',
       '80px', '88px', '96px', '104px', '112px', '120px',
-    ]
+    ];
 
     const emitRichTextCommand = (command: string, value?: string) => {
-      emitter.emit(EmitterEvents.RICH_TEXT_COMMAND, { command, value })
-    }
+      emitter.emit(EmitterEvents.RICH_TEXT_COMMAND, { command, value });
+    };
 
     return {
       fill,
@@ -307,9 +307,9 @@ export default defineComponent({
       updateFill,
       updateGradient,
       updateTextAlign,
-    }
+    };
   },
-})
+});
 </script>
 
 <style lang="scss" scoped>

@@ -20,8 +20,8 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref, watch } from 'vue'
-import { hfmath } from './hfmath'
+import { computed, defineComponent, ref, watch } from 'vue';
+import { hfmath } from './hfmath';
 
 export default defineComponent({
   name: 'formula-content',
@@ -40,31 +40,31 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const box = ref({ x: 0, y: 0, w: 0, h: 0 })
-    const pathd = ref('')
+    const box = ref({ x: 0, y: 0, w: 0, h: 0 });
+    const pathd = ref('');
 
     watch(() => props.latex, () => {
-      const eq = new hfmath(props.latex)
-      pathd.value = eq.pathd({})
-      box.value = eq.box({})
-    }, { immediate: true })
+      const eq = new hfmath(props.latex);
+      pathd.value = eq.pathd({});
+      box.value = eq.box({});
+    }, { immediate: true });
 
     const scale = computed(() => {
-      const boxW = box.value.w + 32
-      const boxH = box.value.h + 32
+      const boxW = box.value.w + 32;
+      const boxH = box.value.h + 32;
 
       if (boxW > props.width || boxH > props.height) {
-        if (boxW / boxH > props.width / props.height) return props.width / boxW
-        return props.height / boxH
+        if (boxW / boxH > props.width / props.height) return props.width / boxW;
+        return props.height / boxH;
       }
-      return 1
-    })
+      return 1;
+    });
 
     return {
       box,
       pathd,
       scale,
-    }
+    };
   },
-})
+});
 </script>

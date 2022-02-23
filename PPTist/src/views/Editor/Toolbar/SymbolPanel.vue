@@ -18,33 +18,33 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref } from 'vue'
-import { SYMBOL_LIST } from '@/configs/symbol'
-import emitter, { EmitterEvents } from '@/utils/emitter'
+import { computed, defineComponent, ref } from 'vue';
+import { SYMBOL_LIST } from '@/configs/symbol';
+import emitter, { EmitterEvents } from '@/utils/emitter';
 
-const symbolPoolList = SYMBOL_LIST
+const symbolPoolList = SYMBOL_LIST;
 
 export default defineComponent({
   name: 'symbol-panel',
   setup() {
-    const selectedSymbolKey = ref(symbolPoolList[0].key)
+    const selectedSymbolKey = ref(symbolPoolList[0].key);
     const symbolPool = computed(() => {
-      const selectedSymbol = symbolPoolList.find(item => item.key === selectedSymbolKey.value)
-      return selectedSymbol?.children || []
-    })
+      const selectedSymbol = symbolPoolList.find(item => item.key === selectedSymbolKey.value);
+      return selectedSymbol?.children || [];
+    });
 
     const selectSymbol = (item: string) => {
-      emitter.emit(EmitterEvents.RICH_TEXT_COMMAND, { command: 'insert', value: item })
-    }
+      emitter.emit(EmitterEvents.RICH_TEXT_COMMAND, { command: 'insert', value: item });
+    };
 
     return {
       symbolPoolList,
       symbolPool,
       selectedSymbolKey,
       selectSymbol,
-    }
+    };
   },
-})
+});
 </script>
 
 <style lang="scss" scoped>

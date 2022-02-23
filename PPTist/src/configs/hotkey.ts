@@ -99,4 +99,4 @@ export const HOTKEY_DOC = [
       { label: '删除线', value: 'Ctrl + D' },
     ],
   },
-]
+];

@@ -58,20 +58,20 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
-import { storeToRefs } from 'pinia'
-import { useMainStore, useSlidesStore } from '@/store'
-import { PPTImageElement, SlideBackground } from '@/types/slides'
-import { CLIPPATHS } from '@/configs/imageClip'
-import { getImageDataURL } from '@/utils/image'
-import useHistorySnapshot from '@/hooks/useHistorySnapshot'
+import { defineComponent, ref } from 'vue';
+import { storeToRefs } from 'pinia';
+import { useMainStore, useSlidesStore } from '@/store';
+import { PPTImageElement, SlideBackground } from '@/types/slides';
+import { CLIPPATHS } from '@/configs/imageClip';
+import { getImageDataURL } from '@/utils/image';
+import useHistorySnapshot from '@/hooks/useHistorySnapshot';
 
-import ElementOutline from '../common/ElementOutline.vue'
-import ElementShadow from '../common/ElementShadow.vue'
-import ElementFlip from '../common/ElementFlip.vue'
-import ElementFilter from '../common/ElementFilter.vue'
+import ElementOutline from '../common/ElementOutline.vue';
+import ElementShadow from '../common/ElementShadow.vue';
+import ElementFlip from '../common/ElementFlip.vue';
+import ElementFilter from '../common/ElementFilter.vue';
 
-const shapeClipPathOptions = CLIPPATHS
+const shapeClipPathOptions = CLIPPATHS;
 const ratioClipOptions = [
   {
     label: '纵横比（方形）',
@@ -103,7 +103,7 @@ const ratioClipOptions = [
       { key: '16:10', ratio: 10 / 16 },
     ],
   },
-]
+];
 
 export default defineComponent({
   name: 'image-style-panel',
@@ -114,36 +114,36 @@ export default defineComponent({
     ElementFilter,
   },
   setup() {
-    const mainStore = useMainStore()
-    const slidesStore = useSlidesStore()
-    const { handleElement, handleElementId } = storeToRefs(mainStore)
-    const { currentSlide } = storeToRefs(slidesStore)
+    const mainStore = useMainStore();
+    const slidesStore = useSlidesStore();
+    const { handleElement, handleElementId } = storeToRefs(mainStore);
+    const { currentSlide } = storeToRefs(slidesStore);
 
-    const clipPanelVisible = ref(false)
+    const clipPanelVisible = ref(false);
 
-    const { addHistorySnapshot } = useHistorySnapshot()
+    const { addHistorySnapshot } = useHistorySnapshot();
 
     // 打开自由裁剪
     const clipImage = () => {
-      mainStore.setClipingImageElementId(handleElementId.value)
-      clipPanelVisible.value = false
-    }
+      mainStore.setClipingImageElementId(handleElementId.value);
+      clipPanelVisible.value = false;
+    };
 
     // 获取原始图片的位置大小
     const getImageElementDataBeforeClip = () => {
-      const _handleElement = handleElement.value as PPTImageElement
+      const _handleElement = handleElement.value as PPTImageElement;
 
       // 图片当前的位置大小和裁剪范围
-      const imgWidth = _handleElement.width
-      const imgHeight = _handleElement.height
-      const imgLeft = _handleElement.left
-      const imgTop = _handleElement.top
-      const originClipRange: [[number, number], [number, number]] = _handleElement.clip ? _handleElement.clip.range : [[0, 0], [100, 100]]
+      const imgWidth = _handleElement.width;
+      const imgHeight = _handleElement.height;
+      const imgLeft = _handleElement.left;
+      const imgTop = _handleElement.top;
+      const originClipRange: [[number, number], [number, number]] = _handleElement.clip ? _handleElement.clip.range : [[0, 0], [100, 100]];
 
-      const originWidth = imgWidth / ((originClipRange[1][0] - originClipRange[0][0]) / 100)
-      const originHeight = imgHeight / ((originClipRange[1][1] - originClipRange[0][1]) / 100)
-      const originLeft = imgLeft - originWidth * (originClipRange[0][0] / 100)
-      const originTop = imgTop - originHeight * (originClipRange[0][1] / 100)
+      const originWidth = imgWidth / ((originClipRange[1][0] - originClipRange[0][0]) / 100);
+      const originHeight = imgHeight / ((originClipRange[1][1] - originClipRange[0][1]) / 100);
+      const originLeft = imgLeft - originWidth * (originClipRange[0][0] / 100);
+      const originTop = imgTop - originHeight * (originClipRange[0][1] / 100);
 
       return {
         originClipRange,
@@ -151,12 +151,12 @@ export default defineComponent({
         originHeight,
         originLeft,
         originTop,
-      }
-    }
+      };
+    };
 
     // 预设裁剪
     const presetImageClip = (shape: string, ratio = 0) => {
-      const _handleElement = handleElement.value as PPTImageElement
+      const _handleElement = handleElement.value as PPTImageElement;
 
       const {
         originClipRange,
@@ -164,23 +164,23 @@ export default defineComponent({
         originHeight,
         originLeft,
         originTop,
-      } = getImageElementDataBeforeClip()
+      } = getImageElementDataBeforeClip();
       
       // 纵横比裁剪（形状固定为矩形）
       if (ratio) {
-        const imageRatio = originHeight / originWidth
+        const imageRatio = originHeight / originWidth;
 
-        const min = 0
-        const max = 100
-        let range: [[number, number], [number, number]]
+        const min = 0;
+        const max = 100;
+        let range: [[number, number], [number, number]];
 
         if (imageRatio > ratio) {
-          const distance = ((1 - ratio / imageRatio) / 2) * 100
-          range = [[min, distance], [max, max - distance]]
+          const distance = ((1 - ratio / imageRatio) / 2) * 100;
+          range = [[min, distance], [max, max - distance]];
         }
         else {
-          const distance = ((1 - imageRatio / ratio) / 2) * 100
-          range = [[distance, min], [max - distance, max]]
+          const distance = ((1 - imageRatio / ratio) / 2) * 100;
+          range = [[distance, min], [max - distance, max]];
         }
         slidesStore.updateElement({
           id: handleElementId.value,
@@ -191,7 +191,7 @@ export default defineComponent({
             width: originWidth * (range[1][0] - range[0][0]) / 100,
             height: originHeight * (range[1][1] - range[0][1]) / 100,
           },
-        })
+        });
       }
       // 形状裁剪（保持当前裁剪范围）
       else {
@@ -200,26 +200,26 @@ export default defineComponent({
           props: {
             clip: { ..._handleElement.clip, shape, range: originClipRange }
           },
-        })
+        });
       }
-      clipImage()
-      addHistorySnapshot()
-    }
+      clipImage();
+      addHistorySnapshot();
+    };
 
     // 替换图片（保持当前的样式）
     const replaceImage = (files: File[]) => {
-      const imageFile = files[0]
-      if (!imageFile) return
+      const imageFile = files[0];
+      if (!imageFile) return;
       getImageDataURL(imageFile).then(dataURL => {
-        const props = { src: dataURL }
-        slidesStore.updateElement({ id: handleElementId.value, props })
-      })
-      addHistorySnapshot()
-    }
+        const props = { src: dataURL };
+        slidesStore.updateElement({ id: handleElementId.value, props });
+      });
+      addHistorySnapshot();
+    };
 
     // 重置图片：清除全部样式
     const resetImage = () => {
-      const _handleElement = handleElement.value as PPTImageElement
+      const _handleElement = handleElement.value as PPTImageElement;
 
       if (_handleElement.clip) {
         const {
@@ -227,7 +227,7 @@ export default defineComponent({
           originHeight,
           originLeft,
           originTop,
-        } = getImageElementDataBeforeClip()
+        } = getImageElementDataBeforeClip();
 
         slidesStore.updateElement({
           id: handleElementId.value,
@@ -237,29 +237,29 @@ export default defineComponent({
             width: originWidth,
             height: originHeight,
           },
-        })
+        });
       }
 
       slidesStore.removeElementProps({
         id: handleElementId.value,
         propName: ['clip', 'outline', 'flip', 'shadow', 'filters'],
-      })
-      addHistorySnapshot()
-    }
+      });
+      addHistorySnapshot();
+    };
 
     // 将图片设置为背景
     const setBackgroundImage = () => {
-      const _handleElement = handleElement.value as PPTImageElement
+      const _handleElement = handleElement.value as PPTImageElement;
 
       const background: SlideBackground = {
         ...currentSlide.value.background,
         type: 'image',
         image: _handleElement.src,
         imageSize: 'cover',
-      }
-      slidesStore.updateSlide({ background })
-      addHistorySnapshot()
-    }
+      };
+      slidesStore.updateSlide({ background });
+      addHistorySnapshot();
+    };
 
     return {
       clipPanelVisible,
@@ -271,9 +271,9 @@ export default defineComponent({
       replaceImage,
       resetImage,
       setBackgroundImage,
-    }
+    };
   },
-})
+});
 </script>
 
 <style lang="scss" scoped>

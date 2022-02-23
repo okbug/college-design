@@ -1,8 +1,11 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+import Header from './Layout/Header.jsx'
+import PlayGround from './Layout/PlayGround.jsx'
 
 export default () => (<>
-    <h1>微前端主应用 APP.js</h1>
-    <h2>下面是子应用</h2>
-    <p><a href="/doc">在线文档</a></p>
-    <p><a href="/ppt">在线演示文稿</a></p>
+    <Header />
+    <Link to="/doc" className='toDoc'>在线文档</Link>
+    <Link to="/ppt" className='toPPT'>在线演示文稿</Link>
+    <PlayGround />
 </>)

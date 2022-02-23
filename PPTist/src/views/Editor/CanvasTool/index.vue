@@ -95,22 +95,22 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, ref } from 'vue'
-import { storeToRefs } from 'pinia'
-import { useMainStore, useSnapshotStore } from '@/store'
-import { getImageDataURL } from '@/utils/image'
-import { ShapePoolItem } from '@/configs/shapes'
-import { LinePoolItem } from '@/configs/lines'
-import useScaleCanvas from '@/hooks/useScaleCanvas'
-import useHistorySnapshot from '@/hooks/useHistorySnapshot'
-import useCreateElement from '@/hooks/useCreateElement'
+import { defineComponent, computed, ref } from 'vue';
+import { storeToRefs } from 'pinia';
+import { useMainStore, useSnapshotStore } from '@/store';
+import { getImageDataURL } from '@/utils/image';
+import { ShapePoolItem } from '@/configs/shapes';
+import { LinePoolItem } from '@/configs/lines';
+import useScaleCanvas from '@/hooks/useScaleCanvas';
+import useHistorySnapshot from '@/hooks/useHistorySnapshot';
+import useCreateElement from '@/hooks/useCreateElement';
 
-import ShapePool from './ShapePool.vue'
-import LinePool from './LinePool.vue'
-import ChartPool from './ChartPool.vue'
-import TableGenerator from './TableGenerator.vue'
-import MediaInput from './MediaInput.vue'
-import LaTeXEditor from '@/components/LaTeXEditor/index.vue'
+import ShapePool from './ShapePool.vue';
+import LinePool from './LinePool.vue';
+import ChartPool from './ChartPool.vue';
+import TableGenerator from './TableGenerator.vue';
+import MediaInput from './MediaInput.vue';
+import LaTeXEditor from '@/components/LaTeXEditor/index.vue';
 
 export default defineComponent({
   name: 'canvas-tool',
@@ -123,14 +123,14 @@ export default defineComponent({
     LaTeXEditor,
   },
   setup() {
-    const mainStore = useMainStore()
-    const { canvasScale } = storeToRefs(mainStore)
-    const { canUndo, canRedo } = storeToRefs(useSnapshotStore())
+    const mainStore = useMainStore();
+    const { canvasScale } = storeToRefs(mainStore);
+    const { canUndo, canRedo } = storeToRefs(useSnapshotStore());
 
-    const canvasScalePercentage = computed(() => parseInt(canvasScale.value * 100 + '') + '%')
+    const canvasScalePercentage = computed(() => parseInt(canvasScale.value * 100 + '') + '%');
 
-    const { scaleCanvas, setCanvasPercentage } = useScaleCanvas()
-    const { redo, undo } = useHistorySnapshot()
+    const { scaleCanvas, setCanvasPercentage } = useScaleCanvas();
+    const { redo, undo } = useHistorySnapshot();
 
     const {
       createImageElement,
@@ -139,45 +139,45 @@ export default defineComponent({
       createLatexElement,
       createVideoElement,
       createAudioElement,
-    } = useCreateElement()
+    } = useCreateElement();
 
     const insertImageElement = (files: File[]) => {
-      const imageFile = files[0]
-      if (!imageFile) return
-      getImageDataURL(imageFile).then(dataURL => createImageElement(dataURL))
-    }
+      const imageFile = files[0];
+      if (!imageFile) return;
+      getImageDataURL(imageFile).then(dataURL => createImageElement(dataURL));
+    };
 
-    const shapePoolVisible = ref(false)
-    const linePoolVisible = ref(false)
-    const chartPoolVisible = ref(false)
-    const tableGeneratorVisible = ref(false)
-    const mediaInputVisible = ref(false)
-    const latexEditorVisible = ref(false)
+    const shapePoolVisible = ref(false);
+    const linePoolVisible = ref(false);
+    const chartPoolVisible = ref(false);
+    const tableGeneratorVisible = ref(false);
+    const mediaInputVisible = ref(false);
+    const latexEditorVisible = ref(false);
 
     // 绘制文字范围
     const drawText = () => {
       mainStore.setCreatingElement({
         type: 'text',
-      })
-    }
+      });
+    };
 
     // 绘制形状范围
     const drawShape = (shape: ShapePoolItem) => {
       mainStore.setCreatingElement({
         type: 'shape',
         data: shape,
-      })
-      shapePoolVisible.value = false
-    }
+      });
+      shapePoolVisible.value = false;
+    };
 
     // 绘制线条路径
     const drawLine = (line: LinePoolItem) => {
       mainStore.setCreatingElement({
         type: 'line',
         data: line,
-      })
-      linePoolVisible.value = false
-    }
+      });
+      linePoolVisible.value = false;
+    };
 
     return {
       scaleCanvas,
@@ -202,9 +202,9 @@ export default defineComponent({
       createLatexElement,
       createVideoElement,
       createAudioElement,
-    }
+    };
   },
-})
+});
 </script>
 
 <style lang="scss" scoped>

@@ -36,13 +36,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import { storeToRefs } from 'pinia'
-import { useMainStore, useSlidesStore } from '@/store'
-import { PPTAudioElement } from '@/types/slides'
-import useHistorySnapshot from '@/hooks/useHistorySnapshot'
+import { defineComponent } from 'vue';
+import { storeToRefs } from 'pinia';
+import { useMainStore, useSlidesStore } from '@/store';
+import { PPTAudioElement } from '@/types/slides';
+import useHistorySnapshot from '@/hooks/useHistorySnapshot';
 
-import ColorButton from '../common/ColorButton.vue'
+import ColorButton from '../common/ColorButton.vue';
 
 export default defineComponent({
   name: 'audio-style-panel',
@@ -50,23 +50,23 @@ export default defineComponent({
     ColorButton,
   },
   setup() {
-    const slidesStore = useSlidesStore()
-    const { handleElement } = storeToRefs(useMainStore())
+    const slidesStore = useSlidesStore();
+    const { handleElement } = storeToRefs(useMainStore());
 
-    const { addHistorySnapshot } = useHistorySnapshot()
+    const { addHistorySnapshot } = useHistorySnapshot();
 
     const updateAudio = (props: Partial<PPTAudioElement>) => {
-      if (!handleElement.value) return
-      slidesStore.updateElement({ id: handleElement.value.id, props })
-      addHistorySnapshot()
-    }
+      if (!handleElement.value) return;
+      slidesStore.updateElement({ id: handleElement.value.id, props });
+      addHistorySnapshot();
+    };
 
     return {
       handleElement,
       updateAudio,
-    }
+    };
   }
-})
+});
 </script>
 
 <style lang="scss" scoped>

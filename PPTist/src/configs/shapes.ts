@@ -378,4 +378,4 @@ export const SHAPE_LIST = [
       },
     ],
   },
-]
+];

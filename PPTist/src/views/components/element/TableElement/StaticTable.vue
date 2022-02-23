@@ -44,11 +44,11 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, PropType, ref, watch } from 'vue'
-import { PPTElementOutline, TableCell, TableTheme } from '@/types/slides'
-import { getTextStyle, formatText } from './utils'
-import useHideCells from './useHideCells'
-import useSubThemeColor from './useSubThemeColor'
+import { computed, defineComponent, PropType, ref, watch } from 'vue';
+import { PPTElementOutline, TableCell, TableTheme } from '@/types/slides';
+import { getTextStyle, formatText } from './utils';
+import useHideCells from './useHideCells';
+import useSubThemeColor from './useSubThemeColor';
 
 export default defineComponent({
   name: 'static-table',
@@ -78,21 +78,21 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const colSizeList = ref<number[]>([])
-    const totalWidth = computed(() => colSizeList.value.reduce((a, b) => a + b))
+    const colSizeList = ref<number[]>([]);
+    const totalWidth = computed(() => colSizeList.value.reduce((a, b) => a + b));
 
     watch([
       () => props.colWidths,
       () => props.width,
     ], () => {
-      colSizeList.value = props.colWidths.map(item => item * props.width)
-    }, { immediate: true })
+      colSizeList.value = props.colWidths.map(item => item * props.width);
+    }, { immediate: true });
 
-    const cells = computed(() => props.data)
-    const { hideCells } = useHideCells(cells)
+    const cells = computed(() => props.data);
+    const { hideCells } = useHideCells(cells);
 
-    const theme = computed(() => props.theme)
-    const { subThemeColor } = useSubThemeColor(theme)
+    const theme = computed(() => props.theme);
+    const { subThemeColor } = useSubThemeColor(theme);
 
     return {
       colSizeList,
@@ -101,9 +101,9 @@ export default defineComponent({
       getTextStyle,
       formatText,
       subThemeColor,
-    }
+    };
   },
-})
+});
 </script>
 
 <style lang="scss" scoped>

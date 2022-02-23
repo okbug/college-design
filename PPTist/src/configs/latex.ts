@@ -71,7 +71,7 @@ export const FORMULA_LIST = [
     label: '方向导数',
     latex: `\\frac{{\\partial f}}{{\\partial l}} = \\frac{{\\partial f}}{{\\partial x}}\\cos \\phi + \\frac{{\\partial f}}{{\\partial y}}\\sin \\phi`,
   },
-]
+];
 
 export const SYMBOL_LIST = [
   {
@@ -271,4 +271,4 @@ export const SYMBOL_LIST = [
       { latex: '\\Omega' },
     ],
   },
-]
+];

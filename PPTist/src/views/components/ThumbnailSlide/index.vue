@@ -27,14 +27,14 @@
 </template>
 
 <script lang="ts">
-import { computed, PropType, defineComponent, provide } from 'vue'
-import { storeToRefs } from 'pinia'
-import { useSlidesStore } from '@/store'
-import { Slide } from '@/types/slides'
-import { VIEWPORT_SIZE } from '@/configs/canvas'
-import useSlideBackgroundStyle from '@/hooks/useSlideBackgroundStyle'
+import { computed, PropType, defineComponent, provide } from 'vue';
+import { storeToRefs } from 'pinia';
+import { useSlidesStore } from '@/store';
+import { Slide } from '@/types/slides';
+import { VIEWPORT_SIZE } from '@/configs/canvas';
+import useSlideBackgroundStyle from '@/hooks/useSlideBackgroundStyle';
 
-import ThumbnailElement from './ThumbnailElement.vue'
+import ThumbnailElement from './ThumbnailElement.vue';
 
 export default defineComponent({
   name: 'thumbnail-slide',
@@ -56,22 +56,22 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const { viewportRatio } = storeToRefs(useSlidesStore())
+    const { viewportRatio } = storeToRefs(useSlidesStore());
 
-    const background = computed(() => props.slide.background)
-    const { backgroundStyle } = useSlideBackgroundStyle(background)
+    const background = computed(() => props.slide.background);
+    const { backgroundStyle } = useSlideBackgroundStyle(background);
 
-    const scale = computed(() => props.size / VIEWPORT_SIZE)
-    provide('slideScale', scale)
+    const scale = computed(() => props.size / VIEWPORT_SIZE);
+    provide('slideScale', scale);
 
     return {
       scale,
       backgroundStyle,
       VIEWPORT_SIZE,
       viewportRatio,
-    }
+    };
   },
-})
+});
 </script>
 
 <style lang="scss" scoped>

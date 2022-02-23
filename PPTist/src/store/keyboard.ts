@@ -1,4 +1,4 @@
-import { defineStore } from 'pinia'
+import { defineStore } from 'pinia';
 
 export interface KeyboardState {
   ctrlKeyState: boolean;
@@ -13,16 +13,16 @@ export const useKeyboardStore = defineStore('keyboard', {
 
   getters: {
     ctrlOrShiftKeyActive(state) {
-      return state.ctrlKeyState || state.shiftKeyState
+      return state.ctrlKeyState || state.shiftKeyState;
     },
   },
 
   actions: {
     setCtrlKeyState(active: boolean) {
-      this.ctrlKeyState = active
+      this.ctrlKeyState = active;
     },
     setShiftKeyState(active: boolean) {
-      this.shiftKeyState = active
+      this.shiftKeyState = active;
     },
   },
-})
+});

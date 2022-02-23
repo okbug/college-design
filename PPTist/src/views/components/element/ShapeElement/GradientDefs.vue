@@ -19,7 +19,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue'
+import { defineComponent, PropType } from 'vue';
 
 export default defineComponent({
   name: 'gradient-defs',
@@ -44,5 +44,5 @@ export default defineComponent({
       default: 0,
     },
   },
-})
+});
 </script>

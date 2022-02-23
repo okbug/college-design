@@ -57,13 +57,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, watch } from 'vue'
-import { storeToRefs } from 'pinia'
-import { useMainStore, useSlidesStore } from '@/store'
-import { PPTElementShadow } from '@/types/slides'
-import useHistorySnapshot from '@/hooks/useHistorySnapshot'
+import { defineComponent, ref, watch } from 'vue';
+import { storeToRefs } from 'pinia';
+import { useMainStore, useSlidesStore } from '@/store';
+import { PPTElementShadow } from '@/types/slides';
+import useHistorySnapshot from '@/hooks/useHistorySnapshot';
 
-import ColorButton from './ColorButton.vue'
+import ColorButton from './ColorButton.vue';
 
 export default defineComponent({
   name: 'element-shadow',
@@ -71,47 +71,47 @@ export default defineComponent({
     ColorButton,
   },
   setup() {
-    const slidesStore = useSlidesStore()
-    const { handleElement } = storeToRefs(useMainStore())
+    const slidesStore = useSlidesStore();
+    const { handleElement } = storeToRefs(useMainStore());
 
-    const shadow = ref<PPTElementShadow>()
-    const hasShadow = ref(false)
+    const shadow = ref<PPTElementShadow>();
+    const hasShadow = ref(false);
 
     watch(handleElement, () => {
-      if (!handleElement.value) return
-      shadow.value = 'shadow' in handleElement.value ? handleElement.value.shadow : undefined
-      hasShadow.value = !!shadow.value
-    }, { deep: true, immediate: true })
+      if (!handleElement.value) return;
+      shadow.value = 'shadow' in handleElement.value ? handleElement.value.shadow : undefined;
+      hasShadow.value = !!shadow.value;
+    }, { deep: true, immediate: true });
 
-    const { addHistorySnapshot } = useHistorySnapshot()
+    const { addHistorySnapshot } = useHistorySnapshot();
 
     const updateShadow = (shadowProps: Partial<PPTElementShadow>) => {
-      if (!handleElement.value || !shadow.value) return
-      const _shadow = { ...shadow.value, ...shadowProps }
-      slidesStore.updateElement({ id: handleElement.value.id, props: { shadow: _shadow } })
-      addHistorySnapshot()
-    }
+      if (!handleElement.value || !shadow.value) return;
+      const _shadow = { ...shadow.value, ...shadowProps };
+      slidesStore.updateElement({ id: handleElement.value.id, props: { shadow: _shadow } });
+      addHistorySnapshot();
+    };
 
     const toggleShadow = (checked: boolean) => {
-      if (!handleElement.value) return
+      if (!handleElement.value) return;
       if (checked) {
-        const _shadow: PPTElementShadow = { h: 1, v: 1, blur: 2, color: '#000' }
-        slidesStore.updateElement({ id: handleElement.value.id, props: { shadow: _shadow } })
+        const _shadow: PPTElementShadow = { h: 1, v: 1, blur: 2, color: '#000' };
+        slidesStore.updateElement({ id: handleElement.value.id, props: { shadow: _shadow } });
       }
       else {
-        slidesStore.removeElementProps({ id: handleElement.value.id, propName: 'shadow' })
+        slidesStore.removeElementProps({ id: handleElement.value.id, propName: 'shadow' });
       }
-      addHistorySnapshot()
-    }
+      addHistorySnapshot();
+    };
 
     return {
       shadow,
       hasShadow,
       toggleShadow,
       updateShadow,
-    }
+    };
   },
-})
+});
 </script>
 
 <style lang="scss" scoped>

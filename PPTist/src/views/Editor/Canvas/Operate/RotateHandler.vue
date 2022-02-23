@@ -5,7 +5,7 @@
 <script lang="ts">
 export default {
   name: 'rotate-handler',
-}
+};
 </script>
 
 <style lang="scss" scoped>

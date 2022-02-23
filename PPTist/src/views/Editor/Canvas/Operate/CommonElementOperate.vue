@@ -28,16 +28,16 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, PropType } from 'vue'
-import { storeToRefs } from 'pinia'
-import { useMainStore } from '@/store'
-import { PPTShapeElement, PPTVideoElement, PPTLatexElement, PPTAudioElement } from '@/types/slides'
-import { OperateResizeHandler } from '@/types/edit'
-import useCommonOperate from '../hooks/useCommonOperate'
+import { computed, defineComponent, PropType } from 'vue';
+import { storeToRefs } from 'pinia';
+import { useMainStore } from '@/store';
+import { PPTShapeElement, PPTVideoElement, PPTLatexElement, PPTAudioElement } from '@/types/slides';
+import { OperateResizeHandler } from '@/types/edit';
+import useCommonOperate from '../hooks/useCommonOperate';
 
-import RotateHandler from './RotateHandler.vue'
-import ResizeHandler from './ResizeHandler.vue'
-import BorderLine from './BorderLine.vue'
+import RotateHandler from './RotateHandler.vue';
+import ResizeHandler from './ResizeHandler.vue';
+import BorderLine from './BorderLine.vue';
 
 type PPTElement = PPTShapeElement | PPTVideoElement | PPTLatexElement | PPTAudioElement
 
@@ -68,20 +68,20 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const { canvasScale } = storeToRefs(useMainStore())
+    const { canvasScale } = storeToRefs(useMainStore());
 
-    const scaleWidth = computed(() => props.elementInfo.width * canvasScale.value)
-    const scaleHeight = computed(() => props.elementInfo.height * canvasScale.value)
-    const { resizeHandlers, borderLines } = useCommonOperate(scaleWidth, scaleHeight)
+    const scaleWidth = computed(() => props.elementInfo.width * canvasScale.value);
+    const scaleHeight = computed(() => props.elementInfo.height * canvasScale.value);
+    const { resizeHandlers, borderLines } = useCommonOperate(scaleWidth, scaleHeight);
 
-    const cannotRotate = computed(() => ['video', 'audio'].includes(props.elementInfo.type))
+    const cannotRotate = computed(() => ['video', 'audio'].includes(props.elementInfo.type));
 
     return {
       scaleWidth,
       resizeHandlers,
       borderLines,
       cannotRotate,
-    }
+    };
   },
-})
+});
 </script>

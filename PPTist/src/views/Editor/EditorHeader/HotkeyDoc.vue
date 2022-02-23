@@ -11,19 +11,19 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue'
-import { HOTKEY_DOC } from '@/configs/hotkey'
+import { defineComponent } from 'vue';
+import { HOTKEY_DOC } from '@/configs/hotkey';
 
-const hotkeys = HOTKEY_DOC
+const hotkeys = HOTKEY_DOC;
 
 export default defineComponent({
   name: 'hotkey-doc',
   setup() {
     return {
       hotkeys,
-    }
+    };
   },
-})
+});
 </script>
 
 <style lang="scss" scoped>

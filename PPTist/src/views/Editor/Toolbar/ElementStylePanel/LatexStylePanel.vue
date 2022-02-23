@@ -44,15 +44,15 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onUnmounted, ref } from 'vue'
-import { storeToRefs } from 'pinia'
-import { useMainStore, useSlidesStore } from '@/store'
-import { PPTLatexElement } from '@/types/slides'
-import emitter, { EmitterEvents } from '@/utils/emitter'
-import useHistorySnapshot from '@/hooks/useHistorySnapshot'
+import { defineComponent, onUnmounted, ref } from 'vue';
+import { storeToRefs } from 'pinia';
+import { useMainStore, useSlidesStore } from '@/store';
+import { PPTLatexElement } from '@/types/slides';
+import emitter, { EmitterEvents } from '@/utils/emitter';
+import useHistorySnapshot from '@/hooks/useHistorySnapshot';
 
-import ColorButton from '../common/ColorButton.vue'
-import LaTeXEditor from '@/components/LaTeXEditor/index.vue'
+import ColorButton from '../common/ColorButton.vue';
+import LaTeXEditor from '@/components/LaTeXEditor/index.vue';
 
 export default defineComponent({
   name: 'latex-style-panel',
@@ -61,18 +61,18 @@ export default defineComponent({
     LaTeXEditor,
   },
   setup() {
-    const slidesStore = useSlidesStore()
-    const { handleElement } = storeToRefs(useMainStore())
+    const slidesStore = useSlidesStore();
+    const { handleElement } = storeToRefs(useMainStore());
 
-    const latexEditorVisible = ref(false)
+    const latexEditorVisible = ref(false);
 
-    const { addHistorySnapshot } = useHistorySnapshot()
+    const { addHistorySnapshot } = useHistorySnapshot();
 
     const updateLatex = (props: Partial<PPTLatexElement>) => {
-      if (!handleElement.value) return
-      slidesStore.updateElement({ id: handleElement.value.id, props })
-      addHistorySnapshot()
-    }
+      if (!handleElement.value) return;
+      slidesStore.updateElement({ id: handleElement.value.id, props });
+      addHistorySnapshot();
+    };
 
     const updateLatexData = (data: { path: string; latex: string; w: number; h: number; }) => {
       updateLatex({
@@ -81,24 +81,24 @@ export default defineComponent({
         width: data.w,
         height: data.h,
         viewBox: [data.w, data.h],
-      })
-    }
+      });
+    };
 
-    const openLatexEditor = () => latexEditorVisible.value = true
+    const openLatexEditor = () => latexEditorVisible.value = true;
 
-    emitter.on(EmitterEvents.OPEN_LATEX_EDITOR, openLatexEditor)
+    emitter.on(EmitterEvents.OPEN_LATEX_EDITOR, openLatexEditor);
     onUnmounted(() => {
-      emitter.off(EmitterEvents.OPEN_LATEX_EDITOR, openLatexEditor)
-    })
+      emitter.off(EmitterEvents.OPEN_LATEX_EDITOR, openLatexEditor);
+    });
 
     return {
       handleElement,
       latexEditorVisible,
       updateLatex,
       updateLatexData,
-    }
+    };
   }
-})
+});
 </script>
 
 <style lang="scss" scoped>

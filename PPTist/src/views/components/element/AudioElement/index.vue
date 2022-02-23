@@ -39,14 +39,14 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, PropType } from 'vue'
-import { storeToRefs } from 'pinia'
-import { useMainStore, useSlidesStore } from '@/store'
-import { PPTAudioElement } from '@/types/slides'
-import { ContextmenuItem } from '@/components/Contextmenu/types'
-import { VIEWPORT_SIZE } from '@/configs/canvas'
+import { computed, defineComponent, PropType } from 'vue';
+import { storeToRefs } from 'pinia';
+import { useMainStore, useSlidesStore } from '@/store';
+import { PPTAudioElement } from '@/types/slides';
+import { ContextmenuItem } from '@/components/Contextmenu/types';
+import { VIEWPORT_SIZE } from '@/configs/canvas';
 
-import AudioPlayer from './AudioPlayer.vue'
+import AudioPlayer from './AudioPlayer.vue';
 
 export default defineComponent({
   name: 'editable-element-audio',
@@ -67,42 +67,42 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const { canvasScale, handleElementId } = storeToRefs(useMainStore())
-    const { viewportRatio } = storeToRefs(useSlidesStore())
+    const { canvasScale, handleElementId } = storeToRefs(useMainStore());
+    const { viewportRatio } = storeToRefs(useSlidesStore());
 
     const audioIconSize = computed(() => {
-      return Math.min(props.elementInfo.width, props.elementInfo.height) + 'px'
-    })
+      return Math.min(props.elementInfo.width, props.elementInfo.height) + 'px';
+    });
     const audioPlayerPosition = computed(() => {
-      const canvasWidth = VIEWPORT_SIZE
-      const canvasHeight = VIEWPORT_SIZE * viewportRatio.value
+      const canvasWidth = VIEWPORT_SIZE;
+      const canvasHeight = VIEWPORT_SIZE * viewportRatio.value;
 
-      const audioWidth = 280 / canvasScale.value
-      const audioHeight = 50 / canvasScale.value
+      const audioWidth = 280 / canvasScale.value;
+      const audioHeight = 50 / canvasScale.value;
 
-      const elWidth = props.elementInfo.width
-      const elHeight = props.elementInfo.height
-      const elLeft = props.elementInfo.left
-      const elTop = props.elementInfo.top
+      const elWidth = props.elementInfo.width;
+      const elHeight = props.elementInfo.height;
+      const elLeft = props.elementInfo.left;
+      const elTop = props.elementInfo.top;
 
-      let left = 0
-      let top = elHeight
+      let left = 0;
+      let top = elHeight;
       
-      if (elLeft + audioWidth >= canvasWidth) left = elWidth - audioWidth
-      if (elTop + elHeight + audioHeight >= canvasHeight) top = -audioHeight
+      if (elLeft + audioWidth >= canvasWidth) left = elWidth - audioWidth;
+      if (elTop + elHeight + audioHeight >= canvasHeight) top = -audioHeight;
 
       return {
         left: left + 'px',
         top: top + 'px',
-      }
-    })
+      };
+    });
 
     const handleSelectElement = (e: MouseEvent) => {
-      if (props.elementInfo.lock) return
-      e.stopPropagation()
+      if (props.elementInfo.lock) return;
+      e.stopPropagation();
 
-      props.selectElement(e, props.elementInfo)
-    }
+      props.selectElement(e, props.elementInfo);
+    };
 
     return {
       canvasScale,
@@ -110,9 +110,9 @@ export default defineComponent({
       audioIconSize,
       audioPlayerPosition,
       handleSelectElement,
-    }
+    };
   },
-})
+});
 </script>
 
 <style lang="scss" scoped>

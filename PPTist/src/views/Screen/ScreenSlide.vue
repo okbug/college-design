@@ -20,14 +20,14 @@
 </template>
 
 <script lang="ts">
-import { computed, PropType, defineComponent, provide } from 'vue'
-import { storeToRefs } from 'pinia'
-import { useSlidesStore } from '@/store'
-import { Slide } from '@/types/slides'
-import { VIEWPORT_SIZE } from '@/configs/canvas'
-import useSlideBackgroundStyle from '@/hooks/useSlideBackgroundStyle'
+import { computed, PropType, defineComponent, provide } from 'vue';
+import { storeToRefs } from 'pinia';
+import { useSlidesStore } from '@/store';
+import { Slide } from '@/types/slides';
+import { VIEWPORT_SIZE } from '@/configs/canvas';
+import useSlideBackgroundStyle from '@/hooks/useSlideBackgroundStyle';
 
-import ScreenElement from './ScreenElement.vue'
+import ScreenElement from './ScreenElement.vue';
 
 export default defineComponent({
   name: 'screen-slide',
@@ -53,21 +53,21 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const { viewportRatio } = storeToRefs(useSlidesStore())
+    const { viewportRatio } = storeToRefs(useSlidesStore());
 
-    const background = computed(() => props.slide.background)
-    const { backgroundStyle } = useSlideBackgroundStyle(background)
+    const background = computed(() => props.slide.background);
+    const { backgroundStyle } = useSlideBackgroundStyle(background);
 
-    const slideId = computed(() => props.slide.id)
-    provide('slideId', slideId)
+    const slideId = computed(() => props.slide.id);
+    provide('slideId', slideId);
 
     return {
       backgroundStyle,
       VIEWPORT_SIZE,
       viewportRatio,
-    }
+    };
   },
-})
+});
 </script>
 
 <style lang="scss" scoped>
