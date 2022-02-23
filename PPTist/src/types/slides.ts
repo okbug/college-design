@@ -1,4 +1,4 @@
-import { IBarChartOptions, ILineChartOptions, IPieChartOptions } from 'chartist'
+import { IBarChartOptions, ILineChartOptions, IPieChartOptions } from 'chartist';
 
 export const enum ElementTypes {
   TEXT = 'text',

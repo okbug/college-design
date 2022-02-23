@@ -40,10 +40,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
-import WritingBoard from '@/components/WritingBoard.vue'
+import { defineComponent, ref } from 'vue';
+import WritingBoard from '@/components/WritingBoard.vue';
 
-const writingBoardColors = ['#000000', '#ffffff', '#1e497b', '#4e81bb', '#e2534d', '#9aba60', '#8165a0', '#47acc5', '#f9974c']
+const writingBoardColors = ['#000000', '#ffffff', '#1e497b', '#4e81bb', '#e2534d', '#9aba60', '#8165a0', '#47acc5', '#f9974c'];
 
 export default defineComponent({
   name: 'writing-board-tool',
@@ -52,36 +52,36 @@ export default defineComponent({
     WritingBoard,
   },
   setup(props, { emit }) {
-    const writingBoardRef = ref()
-    const writingBoardColor = ref('#e2534d')
-    const writingBoardModel = ref('pen')
-    const blackboard = ref(false)
+    const writingBoardRef = ref();
+    const writingBoardColor = ref('#e2534d');
+    const writingBoardModel = ref('pen');
+    const blackboard = ref(false);
 
     // 切换到画笔状态
     const changePen = () => {
-      writingBoardModel.value = 'pen'
-    }
+      writingBoardModel.value = 'pen';
+    };
 
     // 切换到橡皮状态
     const changeEraser = () => {
-      writingBoardModel.value = 'eraser'
-    }
+      writingBoardModel.value = 'eraser';
+    };
 
     // 清除画布上的墨迹
     const clearCanvas = () => {
-      writingBoardRef.value.clearCanvas()
-    }
+      writingBoardRef.value.clearCanvas();
+    };
 
     // 修改画笔颜色，如果当前不处于画笔状态则先切换到画笔状态
     const changeColor = (color: string) => {
-      if (writingBoardModel.value !== 'pen') writingBoardModel.value = 'pen'
-      writingBoardColor.value = color
-    }
+      if (writingBoardModel.value !== 'pen') writingBoardModel.value = 'pen';
+      writingBoardColor.value = color;
+    };
     
     // 关闭写字板
     const closeWritingBoard = () => {
-      emit('close')
-    }
+      emit('close');
+    };
 
     return {
       writingBoardRef,
@@ -94,9 +94,9 @@ export default defineComponent({
       clearCanvas,
       changeColor,
       closeWritingBoard,
-    }
+    };
   },
-})
+});
 </script>
 
 <style lang="scss" scoped>

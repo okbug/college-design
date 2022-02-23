@@ -13,9 +13,9 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from 'vue'
-import { storeToRefs } from 'pinia'
-import { useSlidesStore } from '@/store'
+import { computed, defineComponent } from 'vue';
+import { storeToRefs } from 'pinia';
+import { useSlidesStore } from '@/store';
 
 export default defineComponent({
   name: 'remark',
@@ -27,49 +27,49 @@ export default defineComponent({
     },
   },
   setup(props, { emit }) {
-    const slidesStore = useSlidesStore()
-    const { currentSlide } = storeToRefs(slidesStore)
+    const slidesStore = useSlidesStore();
+    const { currentSlide } = storeToRefs(slidesStore);
     
-    const remark = computed(() => currentSlide.value?.remark || '')
+    const remark = computed(() => currentSlide.value?.remark || '');
 
     const handleInput = (e: InputEvent) => {
-      const value = (e.target as HTMLTextAreaElement).value
-      slidesStore.updateSlide({ remark: value })
-    }
+      const value = (e.target as HTMLTextAreaElement).value;
+      slidesStore.updateSlide({ remark: value });
+    };
 
     const resize = (e: MouseEvent) => {
-      let isMouseDown = true
-      const startPageY = e.pageY
-      const originHeight = props.height
+      let isMouseDown = true;
+      const startPageY = e.pageY;
+      const originHeight = props.height;
 
       document.onmousemove = e => {
-        if (!isMouseDown) return
+        if (!isMouseDown) return;
 
-        const currentPageY = e.pageY
+        const currentPageY = e.pageY;
 
-        const moveY = currentPageY - startPageY
-        let newHeight = -moveY + originHeight
+        const moveY = currentPageY - startPageY;
+        let newHeight = -moveY + originHeight;
 
-        if (newHeight < 40) newHeight = 40
-        if (newHeight > 120) newHeight = 120
+        if (newHeight < 40) newHeight = 40;
+        if (newHeight > 120) newHeight = 120;
 
-        emit('update:height', newHeight)
-      }
+        emit('update:height', newHeight);
+      };
 
       document.onmouseup = () => {
-        isMouseDown = false
-        document.onmousemove = null
-        document.onmouseup = null
-      }
-    }
+        isMouseDown = false;
+        document.onmousemove = null;
+        document.onmouseup = null;
+      };
+    };
 
     return {
       remark,
       handleInput,
       resize,
-    }
+    };
   },
-})
+});
 </script>
 
 <style lang="scss" scoped>

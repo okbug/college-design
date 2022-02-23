@@ -192,19 +192,19 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref } from 'vue'
-import { storeToRefs } from 'pinia'
-import { useMainStore, useSlidesStore } from '@/store'
-import { Slide, SlideBackground, SlideTheme } from '@/types/slides'
-import { PRESET_THEMES } from '@/configs/theme'
-import { WEB_FONTS } from '@/configs/font'
-import useHistorySnapshot from '@/hooks/useHistorySnapshot'
+import { computed, defineComponent, ref } from 'vue';
+import { storeToRefs } from 'pinia';
+import { useMainStore, useSlidesStore } from '@/store';
+import { Slide, SlideBackground, SlideTheme } from '@/types/slides';
+import { PRESET_THEMES } from '@/configs/theme';
+import { WEB_FONTS } from '@/configs/font';
+import useHistorySnapshot from '@/hooks/useHistorySnapshot';
 
-import ColorButton from './common/ColorButton.vue'
-import { getImageDataURL } from '@/utils/image'
+import ColorButton from './common/ColorButton.vue';
+import { getImageDataURL } from '@/utils/image';
 
-const themes = PRESET_THEMES
-const webFonts = WEB_FONTS
+const themes = PRESET_THEMES;
+const webFonts = WEB_FONTS;
 
 export default defineComponent({
   name: 'slide-design-panel',
@@ -212,21 +212,21 @@ export default defineComponent({
     ColorButton,
   },
   setup() {
-    const slidesStore = useSlidesStore()
-    const { availableFonts } = storeToRefs(useMainStore())
-    const { slides, currentSlide, viewportRatio, theme } = storeToRefs(slidesStore)
+    const slidesStore = useSlidesStore();
+    const { availableFonts } = storeToRefs(useMainStore());
+    const { slides, currentSlide, viewportRatio, theme } = storeToRefs(slidesStore);
 
     const background = computed(() => {
       if (!currentSlide.value.background) {
         return {
           type: 'solid',
           value: '#fff',
-        } as SlideBackground
+        } as SlideBackground;
       }
-      return currentSlide.value.background
-    })
+      return currentSlide.value.background;
+    });
 
-    const { addHistorySnapshot } = useHistorySnapshot()
+    const { addHistorySnapshot } = useHistorySnapshot();
 
     // 设置背景模式：纯色、图片、渐变色
     const updateBackgroundType = (type: 'solid' | 'image' | 'gradient') => {
@@ -235,8 +235,8 @@ export default defineComponent({
           ...background.value,
           type: 'solid',
           color: background.value.color || '#fff',
-        }
-        slidesStore.updateSlide({ background: newBackground })
+        };
+        slidesStore.updateSlide({ background: newBackground });
       }
       else if (type === 'image') {
         const newBackground: SlideBackground = {
@@ -244,8 +244,8 @@ export default defineComponent({
           type: 'image',
           image: background.value.image || '',
           imageSize: background.value.imageSize || 'cover',
-        }
-        slidesStore.updateSlide({ background: newBackground })
+        };
+        slidesStore.updateSlide({ background: newBackground });
       }
       else {
         const newBackground: SlideBackground = {
@@ -254,24 +254,24 @@ export default defineComponent({
           gradientType: background.value.gradientType || 'linear',
           gradientColor: background.value.gradientColor || ['#fff', '#fff'],
           gradientRotate: background.value.gradientRotate || 0,
-        }
-        slidesStore.updateSlide({ background: newBackground })
+        };
+        slidesStore.updateSlide({ background: newBackground });
       }
-      addHistorySnapshot()
-    }
+      addHistorySnapshot();
+    };
 
     // 设置背景图片
     const updateBackground = (props: Partial<SlideBackground>) => {
-      slidesStore.updateSlide({ background: { ...background.value, ...props } })
-      addHistorySnapshot()
-    }
+      slidesStore.updateSlide({ background: { ...background.value, ...props } });
+      addHistorySnapshot();
+    };
 
     // 上传背景图片
     const uploadBackgroundImage = (files: File[]) => {
-      const imageFile = files[0]
-      if (!imageFile) return
-      getImageDataURL(imageFile).then(dataURL => updateBackground({ image: dataURL }))
-    }
+      const imageFile = files[0];
+      if (!imageFile) return;
+      getImageDataURL(imageFile).then(dataURL => updateBackground({ image: dataURL }));
+    };
 
     // 应用当前页背景到全部页面
     const applyBackgroundAllSlide = () => {
@@ -279,21 +279,21 @@ export default defineComponent({
         return {
           ...slide,
           background: currentSlide.value.background,
-        }
-      })
-      slidesStore.setSlides(newSlides)
-      addHistorySnapshot()
-    }
+        };
+      });
+      slidesStore.setSlides(newSlides);
+      addHistorySnapshot();
+    };
 
     // 设置主题
     const updateTheme = (themeProps: Partial<SlideTheme>) => {
-      slidesStore.setTheme(themeProps)
-    }
+      slidesStore.setTheme(themeProps);
+    };
 
     // 将当前主题应用到全部页面
     const applyThemeAllSlide = () => {
-      const newSlides: Slide[] = JSON.parse(JSON.stringify(slides.value))
-      const { themeColor, backgroundColor, fontColor, fontName } = theme.value
+      const newSlides: Slide[] = JSON.parse(JSON.stringify(slides.value));
+      const { themeColor, backgroundColor, fontColor, fontName } = theme.value;
 
       for (const slide of newSlides) {
         if (!slide.background || slide.background.type !== 'image') {
@@ -301,51 +301,51 @@ export default defineComponent({
             ...slide.background,
             type: 'solid',
             color: backgroundColor
-          }
+          };
         }
 
-        const elements = slide.elements
+        const elements = slide.elements;
         for (const el of elements) {
-          if (el.type === 'shape') el.fill = themeColor
-          else if (el.type === 'line') el.color = themeColor
+          if (el.type === 'shape') el.fill = themeColor;
+          else if (el.type === 'line') el.color = themeColor;
           else if (el.type === 'text') {
-            el.defaultColor = fontColor
-            el.defaultFontName = fontName
-            if (el.fill) el.fill = themeColor
+            el.defaultColor = fontColor;
+            el.defaultFontName = fontName;
+            if (el.fill) el.fill = themeColor;
           }
           else if (el.type === 'table') {
-            if (el.theme) el.theme.color = themeColor
+            if (el.theme) el.theme.color = themeColor;
             for (const rowCells of el.data) {
               for (const cell of rowCells) {
                 if (cell.style) {
-                  cell.style.color = fontColor
-                  cell.style.fontname = fontName
+                  cell.style.color = fontColor;
+                  cell.style.fontname = fontName;
                 }
               }
             }
           }
           else if (el.type === 'chart') {
-            el.themeColor = [themeColor]
-            el.gridColor = fontColor
+            el.themeColor = [themeColor];
+            el.gridColor = fontColor;
           }
-          else if (el.type === 'latex') el.color = fontColor
-          else if (el.type === 'audio') el.color = themeColor
+          else if (el.type === 'latex') el.color = fontColor;
+          else if (el.type === 'audio') el.color = themeColor;
         }
       }
-      slidesStore.setSlides(newSlides)
-      addHistorySnapshot()
-    }
+      slidesStore.setSlides(newSlides);
+      addHistorySnapshot();
+    };
 
     // 是否显示预设主题
-    const showPresetThemes = ref(true)
+    const showPresetThemes = ref(true);
     const togglePresetThemesVisible = () => {
-      showPresetThemes.value = !showPresetThemes.value
-    }
+      showPresetThemes.value = !showPresetThemes.value;
+    };
 
     // 设置画布尺寸（宽高比例）
     const updateViewportRatio = (value: number) => {
-      slidesStore.setViewportRatio(value)
-    }
+      slidesStore.setViewportRatio(value);
+    };
 
     return {
       availableFonts,
@@ -363,9 +363,9 @@ export default defineComponent({
       updateViewportRatio,
       showPresetThemes,
       togglePresetThemesVisible,
-    }
+    };
   },
-})
+});
 </script>
 
 <style lang="scss" scoped>

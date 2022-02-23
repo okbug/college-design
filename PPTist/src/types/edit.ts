@@ -1,5 +1,5 @@
-import { ShapePoolItem } from '@/configs/shapes'
-import { LinePoolItem } from '@/configs/lines'
+import { ShapePoolItem } from '@/configs/shapes';
+import { LinePoolItem } from '@/configs/lines';
 
 export type ElementOrderCommand = 'up' | 'down' | 'top' | 'bottom'
 

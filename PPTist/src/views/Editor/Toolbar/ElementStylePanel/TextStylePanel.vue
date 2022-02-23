@@ -218,17 +218,17 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, watch } from 'vue'
-import { storeToRefs } from 'pinia'
-import { useMainStore, useSlidesStore } from '@/store'
-import emitter, { EmitterEvents, RichTextCommand } from '@/utils/emitter'
-import { WEB_FONTS } from '@/configs/font'
-import useHistorySnapshot from '@/hooks/useHistorySnapshot'
+import { defineComponent, ref, watch } from 'vue';
+import { storeToRefs } from 'pinia';
+import { useMainStore, useSlidesStore } from '@/store';
+import emitter, { EmitterEvents, RichTextCommand } from '@/utils/emitter';
+import { WEB_FONTS } from '@/configs/font';
+import useHistorySnapshot from '@/hooks/useHistorySnapshot';
 
-import ElementOpacity from '../common/ElementOpacity.vue'
-import ElementOutline from '../common/ElementOutline.vue'
-import ElementShadow from '../common/ElementShadow.vue'
-import { PPTTextElement } from '@/types/slides'
+import ElementOpacity from '../common/ElementOpacity.vue';
+import ElementOutline from '../common/ElementOutline.vue';
+import ElementShadow from '../common/ElementShadow.vue';
+import { PPTTextElement } from '@/types/slides';
 
 const presetStyles = [
   {
@@ -301,9 +301,9 @@ const presetStyles = [
       { command: 'underline' },
     ],
   },
-]
+];
 
-const webFonts = WEB_FONTS
+const webFonts = WEB_FONTS;
 
 export default defineComponent({
   name: 'text-style-panel',
@@ -313,60 +313,60 @@ export default defineComponent({
     ElementShadow,
   },
   setup() {
-    const slidesStore = useSlidesStore()
-    const { handleElement, handleElementId, richTextAttrs, availableFonts } = storeToRefs(useMainStore())
+    const slidesStore = useSlidesStore();
+    const { handleElement, handleElementId, richTextAttrs, availableFonts } = storeToRefs(useMainStore());
 
-    const fill = ref<string>()
-    const lineHeight = ref<number>()
-    const wordSpace = ref<number>()
+    const fill = ref<string>();
+    const lineHeight = ref<number>();
+    const wordSpace = ref<number>();
 
     watch(handleElement, () => {
-      if (!handleElement.value || handleElement.value.type !== 'text') return
+      if (!handleElement.value || handleElement.value.type !== 'text') return;
 
-      fill.value = handleElement.value.fill || '#000'
-      lineHeight.value = handleElement.value.lineHeight || 1.5
-      wordSpace.value = handleElement.value.wordSpace || 0
-    }, { deep: true, immediate: true })
+      fill.value = handleElement.value.fill || '#000';
+      lineHeight.value = handleElement.value.lineHeight || 1.5;
+      wordSpace.value = handleElement.value.wordSpace || 0;
+    }, { deep: true, immediate: true });
 
     const fontSizeOptions = [
       '12px', '14px', '16px', '18px', '20px', '22px', '24px', '28px', '32px',
       '36px', '40px', '44px', '48px', '54px', '60px', '66px', '72px', '76px',
       '80px', '88px', '96px', '104px', '112px', '120px',
-    ]
-    const lineHeightOptions = [0.9, 1.0, 1.15, 1.2, 1.4, 1.5, 1.8, 2.0, 2.5, 3.0]
-    const wordSpaceOptions = [0, 1, 2, 3, 4, 5, 6, 8, 10]
+    ];
+    const lineHeightOptions = [0.9, 1.0, 1.15, 1.2, 1.4, 1.5, 1.8, 2.0, 2.5, 3.0];
+    const wordSpaceOptions = [0, 1, 2, 3, 4, 5, 6, 8, 10];
 
     // 发射富文本设置命令
     const emitRichTextCommand = (command: string, value?: string) => {
-      emitter.emit(EmitterEvents.RICH_TEXT_COMMAND, { command, value })
-    }
+      emitter.emit(EmitterEvents.RICH_TEXT_COMMAND, { command, value });
+    };
 
     // 发射富文本设置命令（批量）
     const emitBatchRichTextCommand = (payload: RichTextCommand[]) => {
-      emitter.emit(EmitterEvents.RICH_TEXT_COMMAND, payload)
-    }
+      emitter.emit(EmitterEvents.RICH_TEXT_COMMAND, payload);
+    };
 
-    const { addHistorySnapshot } = useHistorySnapshot()
+    const { addHistorySnapshot } = useHistorySnapshot();
 
     const updateElement = (props: Partial<PPTTextElement>) => {
-      slidesStore.updateElement({ id: handleElementId.value, props })
-      addHistorySnapshot()
-    }
+      slidesStore.updateElement({ id: handleElementId.value, props });
+      addHistorySnapshot();
+    };
 
     // 设置行高
     const updateLineHeight = (value: number) => {
-      updateElement({ lineHeight: value })
-    }
+      updateElement({ lineHeight: value });
+    };
 
     // 设置字间距
     const updateWordSpace = (value: number) => {
-      updateElement({ wordSpace: value })
-    }
+      updateElement({ wordSpace: value });
+    };
 
     // 设置文本框填充
     const updateFill = (value: string) => {
-      updateElement({ fill: value })
-    }
+      updateElement({ fill: value });
+    };
 
     return {
       fill,
@@ -384,9 +384,9 @@ export default defineComponent({
       emitRichTextCommand,
       emitBatchRichTextCommand,
       presetStyles,
-    }
+    };
   },
-})
+});
 </script>
 
 <style lang="scss" scoped>

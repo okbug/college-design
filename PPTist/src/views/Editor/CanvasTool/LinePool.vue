@@ -52,10 +52,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import { LINE_LIST, LinePoolItem } from '@/configs/lines'
+import { defineComponent } from 'vue';
+import { LINE_LIST, LinePoolItem } from '@/configs/lines';
 
-import LinePointMarker from '@/views/components/element/LineElement/LinePointMarker.vue'
+import LinePointMarker from '@/views/components/element/LineElement/LinePointMarker.vue';
 
 export default defineComponent({
   name: 'line-pool',
@@ -64,18 +64,18 @@ export default defineComponent({
     LinePointMarker,
   },
   setup(props, { emit }) {
-    const lineList = LINE_LIST
+    const lineList = LINE_LIST;
 
     const selectLine = (line: LinePoolItem) => {
-      emit('select', line)
-    }
+      emit('select', line);
+    };
 
     return {
       lineList,
       selectLine,
-    }
+    };
   },
-})
+});
 </script>
 
 <style lang="scss" scoped>

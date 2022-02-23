@@ -34,25 +34,25 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import { SHAPE_LIST, ShapePoolItem } from '@/configs/shapes'
+import { defineComponent } from 'vue';
+import { SHAPE_LIST, ShapePoolItem } from '@/configs/shapes';
 
 export default defineComponent({
   name: 'shape-pool',
   emits: ['select'],
   setup(props, { emit }) {
-    const shapeList = SHAPE_LIST
+    const shapeList = SHAPE_LIST;
 
     const selectShape = (shape: ShapePoolItem) => {
-      emit('select', shape)
-    }
+      emit('select', shape);
+    };
 
     return {
       shapeList,
       selectShape,
-    }
+    };
   },
-})
+});
 </script>
 
 <style lang="scss" scoped>

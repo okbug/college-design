@@ -1,8 +1,8 @@
-import { storeToRefs } from 'pinia'
-import { useSlidesStore } from '@/store'
+import { storeToRefs } from 'pinia';
+import { useSlidesStore } from '@/store';
 
 export default () => {
-  const { slides } = storeToRefs(useSlidesStore())
+  const { slides } = storeToRefs(useSlidesStore());
 
-  return slides
-}
+  return slides;
+};

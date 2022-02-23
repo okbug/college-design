@@ -41,10 +41,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue'
-import { PPTLatexElement } from '@/types/slides'
-import { ContextmenuItem } from '@/components/Contextmenu/types'
-import emitter, { EmitterEvents } from '@/utils/emitter'
+import { defineComponent, PropType } from 'vue';
+import { PPTLatexElement } from '@/types/slides';
+import { ContextmenuItem } from '@/components/Contextmenu/types';
+import emitter, { EmitterEvents } from '@/utils/emitter';
 
 export default defineComponent({
   name: 'editable-element-latex',
@@ -63,22 +63,22 @@ export default defineComponent({
   },
   setup(props) {
     const handleSelectElement = (e: MouseEvent) => {
-      if (props.elementInfo.lock) return
-      e.stopPropagation()
+      if (props.elementInfo.lock) return;
+      e.stopPropagation();
 
-      props.selectElement(e, props.elementInfo)
-    }
+      props.selectElement(e, props.elementInfo);
+    };
 
     const openLatexEditor = () => {
-      emitter.emit(EmitterEvents.OPEN_LATEX_EDITOR)
-    }
+      emitter.emit(EmitterEvents.OPEN_LATEX_EDITOR);
+    };
 
     return {
       handleSelectElement,
       openLatexEditor,
-    }
+    };
   },
-})
+});
 </script>
 
 <style lang="scss" scoped>

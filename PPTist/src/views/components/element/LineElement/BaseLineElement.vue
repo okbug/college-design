@@ -51,12 +51,12 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, PropType } from 'vue'
-import { PPTLineElement } from '@/types/slides'
-import { getLineElementPath } from '@/utils/element'
-import useElementShadow from '@/views/components/element/hooks/useElementShadow'
+import { computed, defineComponent, PropType } from 'vue';
+import { PPTLineElement } from '@/types/slides';
+import { getLineElementPath } from '@/utils/element';
+import useElementShadow from '@/views/components/element/hooks/useElementShadow';
 
-import LinePointMarker from './LinePointMarker.vue'
+import LinePointMarker from './LinePointMarker.vue';
 
 export default defineComponent({
   name: 'editable-element-shape',
@@ -70,23 +70,23 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const shadow = computed(() => props.elementInfo.shadow)
-    const { shadowStyle } = useElementShadow(shadow)
+    const shadow = computed(() => props.elementInfo.shadow);
+    const { shadowStyle } = useElementShadow(shadow);
 
     const svgWidth = computed(() => {
-      const width = Math.abs(props.elementInfo.start[0] - props.elementInfo.end[0])
-      return width < 24 ? 24 : width
-    })
+      const width = Math.abs(props.elementInfo.start[0] - props.elementInfo.end[0]);
+      return width < 24 ? 24 : width;
+    });
     const svgHeight = computed(() => {
-      const height = Math.abs(props.elementInfo.start[1] - props.elementInfo.end[1])
-      return height < 24 ? 24 : height
-    })
+      const height = Math.abs(props.elementInfo.start[1] - props.elementInfo.end[1]);
+      return height < 24 ? 24 : height;
+    });
 
-    const lineDashArray = computed(() => props.elementInfo.style === 'dashed' ? '10, 5' : '0, 0')
+    const lineDashArray = computed(() => props.elementInfo.style === 'dashed' ? '10, 5' : '0, 0');
 
     const path = computed(() => {
-      return getLineElementPath(props.elementInfo)
-    })
+      return getLineElementPath(props.elementInfo);
+    });
 
     return {
       shadowStyle,
@@ -94,9 +94,9 @@ export default defineComponent({
       svgHeight,
       lineDashArray,
       path,
-    }
+    };
   },
-})
+});
 </script>
 
 <style lang="scss" scoped>

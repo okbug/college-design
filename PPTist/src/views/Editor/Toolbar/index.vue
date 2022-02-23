@@ -16,26 +16,26 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, watch } from 'vue'
-import { storeToRefs } from 'pinia'
-import { useMainStore } from '@/store'
-import { ToolbarState, ToolbarStates } from '@/types/toolbar'
+import { computed, watch } from 'vue';
+import { storeToRefs } from 'pinia';
+import { useMainStore } from '@/store';
+import { ToolbarState, ToolbarStates } from '@/types/toolbar';
 
-import ElementStylePanel from './ElementStylePanel/index.vue'
-import ElementPositionPanel from './ElementPositionPanel.vue'
-import ElementAnimationPanel from './ElementAnimationPanel.vue'
-import SlideDesignPanel from './SlideDesignPanel.vue'
-import SlideAnimationPanel from './SlideAnimationPanel.vue'
-import MultiPositionPanel from './MultiPositionPanel.vue'
-import SymbolPanel from './SymbolPanel.vue'
+import ElementStylePanel from './ElementStylePanel/index.vue';
+import ElementPositionPanel from './ElementPositionPanel.vue';
+import ElementAnimationPanel from './ElementAnimationPanel.vue';
+import SlideDesignPanel from './SlideDesignPanel.vue';
+import SlideAnimationPanel from './SlideAnimationPanel.vue';
+import MultiPositionPanel from './MultiPositionPanel.vue';
+import SymbolPanel from './SymbolPanel.vue';
 
 interface ElementTabs {
   label: string;
   value: ToolbarState;
 }
 
-const mainStore = useMainStore()
-const { activeElementIdList, handleElement, toolbarState } = storeToRefs(mainStore)
+const mainStore = useMainStore();
+const { activeElementIdList, handleElement, toolbarState } = storeToRefs(mainStore);
 
 const elementTabs = computed<ElementTabs[]>(() => {
   if (handleElement.value?.type === 'text') {
@@ -44,40 +44,40 @@ const elementTabs = computed<ElementTabs[]>(() => {
       { label: '符号', value: ToolbarStates.SYMBOL },
       { label: '位置', value: ToolbarStates.EL_POSITION },
       { label: '动画', value: ToolbarStates.EL_ANIMATION },
-    ]
+    ];
   }
   return [
     { label: '样式', value: ToolbarStates.EL_STYLE },
     { label: '位置', value: ToolbarStates.EL_POSITION },
     { label: '动画', value: ToolbarStates.EL_ANIMATION },
-  ]
-})
+  ];
+});
 const slideTabs = [
   { label: '设计', value: ToolbarStates.SLIDE_DESIGN },
   { label: '切换', value: ToolbarStates.SLIDE_ANIMATION },
   { label: '动画', value: ToolbarStates.EL_ANIMATION },
-]
+];
 const multiSelectTabs = [
   { label: '位置', value: ToolbarStates.MULTI_POSITION },
   { label: '样式', value: ToolbarStates.EL_STYLE },
-]
+];
 
 const setToolbarState = (value: ToolbarState) => {
-  mainStore.setToolbarState(value)
-}
+  mainStore.setToolbarState(value);
+};
 
 const currentTabs = computed(() => {
-  if (!activeElementIdList.value.length) return slideTabs
-  else if (activeElementIdList.value.length > 1) return multiSelectTabs
-  return elementTabs.value
-})
+  if (!activeElementIdList.value.length) return slideTabs;
+  else if (activeElementIdList.value.length > 1) return multiSelectTabs;
+  return elementTabs.value;
+});
 
 watch(currentTabs, () => {
-  const currentTabsValue: ToolbarState[] = currentTabs.value.map(tab => tab.value)
+  const currentTabsValue: ToolbarState[] = currentTabs.value.map(tab => tab.value);
   if (!currentTabsValue.includes(toolbarState.value)) {
-    mainStore.setToolbarState(currentTabsValue[0])
+    mainStore.setToolbarState(currentTabsValue[0]);
   }
-})
+});
 
 const currentPanelComponent = computed(() => {
   const panelMap = {
@@ -88,9 +88,9 @@ const currentPanelComponent = computed(() => {
     [ToolbarStates.SLIDE_ANIMATION]: SlideAnimationPanel,
     [ToolbarStates.MULTI_POSITION]: MultiPositionPanel,
     [ToolbarStates.SYMBOL]: SymbolPanel,
-  }
-  return panelMap[toolbarState.value] || null
-})
+  };
+  return panelMap[toolbarState.value] || null;
+});
 </script>
 
 <style lang="scss" scoped>

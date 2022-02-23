@@ -21,10 +21,10 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, PropType } from 'vue'
-import { ContextmenuItem, Axis } from './types'
+import { computed, defineComponent, PropType } from 'vue';
+import { ContextmenuItem, Axis } from './types';
 
-import MenuContent from './MenuContent.vue'
+import MenuContent from './MenuContent.vue';
 
 export default defineComponent({
   name: 'contextmenu',
@@ -51,40 +51,40 @@ export default defineComponent({
   },
   setup(props) {
     const style = computed(() => {
-      const MENU_WIDTH = 170
-      const MENU_HEIGHT = 30
-      const DIVIDER_HEIGHT = 11
-      const PADDING = 5
+      const MENU_WIDTH = 170;
+      const MENU_HEIGHT = 30;
+      const DIVIDER_HEIGHT = 11;
+      const PADDING = 5;
 
-      const { x, y } = props.axis
-      const menuCount = props.menus.filter(menu => !(menu.divider || menu.hide)).length
-      const dividerCount = props.menus.filter(menu => menu.divider).length
+      const { x, y } = props.axis;
+      const menuCount = props.menus.filter(menu => !(menu.divider || menu.hide)).length;
+      const dividerCount = props.menus.filter(menu => menu.divider).length;
 
-      const menuWidth = MENU_WIDTH
-      const menuHeight = menuCount * MENU_HEIGHT + dividerCount * DIVIDER_HEIGHT + PADDING * 2
+      const menuWidth = MENU_WIDTH;
+      const menuHeight = menuCount * MENU_HEIGHT + dividerCount * DIVIDER_HEIGHT + PADDING * 2;
 
-      const screenWidth = document.body.clientWidth
-      const screenHeight = document.body.clientHeight
+      const screenWidth = document.body.clientWidth;
+      const screenHeight = document.body.clientHeight;
 
       return {
         left: screenWidth <= x + menuWidth ? x - menuWidth : x,
         top: screenHeight <= y + menuHeight ? y - menuHeight : y,
-      }
-    })
+      };
+    });
 
     const handleClickMenuItem = (item: ContextmenuItem) => {
-      if (item.disable) return
-      if (item.children && !item.handler) return
-      if (item.handler) item.handler(props.el)
-      props.removeContextmenu()
-    }
+      if (item.disable) return;
+      if (item.children && !item.handler) return;
+      if (item.handler) item.handler(props.el);
+      props.removeContextmenu();
+    };
 
     return {
       style,
       handleClickMenuItem,
-    }
+    };
   },
-})
+});
 </script>
 
 <style lang="scss">

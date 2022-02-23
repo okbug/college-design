@@ -1,4 +1,4 @@
-import { defineStore } from 'pinia'
+import { defineStore } from 'pinia';
 
 export interface ScreenState {
   screening: boolean;
@@ -11,7 +11,7 @@ export const useScreenStore = defineStore('screen', {
 
   actions: {
     setScreening(screening: boolean) {
-      this.screening = screening
+      this.screening = screening;
     },
   },
-})
+});

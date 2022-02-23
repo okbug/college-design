@@ -19,23 +19,23 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { ref } from 'vue';
 
-import useGlobalHotkey from '@/hooks/useGlobalHotkey'
-import usePasteEvent from '@/hooks/usePasteEvent'
+import useGlobalHotkey from '@/hooks/useGlobalHotkey';
+import usePasteEvent from '@/hooks/usePasteEvent';
 
-import EditorHeader from './EditorHeader/index.vue'
-import Canvas from './Canvas/index.vue'
-import CanvasTool from './CanvasTool/index.vue'
-import Thumbnails from './Thumbnails/index.vue'
-import Toolbar from './Toolbar/index.vue'
-import Remark from './Remark/index.vue'
+import EditorHeader from './EditorHeader/index.vue';
+import Canvas from './Canvas/index.vue';
+import CanvasTool from './CanvasTool/index.vue';
+import Thumbnails from './Thumbnails/index.vue';
+import Toolbar from './Toolbar/index.vue';
+import Remark from './Remark/index.vue';
 
 
-const remarkHeight = ref(40)
+const remarkHeight = ref(40);
 
-useGlobalHotkey()
-usePasteEvent()
+useGlobalHotkey();
+usePasteEvent();
 
 </script>
 

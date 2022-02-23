@@ -27,16 +27,16 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, PropType } from 'vue'
-import { storeToRefs } from 'pinia'
-import { useMainStore } from '@/store'
-import { PPTTableElement } from '@/types/slides'
-import { OperateResizeHandler } from '@/types/edit'
-import useCommonOperate from '../hooks/useCommonOperate'
+import { computed, defineComponent, PropType } from 'vue';
+import { storeToRefs } from 'pinia';
+import { useMainStore } from '@/store';
+import { PPTTableElement } from '@/types/slides';
+import { OperateResizeHandler } from '@/types/edit';
+import useCommonOperate from '../hooks/useCommonOperate';
 
-import RotateHandler from './RotateHandler.vue'
-import ResizeHandler from './ResizeHandler.vue'
-import BorderLine from './BorderLine.vue'
+import RotateHandler from './RotateHandler.vue';
+import ResizeHandler from './ResizeHandler.vue';
+import BorderLine from './BorderLine.vue';
 
 export default defineComponent({
   name: 'table-element-operate',
@@ -65,20 +65,20 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const { canvasScale } = storeToRefs(useMainStore())
+    const { canvasScale } = storeToRefs(useMainStore());
 
-    const outlineWidth = computed(() => props.elementInfo.outline.width || 1)
+    const outlineWidth = computed(() => props.elementInfo.outline.width || 1);
 
-    const scaleWidth = computed(() => (props.elementInfo.width + outlineWidth.value) * canvasScale.value)
-    const scaleHeight = computed(() => props.elementInfo.height * canvasScale.value)
+    const scaleWidth = computed(() => (props.elementInfo.width + outlineWidth.value) * canvasScale.value);
+    const scaleHeight = computed(() => props.elementInfo.height * canvasScale.value);
 
-    const { textElementResizeHandlers, borderLines } = useCommonOperate(scaleWidth, scaleHeight)
+    const { textElementResizeHandlers, borderLines } = useCommonOperate(scaleWidth, scaleHeight);
 
     return {
       scaleWidth,
       textElementResizeHandlers,
       borderLines,
-    }
+    };
   },
-})
+});
 </script>

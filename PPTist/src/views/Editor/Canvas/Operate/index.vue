@@ -36,19 +36,19 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, computed } from 'vue'
-import { storeToRefs } from 'pinia'
-import { useMainStore, useSlidesStore } from '@/store'
-import { ElementTypes, PPTElement } from '@/types/slides'
-import { OperateLineHandler, OperateResizeHandler } from '@/types/edit'
+import { defineComponent, PropType, computed } from 'vue';
+import { storeToRefs } from 'pinia';
+import { useMainStore, useSlidesStore } from '@/store';
+import { ElementTypes, PPTElement } from '@/types/slides';
+import { OperateLineHandler, OperateResizeHandler } from '@/types/edit';
 
-import ImageElementOperate from './ImageElementOperate.vue'
-import TextElementOperate from './TextElementOperate.vue'
-import ShapeElementOperate from './ShapeElementOperate.vue'
-import LineElementOperate from './LineElementOperate.vue'
-import TableElementOperate from './TableElementOperate.vue'
-import CommonElementOperate from './CommonElementOperate.vue'
-import LinkHandler from './LinkHandler.vue'
+import ImageElementOperate from './ImageElementOperate.vue';
+import TextElementOperate from './TextElementOperate.vue';
+import ShapeElementOperate from './ShapeElementOperate.vue';
+import LineElementOperate from './LineElementOperate.vue';
+import TableElementOperate from './TableElementOperate.vue';
+import CommonElementOperate from './CommonElementOperate.vue';
+import LinkHandler from './LinkHandler.vue';
 
 export default defineComponent({
   name: 'operate',
@@ -94,8 +94,8 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const { canvasScale, toolbarState } = storeToRefs(useMainStore())
-    const { currentSlide } = storeToRefs(useSlidesStore())
+    const { canvasScale, toolbarState } = storeToRefs(useMainStore());
+    const { currentSlide } = storeToRefs(useSlidesStore());
 
     const currentOperateComponent = computed(() => {
       const elementTypeMap = {
@@ -108,23 +108,23 @@ export default defineComponent({
         [ElementTypes.LATEX]: CommonElementOperate,
         [ElementTypes.VIDEO]: CommonElementOperate,
         [ElementTypes.AUDIO]: CommonElementOperate,
-      }
-      return elementTypeMap[props.elementInfo.type] || null
-    })
+      };
+      return elementTypeMap[props.elementInfo.type] || null;
+    });
 
     const elementIndexInAnimation = computed(() => {
-      const animations = currentSlide.value.animations || []
-      return animations.findIndex(animation => animation.elId === props.elementInfo.id)
-    })
+      const animations = currentSlide.value.animations || [];
+      return animations.findIndex(animation => animation.elId === props.elementInfo.id);
+    });
 
     return {
       currentOperateComponent,
       canvasScale,
       toolbarState,
       elementIndexInAnimation,
-    }
+    };
   },
-})
+});
 </script>
 
 <style lang="scss" scoped>

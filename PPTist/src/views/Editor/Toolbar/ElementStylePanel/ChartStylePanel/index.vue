@@ -139,17 +139,17 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onUnmounted, ref, watch } from 'vue'
-import { IBarChartOptions, ILineChartOptions, IPieChartOptions } from 'chartist'
-import { storeToRefs } from 'pinia'
-import { useMainStore, useSlidesStore } from '@/store'
-import { ChartData, PPTChartElement } from '@/types/slides'
-import emitter, { EmitterEvents } from '@/utils/emitter'
-import useHistorySnapshot from '@/hooks/useHistorySnapshot'
+import { defineComponent, onUnmounted, ref, watch } from 'vue';
+import { IBarChartOptions, ILineChartOptions, IPieChartOptions } from 'chartist';
+import { storeToRefs } from 'pinia';
+import { useMainStore, useSlidesStore } from '@/store';
+import { ChartData, PPTChartElement } from '@/types/slides';
+import emitter, { EmitterEvents } from '@/utils/emitter';
+import useHistorySnapshot from '@/hooks/useHistorySnapshot';
 
-import ElementOutline from '../../common/ElementOutline.vue'
-import ColorButton from '../../common/ColorButton.vue'
-import ChartDataEditor from './ChartDataEditor.vue'
+import ElementOutline from '../../common/ElementOutline.vue';
+import ColorButton from '../../common/ColorButton.vue';
+import ChartDataEditor from './ChartDataEditor.vue';
 
 const presetChartThemes = [
   ['#d87c7c', '#919e8b', '#d7ab82', '#6e7074', '#61a0a8', '#efa18d'],
@@ -164,7 +164,7 @@ const presetChartThemes = [
   ['#e01f54', '#001852', '#f5e8c8', '#b8d2c7', '#c6b38e', '#a4d8c2'],
   ['#c12e34', '#e6b600', '#0098d9', '#2b821d', '#005eaa', '#339ca8'],
   ['#8a7ca8', '#e098c7', '#8fd3e8', '#71669e', '#cc70af', '#7cb4cc'],
-]
+];
 
 export default defineComponent({
   name: 'chart-style-panel',
@@ -174,31 +174,31 @@ export default defineComponent({
     ColorButton,
   },
   setup() {
-    const mainStore = useMainStore()
-    const slidesStore = useSlidesStore()
-    const { handleElement, handleElementId } = storeToRefs(mainStore)
-    const { theme } = storeToRefs(slidesStore)
+    const mainStore = useMainStore();
+    const slidesStore = useSlidesStore();
+    const { handleElement, handleElementId } = storeToRefs(mainStore);
+    const { theme } = storeToRefs(slidesStore);
 
-    const chartDataEditorVisible = ref(false)
-    const presetThemesVisible = ref(false)
+    const chartDataEditorVisible = ref(false);
+    const presetThemesVisible = ref(false);
 
-    const { addHistorySnapshot } = useHistorySnapshot()
+    const { addHistorySnapshot } = useHistorySnapshot();
 
-    const fill = ref<string>()
+    const fill = ref<string>();
 
-    const themeColor = ref<string[]>([])
-    const gridColor = ref('')
-    const legend = ref('')
+    const themeColor = ref<string[]>([]);
+    const gridColor = ref('');
+    const legend = ref('');
 
-    const lineSmooth = ref(true)
-    const showLine = ref(true)
-    const showArea = ref(false)
-    const horizontalBars = ref(false)
-    const donut = ref(false)
+    const lineSmooth = ref(true);
+    const showLine = ref(true);
+    const showArea = ref(false);
+    const horizontalBars = ref(false);
+    const donut = ref(false);
 
     watch(handleElement, () => {
-      if (!handleElement.value || handleElement.value.type !== 'chart') return
-      fill.value = handleElement.value.fill || '#000'
+      if (!handleElement.value || handleElement.value.type !== 'chart') return;
+      fill.value = handleElement.value.fill || '#000';
 
       if (handleElement.value.options) {
         const {
@@ -207,90 +207,90 @@ export default defineComponent({
           showArea: _showArea,
           horizontalBars: _horizontalBars,
           donut: _donut,
-        } = handleElement.value.options
+        } = handleElement.value.options;
 
-        if (_lineSmooth !== undefined) lineSmooth.value = _lineSmooth as boolean
-        if (_showLine !== undefined) showLine.value = _showLine
-        if (_showArea !== undefined) showArea.value = _showArea
-        if (_horizontalBars !== undefined) horizontalBars.value = _horizontalBars
-        if (_donut !== undefined) donut.value = _donut
+        if (_lineSmooth !== undefined) lineSmooth.value = _lineSmooth as boolean;
+        if (_showLine !== undefined) showLine.value = _showLine;
+        if (_showArea !== undefined) showArea.value = _showArea;
+        if (_horizontalBars !== undefined) horizontalBars.value = _horizontalBars;
+        if (_donut !== undefined) donut.value = _donut;
       }
 
-      themeColor.value = handleElement.value.themeColor
-      gridColor.value = handleElement.value.gridColor || 'rgba(0, 0, 0, 0.4)'
-      legend.value = handleElement.value.legend || ''
-    }, { deep: true, immediate: true })
+      themeColor.value = handleElement.value.themeColor;
+      gridColor.value = handleElement.value.gridColor || 'rgba(0, 0, 0, 0.4)';
+      legend.value = handleElement.value.legend || '';
+    }, { deep: true, immediate: true });
 
     const updateElement = (props: Partial<PPTChartElement>) => {
-      slidesStore.updateElement({ id: handleElementId.value, props })
-      addHistorySnapshot()
-    }
+      slidesStore.updateElement({ id: handleElementId.value, props });
+      addHistorySnapshot();
+    };
 
     // 设置图表数据
     const updateData = (data: ChartData) => {
-      chartDataEditorVisible.value = false
-      updateElement({ data })
-    }
+      chartDataEditorVisible.value = false;
+      updateElement({ data });
+    };
 
     // 设置填充色
     const updateFill = (value: string) => {
-      updateElement({ fill: value })
-    }
+      updateElement({ fill: value });
+    };
 
     // 设置其他选项：柱状图转条形图、折线图转面积图、折线图转散点图、饼图转环形图、折线图开关平滑曲线
     const updateOptions = (optionProps: ILineChartOptions & IBarChartOptions & IPieChartOptions) => {
-      const _handleElement = handleElement.value as PPTChartElement
+      const _handleElement = handleElement.value as PPTChartElement;
 
-      const newOptions = { ..._handleElement.options, ...optionProps }
-      updateElement({ options: newOptions })
-    }
+      const newOptions = { ..._handleElement.options, ...optionProps };
+      updateElement({ options: newOptions });
+    };
 
     // 设置主题色
     const updateTheme = (color: string, index: number) => {
       const props = {
         themeColor: themeColor.value.map((c, i) => i === index ? color : c),
-      }
-      updateElement(props)
-    }
+      };
+      updateElement(props);
+    };
 
     // 添加主题色
     const addThemeColor = () => {
       const props = {
         themeColor: [...themeColor.value, theme.value.themeColor],
-      }
-      updateElement(props)
-    }
+      };
+      updateElement(props);
+    };
 
     // 使用预置主题配色
     const applyPresetTheme = (colors: string[]) => {
-      updateElement({ themeColor: colors })
-      presetThemesVisible.value = false
-    }
+      updateElement({ themeColor: colors });
+      presetThemesVisible.value = false;
+    };
 
     // 删除主题色
     const deleteThemeColor = (index: number) => {
       const props = {
         themeColor: themeColor.value.filter((c, i) => i !== index),
-      }
-      updateElement(props)
-    }
+      };
+      updateElement(props);
+    };
 
     // 设置网格颜色
     const updateGridColor = (gridColor: string) => {
-      updateElement({ gridColor })
-    }
+      updateElement({ gridColor });
+    };
 
     // 设置图例位置/不显示
     const updateLegend = (legend: '' | 'top' | 'bottom') => {
-      updateElement({ legend })
-    }
+      updateElement({ legend });
+    };
 
-    const openDataEditor = () => chartDataEditorVisible.value = true
+    const openDataEditor = () => chartDataEditorVisible.value = true;
 
-    emitter.on(EmitterEvents.OPEN_CHART_DATA_EDITOR, openDataEditor)
+    emitter.on(EmitterEvents.OPEN_CHART_DATA_EDITOR, openDataEditor);
     onUnmounted(() => {
-      emitter.off(EmitterEvents.OPEN_CHART_DATA_EDITOR, openDataEditor)
-    })
+      emitter.off(EmitterEvents.OPEN_CHART_DATA_EDITOR, openDataEditor);
+    });
 
     return {
       chartDataEditorVisible,
@@ -315,9 +315,9 @@ export default defineComponent({
       updateLegend,
       presetChartThemes,
       applyPresetTheme,
-    }
+    };
   },
-})
+});
 </script>
 
 <style lang="scss" scoped>

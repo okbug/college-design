@@ -8,12 +8,12 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from 'vue'
-import { storeToRefs } from 'pinia'
-import { useMainStore, useSlidesStore } from '@/store'
-import { SlideBackground } from '@/types/slides'
-import GridLines from './GridLines.vue'
-import useSlideBackgroundStyle from '@/hooks/useSlideBackgroundStyle'
+import { computed, defineComponent } from 'vue';
+import { storeToRefs } from 'pinia';
+import { useMainStore, useSlidesStore } from '@/store';
+import { SlideBackground } from '@/types/slides';
+import GridLines from './GridLines.vue';
+import useSlideBackgroundStyle from '@/hooks/useSlideBackgroundStyle';
 
 export default defineComponent({
   name: 'viewport-background',
@@ -21,18 +21,18 @@ export default defineComponent({
     GridLines,
   },
   setup() {
-    const { showGridLines } = storeToRefs(useMainStore())
-    const { currentSlide } = storeToRefs(useSlidesStore())
-    const background = computed<SlideBackground | undefined>(() => currentSlide.value?.background)
+    const { showGridLines } = storeToRefs(useMainStore());
+    const { currentSlide } = storeToRefs(useSlidesStore());
+    const background = computed<SlideBackground | undefined>(() => currentSlide.value?.background);
 
-    const { backgroundStyle } = useSlideBackgroundStyle(background)
+    const { backgroundStyle } = useSlideBackgroundStyle(background);
 
     return {
       showGridLines,
       backgroundStyle,
-    }
+    };
   },
-})
+});
 </script>
 
 <style lang="scss" scoped>

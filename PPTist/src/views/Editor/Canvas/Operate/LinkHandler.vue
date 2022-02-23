@@ -11,11 +11,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue'
-import { storeToRefs } from 'pinia'
-import { useMainStore } from '@/store'
-import { PPTElement } from '@/types/slides'
-import useLink from '@/hooks/useLink'
+import { defineComponent, PropType } from 'vue';
+import { storeToRefs } from 'pinia';
+import { useMainStore } from '@/store';
+import { PPTElement } from '@/types/slides';
+import useLink from '@/hooks/useLink';
 
 export default defineComponent({
   name: 'link-handler',
@@ -30,16 +30,16 @@ export default defineComponent({
     },
   },
   setup() {
-    const { canvasScale } = storeToRefs(useMainStore())
+    const { canvasScale } = storeToRefs(useMainStore());
 
-    const { removeLink } = useLink()
+    const { removeLink } = useLink();
 
     return {
       canvasScale,
       removeLink,
-    }
+    };
   },
-})
+});
 </script>
 
 <style lang="scss" scoped>

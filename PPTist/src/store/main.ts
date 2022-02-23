@@ -1,11 +1,11 @@
-import { defineStore } from 'pinia'
-import { CreatingElement } from '@/types/edit'
-import { ToolbarState } from '@/types/toolbar'
-import { SYS_FONTS } from '@/configs/font'
-import { TextAttrs, defaultRichTextAttrs } from '@/utils/prosemirror/utils'
-import { isSupportFont } from '@/utils/font'
+import { defineStore } from 'pinia';
+import { CreatingElement } from '@/types/edit';
+import { ToolbarState } from '@/types/toolbar';
+import { SYS_FONTS } from '@/configs/font';
+import { TextAttrs, defaultRichTextAttrs } from '@/utils/prosemirror/utils';
+import { isSupportFont } from '@/utils/font';
 
-import { useSlidesStore } from './slides'
+import { useSlidesStore } from './slides';
 
 export interface MainState {
   activeElementIdList: string[];
@@ -52,94 +52,94 @@ export const useMainStore = defineStore('main', {
 
   getters: {
     activeElementList(state) {
-      const slidesStore = useSlidesStore()
-      const currentSlide = slidesStore.currentSlide
-      if (!currentSlide || !currentSlide.elements) return []
-      return currentSlide.elements.filter(element => state.activeElementIdList.includes(element.id))
+      const slidesStore = useSlidesStore();
+      const currentSlide = slidesStore.currentSlide;
+      if (!currentSlide || !currentSlide.elements) return [];
+      return currentSlide.elements.filter(element => state.activeElementIdList.includes(element.id));
     },
   
     handleElement(state) {
-      const slidesStore = useSlidesStore()
-      const currentSlide = slidesStore.currentSlide
-      if (!currentSlide || !currentSlide.elements) return null
-      return currentSlide.elements.find(element => state.handleElementId === element.id) || null
+      const slidesStore = useSlidesStore();
+      const currentSlide = slidesStore.currentSlide;
+      if (!currentSlide || !currentSlide.elements) return null;
+      return currentSlide.elements.find(element => state.handleElementId === element.id) || null;
     },
   },
 
   actions: {
     setActiveElementIdList(activeElementIdList: string[]) {
-      if (activeElementIdList.length === 1) this.handleElementId = activeElementIdList[0]
-      else this.handleElementId = ''
+      if (activeElementIdList.length === 1) this.handleElementId = activeElementIdList[0];
+      else this.handleElementId = '';
       
-      this.activeElementIdList = activeElementIdList
+      this.activeElementIdList = activeElementIdList;
     },
     
     setHandleElementId(handleElementId: string) {
-      this.handleElementId = handleElementId
+      this.handleElementId = handleElementId;
     },
     
     setActiveGroupElementId(activeGroupElementId: string) {
-      this.activeGroupElementId = activeGroupElementId
+      this.activeGroupElementId = activeGroupElementId;
     },
   
     setCanvasPercentage(percentage: number) {
-      this.canvasPercentage = percentage
+      this.canvasPercentage = percentage;
     },
   
     setCanvasScale(scale: number) {
-      this.canvasScale = scale
+      this.canvasScale = scale;
     },
   
     setThumbnailsFocus(isFocus: boolean) {
-      this.thumbnailsFocus = isFocus
+      this.thumbnailsFocus = isFocus;
     },
   
     setEditorareaFocus(isFocus: boolean) {
-      this.editorAreaFocus = isFocus
+      this.editorAreaFocus = isFocus;
     },
   
     setDisableHotkeysState(disable: boolean) {
-      this.disableHotkeys = disable
+      this.disableHotkeys = disable;
     },
   
     setGridLinesState(show: boolean) {
-      this.showGridLines = show
+      this.showGridLines = show;
     },
   
     setCreatingElement(element: CreatingElement | null) {
-      this.creatingElement = element
+      this.creatingElement = element;
     },
   
     setAvailableFonts() {
-      this.availableFonts = SYS_FONTS.filter(font => isSupportFont(font.value))
+      this.availableFonts = SYS_FONTS.filter(font => isSupportFont(font.value));
     },
   
     setToolbarState(toolbarState: ToolbarState) {
-      this.toolbarState = toolbarState
+      this.toolbarState = toolbarState;
     },
   
     setClipingImageElementId(elId: string) {
-      this.clipingImageElementId = elId
+      this.clipingImageElementId = elId;
     },
   
     setRichtextAttrs(attrs: TextAttrs) {
-      this.richTextAttrs = attrs
+      this.richTextAttrs = attrs;
     },
   
     setSelectedTableCells(cells: string[]) {
-      this.selectedTableCells = cells
+      this.selectedTableCells = cells;
     },
   
     setScalingState(isScaling: boolean) {
-      this.isScaling = isScaling
+      this.isScaling = isScaling;
     },
   
     setEditingShapeElementId(ellId: string) {
-      this.editingShapeElementId = ellId
+      this.editingShapeElementId = ellId;
     },
     
     updateSelectedSlidesIndex(selectedSlidesIndex: number[]) {
-      this.selectedSlidesIndex = selectedSlidesIndex
+      this.selectedSlidesIndex = selectedSlidesIndex;
     },
   },
-})
+});

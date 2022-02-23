@@ -7,10 +7,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue'
-import { PPTChartElement } from '@/types/slides'
+import { defineComponent, PropType } from 'vue';
+import { PPTChartElement } from '@/types/slides';
 
-import BaseChartElement from './BaseChartElement.vue'
+import BaseChartElement from './BaseChartElement.vue';
 
 export default defineComponent({
   name: 'screen-element-chart',
@@ -23,5 +23,5 @@ export default defineComponent({
       required: true,
     },
   },
-})
+});
 </script>

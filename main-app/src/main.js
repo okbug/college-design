@@ -1,37 +1,12 @@
-import { registerMicroApps, start } from 'qiankun';
 import React from 'react'
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import App from './App.js';
 import User from './views/User/index.js'
+import './micro-app-regester';
+import 'antd/dist/antd.less';
 
-registerMicroApps([
-  {
-    name: 'pptist', // 和子应用 package.json 中name字段相同
-    entry: '//localhost:8080',
-    container: '#main',
-    activeRule: '/ppt',
-    props: {
-        a() {
-            console.log('this is a function in main app to ppt');
-        }
-    }
-  },
-  {
-    name: 'docute', // 和子应用 package.json 中name字段相同
-    entry: '//localhost:3000',
-    container: '#main',
-    activeRule: '/doc',
-    props: {
-        a() {
-            console.log('this is a function in main app to doc');
-        }
-    }
-  },
-]);
-
-start();
 
 ReactDOM.render(
   <Router>

@@ -1,5 +1,5 @@
-import { SVGPathData } from 'svg-pathdata'
-import arcToBezier from 'svg-arc-to-cubic-bezier'
+import { SVGPathData } from 'svg-pathdata';
+import arcToBezier from 'svg-arc-to-cubic-bezier';
 
 const typeMap = {
   1: 'Z',
@@ -12,20 +12,20 @@ const typeMap = {
   128: 'Q',
   256: 'T',
   512: 'A',
-}
+};
 
 /**
  * 简单解析SVG路径
  * @param d SVG path d属性
  */
 export const parseSvgPath = (d: string) => {
-  const pathData = new SVGPathData(d)
+  const pathData = new SVGPathData(d);
 
   const ret = pathData.commands.map(item => {
-    return { ...item, type: typeMap[item.type] }
-  })
-  return ret
-}
+    return { ...item, type: typeMap[item.type] };
+  });
+  return ret;
+};
 
 export type SvgPath = ReturnType<typeof parseSvgPath>
 
@@ -34,11 +34,11 @@ export type SvgPath = ReturnType<typeof parseSvgPath>
  * @param d SVG path d属性
  */
 export const toPoints = (d: string) => {
-  const pathData = new SVGPathData(d)
+  const pathData = new SVGPathData(d);
   
-  const points = []
+  const points = [];
   for (const item of pathData.commands) {
-    const type = typeMap[item.type]
+    const type = typeMap[item.type];
 
     if (item.type === 2 || item.type === 16) {
       points.push({
@@ -46,7 +46,7 @@ export const toPoints = (d: string) => {
         y: item.y,
         relative: item.relative,
         type,
-      })
+      });
     }
     if (item.type === 32) {
       points.push({
@@ -61,7 +61,7 @@ export const toPoints = (d: string) => {
         },
         relative: item.relative,
         type,
-      })
+      });
     }
     else if (item.type === 128) {
       points.push({
@@ -74,11 +74,11 @@ export const toPoints = (d: string) => {
         },
         relative: item.relative,
         type,
-      })
+      });
     }
     else if (item.type === 512) {
-      const lastPoint = points[points.length - 1]
-      if (!['M', 'L', 'Q', 'C'].includes(lastPoint.type)) continue
+      const lastPoint = points[points.length - 1];
+      if (!['M', 'L', 'Q', 'C'].includes(lastPoint.type)) continue;
 
       const cubicBezierPoints = arcToBezier({
         px: lastPoint.x as number,
@@ -90,7 +90,7 @@ export const toPoints = (d: string) => {
         xAxisRotation: item.xRot,
         largeArcFlag: item.lArcFlag,
         sweepFlag: item.sweepFlag,
-      })
+      });
       for (const cbPoint of cubicBezierPoints) {
         points.push({
           x: cbPoint.x, 
@@ -104,15 +104,15 @@ export const toPoints = (d: string) => {
           },
           relative: false,
           type: 'C',
-        })
+        });
       }
     }
     else if (item.type === 1) {
-      points.push({ close: true, type })
+      points.push({ close: true, type });
     }
-    else continue
+    else continue;
   }
-  return points
-}
+  return points;
+};
 
 export type SvgPoints = ReturnType<typeof toPoints>

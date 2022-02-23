@@ -1,6 +1,6 @@
 /* eslint-disable max-lines */
 
-import { Slide } from '@/types/slides'
+import { Slide } from '@/types/slides';
 
 export const layouts: Slide[] = [
   {
@@ -965,4 +965,4 @@ export const layouts: Slide[] = [
       color: '{{backgroundColor}}',
     },
   },
-]
+];

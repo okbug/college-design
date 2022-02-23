@@ -9,29 +9,29 @@ interface ImageSize {
  */
 export const getImageSize = (src: string): Promise<ImageSize> => {
   return new Promise(resolve => {
-    const img = document.createElement('img')
-    img.src = src
-    img.style.opacity = '0'
-    document.body.appendChild(img)
+    const img = document.createElement('img');
+    img.src = src;
+    img.style.opacity = '0';
+    document.body.appendChild(img);
 
     img.onload = () => {
-      const imgWidth = img.clientWidth
-      const imgHeight = img.clientHeight
+      const imgWidth = img.clientWidth;
+      const imgHeight = img.clientHeight;
     
-      img.onload = null
-      img.onerror = null
+      img.onload = null;
+      img.onerror = null;
 
-      document.body.removeChild(img)
+      document.body.removeChild(img);
 
-      resolve({ width: imgWidth, height: imgHeight })
-    }
+      resolve({ width: imgWidth, height: imgHeight });
+    };
 
     img.onerror = () => {
-      img.onload = null
-      img.onerror = null
-    }
-  })
-}
+      img.onload = null;
+      img.onerror = null;
+    };
+  });
+};
 
 /**
  * 读取图片文件的dataURL
@@ -39,10 +39,10 @@ export const getImageSize = (src: string): Promise<ImageSize> => {
  */
 export const getImageDataURL = (file: File): Promise<string> => {
   return new Promise(resolve => {
-    const reader = new FileReader()
+    const reader = new FileReader();
     reader.addEventListener('load', () => {
-      resolve(reader.result as string)
-    })
-    reader.readAsDataURL(file)
-  })
-}
+      resolve(reader.result as string);
+    });
+    reader.readAsDataURL(file);
+  });
+};

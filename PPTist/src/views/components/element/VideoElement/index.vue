@@ -36,13 +36,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue'
-import { storeToRefs } from 'pinia'
-import { useMainStore } from '@/store'
-import { PPTVideoElement } from '@/types/slides'
-import { ContextmenuItem } from '@/components/Contextmenu/types'
+import { defineComponent, PropType } from 'vue';
+import { storeToRefs } from 'pinia';
+import { useMainStore } from '@/store';
+import { PPTVideoElement } from '@/types/slides';
+import { ContextmenuItem } from '@/components/Contextmenu/types';
 
-import VideoPlayer from './VideoPlayer/index.vue'
+import VideoPlayer from './VideoPlayer/index.vue';
 
 export default defineComponent({
   name: 'editable-element-video',
@@ -63,21 +63,21 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const { canvasScale } = storeToRefs(useMainStore())
+    const { canvasScale } = storeToRefs(useMainStore());
 
     const handleSelectElement = (e: MouseEvent, canMove = true) => {
-      if (props.elementInfo.lock) return
-      e.stopPropagation()
+      if (props.elementInfo.lock) return;
+      e.stopPropagation();
 
-      props.selectElement(e, props.elementInfo, canMove)
-    }
+      props.selectElement(e, props.elementInfo, canMove);
+    };
 
     return {
       canvasScale,
       handleSelectElement,
-    }
+    };
   },
-})
+});
 </script>
 
 <style lang="scss" scoped>

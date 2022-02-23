@@ -68,15 +68,15 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
-import { storeToRefs } from 'pinia'
-import { useMainStore } from '@/store'
-import useScreening from '@/hooks/useScreening'
-import useSlideHandler from '@/hooks/useSlideHandler'
-import useHistorySnapshot from '@/hooks/useHistorySnapshot'
-import useExport from '@/hooks/useExport'
+import { defineComponent, ref } from 'vue';
+import { storeToRefs } from 'pinia';
+import { useMainStore } from '@/store';
+import useScreening from '@/hooks/useScreening';
+import useSlideHandler from '@/hooks/useSlideHandler';
+import useHistorySnapshot from '@/hooks/useHistorySnapshot';
+import useExport from '@/hooks/useExport';
 
-import HotkeyDoc from './HotkeyDoc.vue'
+import HotkeyDoc from './HotkeyDoc.vue';
 
 export default defineComponent({
   name: 'editor-header',
@@ -84,23 +84,23 @@ export default defineComponent({
     HotkeyDoc,
   },
   setup() {
-    const mainStore = useMainStore()
-    const { showGridLines } = storeToRefs(mainStore)
+    const mainStore = useMainStore();
+    const { showGridLines } = storeToRefs(mainStore);
 
-    const { enterScreening, enterScreeningFromStart } = useScreening()
-    const { createSlide, deleteSlide, resetSlides } = useSlideHandler()
-    const { redo, undo } = useHistorySnapshot()
-    const { exporting, exportJSON, exportPPTX } = useExport()
+    const { enterScreening, enterScreeningFromStart } = useScreening();
+    const { createSlide, deleteSlide, resetSlides } = useSlideHandler();
+    const { redo, undo } = useHistorySnapshot();
+    const { exporting, exportJSON, exportPPTX } = useExport();
 
     const toggleGridLines = () => {
-      mainStore.setGridLinesState(!showGridLines.value)
-    }
+      mainStore.setGridLinesState(!showGridLines.value);
+    };
 
-    const hotkeyDrawerVisible = ref(false)
+    const hotkeyDrawerVisible = ref(false);
 
     const goIssues = () => {
-      window.open('https://github.com/pipipi-pikachu/PPTist/issues')
-    }
+      window.open('https://github.com/pipipi-pikachu/PPTist/issues');
+    };
 
     return {
       redo,
@@ -117,9 +117,9 @@ export default defineComponent({
       exportJSON,
       exportPPTX,
       goIssues,
-    }
+    };
   },
-})
+});
 </script>
 
 <style lang="scss" scoped>

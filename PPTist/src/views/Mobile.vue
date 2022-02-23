@@ -17,27 +17,27 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, ref } from 'vue'
-import { storeToRefs } from 'pinia'
-import { useSlidesStore } from '@/store'
-import useScreening from '@/hooks/useScreening'
-import useLoadSlides from '@/hooks/useLoadSlides'
+import { onMounted, ref } from 'vue';
+import { storeToRefs } from 'pinia';
+import { useSlidesStore } from '@/store';
+import useScreening from '@/hooks/useScreening';
+import useLoadSlides from '@/hooks/useLoadSlides';
 
-import ThumbnailSlide from '@/views/components/ThumbnailSlide/index.vue'
+import ThumbnailSlide from '@/views/components/ThumbnailSlide/index.vue';
 
-const { slides } = storeToRefs(useSlidesStore())
+const { slides } = storeToRefs(useSlidesStore());
 
-const { slidesLoadLimit } = useLoadSlides()
+const { slidesLoadLimit } = useLoadSlides();
 // eslint-disable-next-line
 const { enterScreening } = useScreening()
 
-const mobileRef = ref<HTMLElement>()
-const slideWidth = ref(0)
+const mobileRef = ref<HTMLElement>();
+const slideWidth = ref(0);
 
 onMounted(() => {
-  if (!mobileRef.value) return
-  slideWidth.value = mobileRef.value.clientWidth - 10
-})
+  if (!mobileRef.value) return;
+  slideWidth.value = mobileRef.value.clientWidth - 10;
+});
 </script>
 
 <style lang="scss" scoped>

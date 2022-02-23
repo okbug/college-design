@@ -62,13 +62,13 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, PropType } from 'vue'
-import { PPTShapeElement, ShapeText } from '@/types/slides'
-import useElementOutline from '@/views/components/element/hooks/useElementOutline'
-import useElementShadow from '@/views/components/element/hooks/useElementShadow'
-import useElementFlip from '@/views/components/element/hooks/useElementFlip'
+import { computed, defineComponent, PropType } from 'vue';
+import { PPTShapeElement, ShapeText } from '@/types/slides';
+import useElementOutline from '@/views/components/element/hooks/useElementOutline';
+import useElementShadow from '@/views/components/element/hooks/useElementShadow';
+import useElementFlip from '@/views/components/element/hooks/useElementFlip';
 
-import GradientDefs from './GradientDefs.vue'
+import GradientDefs from './GradientDefs.vue';
 
 export default defineComponent({
   name: 'base-element-shape',
@@ -82,15 +82,15 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const outline = computed(() => props.elementInfo.outline)
-    const { outlineWidth, outlineStyle, outlineColor } = useElementOutline(outline)
+    const outline = computed(() => props.elementInfo.outline);
+    const { outlineWidth, outlineStyle, outlineColor } = useElementOutline(outline);
     
-    const shadow = computed(() => props.elementInfo.shadow)
-    const { shadowStyle } = useElementShadow(shadow)
+    const shadow = computed(() => props.elementInfo.shadow);
+    const { shadowStyle } = useElementShadow(shadow);
 
-    const flipH = computed(() => props.elementInfo.flipH)
-    const flipV = computed(() => props.elementInfo.flipV)
-    const { flipStyle } = useElementFlip(flipH, flipV)
+    const flipH = computed(() => props.elementInfo.flipH);
+    const flipV = computed(() => props.elementInfo.flipV);
+    const { flipStyle } = useElementFlip(flipH, flipV);
 
     const text = computed<ShapeText>(() => {
       const defaultText: ShapeText = {
@@ -98,11 +98,11 @@ export default defineComponent({
         defaultFontName: '微软雅黑',
         defaultColor: '#000',
         align: 'middle',
-      }
-      if (!props.elementInfo.text) return defaultText
+      };
+      if (!props.elementInfo.text) return defaultText;
 
-      return props.elementInfo.text
-    })
+      return props.elementInfo.text;
+    });
 
     return {
       shadowStyle,
@@ -111,9 +111,9 @@ export default defineComponent({
       outlineColor,
       flipStyle,
       text,
-    }
+    };
   },
-})
+});
 </script>
 
 <style lang="scss" scoped>

@@ -27,16 +27,16 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, PropType } from 'vue'
-import { storeToRefs } from 'pinia'
-import { useMainStore } from '@/store'
-import { PPTShapeElement } from '@/types/slides'
-import { OperateResizeHandler } from '@/types/edit'
-import useCommonOperate from '../hooks/useCommonOperate'
+import { computed, defineComponent, PropType } from 'vue';
+import { storeToRefs } from 'pinia';
+import { useMainStore } from '@/store';
+import { PPTShapeElement } from '@/types/slides';
+import { OperateResizeHandler } from '@/types/edit';
+import useCommonOperate from '../hooks/useCommonOperate';
 
-import RotateHandler from './RotateHandler.vue'
-import ResizeHandler from './ResizeHandler.vue'
-import BorderLine from './BorderLine.vue'
+import RotateHandler from './RotateHandler.vue';
+import ResizeHandler from './ResizeHandler.vue';
+import BorderLine from './BorderLine.vue';
 
 export default defineComponent({
   name: 'shape-element-operate',
@@ -65,17 +65,17 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const { canvasScale } = storeToRefs(useMainStore())
+    const { canvasScale } = storeToRefs(useMainStore());
 
-    const scaleWidth = computed(() => props.elementInfo.width * canvasScale.value)
-    const scaleHeight = computed(() => props.elementInfo.height * canvasScale.value)
-    const { resizeHandlers, borderLines } = useCommonOperate(scaleWidth, scaleHeight)
+    const scaleWidth = computed(() => props.elementInfo.width * canvasScale.value);
+    const scaleHeight = computed(() => props.elementInfo.height * canvasScale.value);
+    const { resizeHandlers, borderLines } = useCommonOperate(scaleWidth, scaleHeight);
 
     return {
       scaleWidth,
       resizeHandlers,
       borderLines,
-    }
+    };
   },
-})
+});
 </script>

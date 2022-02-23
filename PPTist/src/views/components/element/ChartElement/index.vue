@@ -43,13 +43,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue'
-import { PPTChartElement } from '@/types/slides'
-import { ContextmenuItem } from '@/components/Contextmenu/types'
-import emitter, { EmitterEvents } from '@/utils/emitter'
+import { defineComponent, PropType } from 'vue';
+import { PPTChartElement } from '@/types/slides';
+import { ContextmenuItem } from '@/components/Contextmenu/types';
+import emitter, { EmitterEvents } from '@/utils/emitter';
 
-import ElementOutline from '@/views/components/element/ElementOutline.vue'
-import Chart from './Chart.vue'
+import ElementOutline from '@/views/components/element/ElementOutline.vue';
+import Chart from './Chart.vue';
 
 export default defineComponent({
   name: 'editable-element-chart',
@@ -72,22 +72,22 @@ export default defineComponent({
   },
   setup(props) {
     const handleSelectElement = (e: MouseEvent) => {
-      if (props.elementInfo.lock) return
-      e.stopPropagation()
+      if (props.elementInfo.lock) return;
+      e.stopPropagation();
 
-      props.selectElement(e, props.elementInfo)
-    }
+      props.selectElement(e, props.elementInfo);
+    };
 
     const openDataEditor = () => {
-      emitter.emit(EmitterEvents.OPEN_CHART_DATA_EDITOR)
-    }
+      emitter.emit(EmitterEvents.OPEN_CHART_DATA_EDITOR);
+    };
 
     return {
       handleSelectElement,
       openDataEditor,
-    }
+    };
   },
-})
+});
 </script>
 
 <style lang="scss" scoped>

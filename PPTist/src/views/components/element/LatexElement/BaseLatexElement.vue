@@ -35,8 +35,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue'
-import { PPTLatexElement } from '@/types/slides'
+import { defineComponent, PropType } from 'vue';
+import { PPTLatexElement } from '@/types/slides';
 
 export default defineComponent({
   name: 'base-element-latex',
@@ -46,7 +46,7 @@ export default defineComponent({
       required: true,
     },
   },
-})
+});
 </script>
 
 <style lang="scss" scoped>

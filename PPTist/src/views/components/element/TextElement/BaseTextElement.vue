@@ -35,11 +35,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, computed } from 'vue'
-import { PPTTextElement } from '@/types/slides'
-import ElementOutline from '@/views/components/element/ElementOutline.vue'
+import { defineComponent, PropType, computed } from 'vue';
+import { PPTTextElement } from '@/types/slides';
+import ElementOutline from '@/views/components/element/ElementOutline.vue';
 
-import useElementShadow from '@/views/components/element/hooks/useElementShadow'
+import useElementShadow from '@/views/components/element/hooks/useElementShadow';
 
 export default defineComponent({
   name: 'base-element-text',
@@ -53,14 +53,14 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const shadow = computed(() => props.elementInfo.shadow)
-    const { shadowStyle } = useElementShadow(shadow)
+    const shadow = computed(() => props.elementInfo.shadow);
+    const { shadowStyle } = useElementShadow(shadow);
 
     return {
       shadowStyle,
-    }
+    };
   },
-})
+});
 </script>
 
 <style lang="scss" scoped>

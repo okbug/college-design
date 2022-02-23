@@ -36,13 +36,13 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, inject, PropType, ref, Ref } from 'vue'
-import { storeToRefs } from 'pinia'
-import { useSlidesStore } from '@/store'
-import { PPTAudioElement } from '@/types/slides'
-import { VIEWPORT_SIZE } from '@/configs/canvas'
+import { computed, defineComponent, inject, PropType, ref, Ref } from 'vue';
+import { storeToRefs } from 'pinia';
+import { useSlidesStore } from '@/store';
+import { PPTAudioElement } from '@/types/slides';
+import { VIEWPORT_SIZE } from '@/configs/canvas';
 
-import AudioPlayer from './AudioPlayer.vue'
+import AudioPlayer from './AudioPlayer.vue';
 
 export default defineComponent({
   name: 'screen-element-audio',
@@ -56,45 +56,45 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const { viewportRatio, currentSlide } = storeToRefs(useSlidesStore())
+    const { viewportRatio, currentSlide } = storeToRefs(useSlidesStore());
 
-    const scale: Ref<number> = inject('slideScale') || ref(1)
-    const slideId: Ref<string> = inject('slideId') || ref('')
+    const scale: Ref<number> = inject('slideScale') || ref(1);
+    const slideId: Ref<string> = inject('slideId') || ref('');
 
-    const inCurrentSlide = computed(() => currentSlide.value.id === slideId.value)
+    const inCurrentSlide = computed(() => currentSlide.value.id === slideId.value);
 
     const audioIconSize = computed(() => {
-      return Math.min(props.elementInfo.width, props.elementInfo.height) + 'px'
-    })
+      return Math.min(props.elementInfo.width, props.elementInfo.height) + 'px';
+    });
     const audioPlayerPosition = computed(() => {
-      const canvasWidth = VIEWPORT_SIZE
-      const canvasHeight = VIEWPORT_SIZE * viewportRatio.value
+      const canvasWidth = VIEWPORT_SIZE;
+      const canvasHeight = VIEWPORT_SIZE * viewportRatio.value;
 
-      const audioWidth = 280 / scale.value
-      const audioHeight = 50 / scale.value
+      const audioWidth = 280 / scale.value;
+      const audioHeight = 50 / scale.value;
 
-      const elWidth = props.elementInfo.width
-      const elHeight = props.elementInfo.height
-      const elLeft = props.elementInfo.left
-      const elTop = props.elementInfo.top
+      const elWidth = props.elementInfo.width;
+      const elHeight = props.elementInfo.height;
+      const elLeft = props.elementInfo.left;
+      const elTop = props.elementInfo.top;
 
-      let left = 0
-      let top = elHeight
+      let left = 0;
+      let top = elHeight;
       
-      if (elLeft + audioWidth >= canvasWidth) left = elWidth - audioWidth
-      if (elTop + elHeight + audioHeight >= canvasHeight) top = -audioHeight
+      if (elLeft + audioWidth >= canvasWidth) left = elWidth - audioWidth;
+      if (elTop + elHeight + audioHeight >= canvasHeight) top = -audioHeight;
 
       return {
         left: left + 'px',
         top: top + 'px',
-      }
-    })
+      };
+    });
 
-    const audioPlayerRef = ref()
+    const audioPlayerRef = ref();
     const toggle = () => {
-      if (!audioPlayerRef.value) return
-      audioPlayerRef.value.toggle()
-    }
+      if (!audioPlayerRef.value) return;
+      audioPlayerRef.value.toggle();
+    };
 
     return {
       scale,
@@ -103,9 +103,9 @@ export default defineComponent({
       audioPlayerPosition,
       audioPlayerRef,
       toggle,
-    }
+    };
   },
-})
+});
 </script>
 
 <style lang="scss" scoped>

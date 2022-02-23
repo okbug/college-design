@@ -25,10 +25,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue'
-import { PPTTableElement } from '@/types/slides'
+import { defineComponent, PropType } from 'vue';
+import { PPTTableElement } from '@/types/slides';
 
-import StaticTable from './StaticTable.vue'
+import StaticTable from './StaticTable.vue';
 
 export default defineComponent({
   name: 'base-element-table',
@@ -41,7 +41,7 @@ export default defineComponent({
       required: true,
     },
   },
-})
+});
 </script>
 
 <style lang="scss" scoped>

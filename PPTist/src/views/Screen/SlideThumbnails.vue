@@ -18,12 +18,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue'
-import { storeToRefs } from 'pinia'
-import { useSlidesStore } from '@/store'
-import useLoadSlides from '@/hooks/useLoadSlides'
+import { defineComponent, PropType } from 'vue';
+import { storeToRefs } from 'pinia';
+import { useSlidesStore } from '@/store';
+import useLoadSlides from '@/hooks/useLoadSlides';
 
-import ThumbnailSlide from '@/views/components/ThumbnailSlide/index.vue'
+import ThumbnailSlide from '@/views/components/ThumbnailSlide/index.vue';
 
 export default defineComponent({
   name: 'slide-thumbnails',
@@ -37,20 +37,20 @@ export default defineComponent({
     },
   },
   setup(props, { emit }) {
-    const { slides, slideIndex } = storeToRefs(useSlidesStore())
+    const { slides, slideIndex } = storeToRefs(useSlidesStore());
 
-    const { slidesLoadLimit } = useLoadSlides()
+    const { slidesLoadLimit } = useLoadSlides();
 
-    const close = () => emit('close')
+    const close = () => emit('close');
 
     return {
       slides,
       slideIndex,
       slidesLoadLimit,
       close,
-    }
+    };
   },
-})
+});
 </script>
 
 <style lang="scss" scoped>

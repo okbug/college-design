@@ -5,10 +5,10 @@
 </template>
 
 <script lang="ts">
-import { computed, PropType, defineComponent } from 'vue'
-import { storeToRefs } from 'pinia'
-import { useMainStore } from '@/store'
-import { AlignmentLineAxis } from '@/types/edit'
+import { computed, PropType, defineComponent } from 'vue';
+import { storeToRefs } from 'pinia';
+import { useMainStore } from '@/store';
+import { AlignmentLineAxis } from '@/types/edit';
 
 export default defineComponent({
   name: 'alignment-line',
@@ -27,25 +27,25 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const { canvasScale } = storeToRefs(useMainStore())
+    const { canvasScale } = storeToRefs(useMainStore());
 
     // 吸附对齐线的位置
-    const left = computed(() => props.axis.x * canvasScale.value + 'px')
-    const top = computed(() => props.axis.y * canvasScale.value + 'px')
+    const left = computed(() => props.axis.x * canvasScale.value + 'px');
+    const top = computed(() => props.axis.y * canvasScale.value + 'px');
 
     // 吸附对齐线的长度
     const sizeStyle = computed(() => {
-      if (props.type === 'vertical') return { height: props.length * canvasScale.value + 'px' }
-      return { width: props.length * canvasScale.value + 'px' }
-    })
+      if (props.type === 'vertical') return { height: props.length * canvasScale.value + 'px' };
+      return { width: props.length * canvasScale.value + 'px' };
+    });
 
     return {
       left,
       top,
       sizeStyle,
-    }
+    };
   },
-})
+});
 </script>
 
 <style lang="scss" scoped>

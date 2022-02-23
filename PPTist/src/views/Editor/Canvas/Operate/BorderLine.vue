@@ -3,8 +3,8 @@
 </template>
 
 <script lang="ts">
-import { PropType } from 'vue'
-import { OperateBorderLine } from '@/types/edit'
+import { PropType } from 'vue';
+import { OperateBorderLine } from '@/types/edit';
 
 export default {
   name: 'border-line',
@@ -18,7 +18,7 @@ export default {
       default: false,
     },
   },
-}
+};
 </script>
 
 <style lang="scss" scoped>

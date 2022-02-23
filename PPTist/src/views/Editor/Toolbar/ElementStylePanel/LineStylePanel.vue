@@ -63,14 +63,14 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import { storeToRefs } from 'pinia'
-import { useMainStore, useSlidesStore } from '@/store'
-import { PPTLineElement } from '@/types/slides'
-import useHistorySnapshot from '@/hooks/useHistorySnapshot'
+import { defineComponent } from 'vue';
+import { storeToRefs } from 'pinia';
+import { useMainStore, useSlidesStore } from '@/store';
+import { PPTLineElement } from '@/types/slides';
+import useHistorySnapshot from '@/hooks/useHistorySnapshot';
 
-import ElementShadow from '../common/ElementShadow.vue'
-import ColorButton from '../common/ColorButton.vue'
+import ElementShadow from '../common/ElementShadow.vue';
+import ColorButton from '../common/ColorButton.vue';
 
 export default defineComponent({
   name: 'line-style-panel',
@@ -79,23 +79,23 @@ export default defineComponent({
     ColorButton,
   },
   setup() {
-    const slidesStore = useSlidesStore()
-    const { handleElement } = storeToRefs(useMainStore())
+    const slidesStore = useSlidesStore();
+    const { handleElement } = storeToRefs(useMainStore());
 
-    const { addHistorySnapshot } = useHistorySnapshot()
+    const { addHistorySnapshot } = useHistorySnapshot();
 
     const updateLine = (props: Partial<PPTLineElement>) => {
-      if (!handleElement.value) return
-      slidesStore.updateElement({ id: handleElement.value.id, props })
-      addHistorySnapshot()
-    }
+      if (!handleElement.value) return;
+      slidesStore.updateElement({ id: handleElement.value.id, props });
+      addHistorySnapshot();
+    };
 
     return {
       handleElement,
       updateLine,
-    }
+    };
   }
-})
+});
 </script>
 
 <style lang="scss" scoped>

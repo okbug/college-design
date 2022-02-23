@@ -1,8 +1,8 @@
-import { useMainStore } from './main'
-import { useSlidesStore } from './slides'
-import { useSnapshotStore } from './snapshot'
-import { useKeyboardStore } from './keyboard'
-import { useScreenStore } from './screen'
+import { useMainStore } from './main';
+import { useSlidesStore } from './slides';
+import { useSnapshotStore } from './snapshot';
+import { useKeyboardStore } from './keyboard';
+import { useScreenStore } from './screen';
 
 export {
   useMainStore,
@@ -10,4 +10,4 @@ export {
   useSnapshotStore,
   useKeyboardStore,
   useScreenStore,
-}
+};

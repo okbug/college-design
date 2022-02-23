@@ -15,18 +15,18 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, PropType } from 'vue'
-import { ElementTypes, PPTElement } from '@/types/slides'
+import { computed, defineComponent, PropType } from 'vue';
+import { ElementTypes, PPTElement } from '@/types/slides';
 
-import BaseImageElement from '@/views/components/element/ImageElement/BaseImageElement.vue'
-import BaseTextElement from '@/views/components/element/TextElement/BaseTextElement.vue'
-import BaseShapeElement from '@/views/components/element/ShapeElement/BaseShapeElement.vue'
-import BaseLineElement from '@/views/components/element/LineElement/BaseLineElement.vue'
-import BaseChartElement from '@/views/components/element/ChartElement/BaseChartElement.vue'
-import BaseTableElement from '@/views/components/element/TableElement/BaseTableElement.vue'
-import BaseLatexElement from '@/views/components/element/LatexElement/BaseLatexElement.vue'
-import BaseVideoElement from '@/views/components/element/VideoElement/BaseVideoElement.vue'
-import BaseAudioElement from '@/views/components/element/AudioElement/BaseAudioElement.vue'
+import BaseImageElement from '@/views/components/element/ImageElement/BaseImageElement.vue';
+import BaseTextElement from '@/views/components/element/TextElement/BaseTextElement.vue';
+import BaseShapeElement from '@/views/components/element/ShapeElement/BaseShapeElement.vue';
+import BaseLineElement from '@/views/components/element/LineElement/BaseLineElement.vue';
+import BaseChartElement from '@/views/components/element/ChartElement/BaseChartElement.vue';
+import BaseTableElement from '@/views/components/element/TableElement/BaseTableElement.vue';
+import BaseLatexElement from '@/views/components/element/LatexElement/BaseLatexElement.vue';
+import BaseVideoElement from '@/views/components/element/VideoElement/BaseVideoElement.vue';
+import BaseAudioElement from '@/views/components/element/AudioElement/BaseAudioElement.vue';
 
 export default defineComponent({
   name: 'base-element',
@@ -52,13 +52,13 @@ export default defineComponent({
         [ElementTypes.LATEX]: BaseLatexElement,
         [ElementTypes.VIDEO]: BaseVideoElement,
         [ElementTypes.AUDIO]: BaseAudioElement,
-      }
-      return elementTypeMap[props.elementInfo.type] || null
-    })
+      };
+      return elementTypeMap[props.elementInfo.type] || null;
+    });
 
     return {
       currentElementComponent,
-    }
+    };
   },
-})
+});
 </script>
