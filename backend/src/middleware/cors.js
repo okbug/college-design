@@ -6,6 +6,7 @@ module.exports = function useCors(options) {
       "Content-Type, Content-Length,Authorization,Accept,X-Requested-With"
     );
     ctx.set("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
+    ctx.set('Access-Control-Max-Age','60')
     if (ctx.method == "OPTIONS") {
       ctx.body = 200;
     } else {

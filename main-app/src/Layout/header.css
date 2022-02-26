@@ -1,3 +1,6 @@
+.left {
+    width: 200px;
+}
 .title {
     color: white;
 }
@@ -6,8 +9,17 @@
     position: absolute;
     right: 50px;
     top: 5px;
+    color: white;
 }
 
 .login .ant-btn {
     margin: 3px;
+}
+
+.ant-modal-body {
+    height: 440px;
+}
+
+.ant-modal-footer {
+    display: none;
 }
