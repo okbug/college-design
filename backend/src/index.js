@@ -6,6 +6,7 @@ const route = new Router();
 const cors = require("./middleware/cors");
 
 const { login, register, checkUser, getUserInfo } = require("./utils/user");
+const {getDocDetail} = require('./utils/doclist');
 const { paramPaser } = require("./utils/parser");
 
 /**
@@ -125,6 +126,8 @@ route.post("/register", async (ctx) => {
 route.post('/getDocDetail', async (ctx) => {
   const params = await paramPaser(ctx);
   console.log(params);
+  const res = await getDocDetail(params.id)
+  ctx.body = res;
 })
 
 // 路由的注册

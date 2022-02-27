@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {useParams} from 'react-router-dom';
 import "vditor/src/assets/scss/index.scss";
 import Vditor from 'vditor';
 import {debounce} from '../../utils/common';
-
+import context from "@/utils/context";
 import { useEditor } from "../../utils/useEditor";
 
 export default function Editor() {
-
+  const event = useContext(context);
+  
   const {id} = useParams();
+  
   
   const [text, setText] = useState<string>('')
   
@@ -23,10 +25,15 @@ export default function Editor() {
   });
 
   useEffect(() => {
-    console.log(id, 122121212)
-    setText(id as string);
-    console.log(vditor)
-  }, [text, vditor, id])
+    if (!vditor) return;
+    Promise.all(event.emit('post', 'getDocDetail', {
+      id
+    })).then(([res]) => {
+      setTimeout(() => {
+        vditor.setValue(res.content.text)
+      }, 50)
+    })
+  }, [event, id, vditor])
 
   const onInput = debounce(() => {
     if (!vditor) {
