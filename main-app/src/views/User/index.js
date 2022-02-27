@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Button, message } from 'antd';
-import { checkUser, getUserInfo } from "../../common";
+import { checkUser, getUserInfo } from "@/common";
 import {Link} from 'react-router-dom'
+import PlayGround from "@/Layout/PlayGround.jsx";
 
 const User = () => {
   const userName = localStorage.getItem('username')
@@ -32,6 +33,7 @@ const User = () => {
          )
         }
       </div>
+      <PlayGround />
     </>
   );
 };

@@ -19,11 +19,11 @@ export default function Editor() {
       height: 600,
     },
     bindFn: setVditor,
-    defaultText: id ? text : 'Hello World!'
+    defaultText: id ? id : 'Hello World!'
   });
 
   useEffect(() => {
-    console.log(id)
+    console.log(id, 122121212)
     setText(id as string);
     console.log(vditor)
   }, [text, vditor, id])

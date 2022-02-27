@@ -43,13 +43,17 @@ route.post("/checkUserLogin", async (ctx) => {
     ctx.body = {
       code: 0,
       msg: "已过期或者失效",
-      data: null,
+      data: {
+        e: 124
+      },
     };
   } else
     ctx.body = {
       code: 200,
       msg: "ok",
-      data: null,
+      data: {
+        name: 'test'
+      },
     };
 });
 
@@ -117,6 +121,11 @@ route.post("/register", async (ctx) => {
     };
   }
 });
+
+route.post('/getDocDetail', async (ctx) => {
+  const params = await paramPaser(ctx);
+  console.log(params);
+})
 
 // 路由的注册
 app.use(route.routes()).use(route.allowedMethods());
