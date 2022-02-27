@@ -1,5 +1,16 @@
-.left {
+.header {
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+.left, .nav-btn {
     width: 200px;
+    display: inline-block;
+}
+.menu-item {
+    width: 200px;
+    display: inline-block;
 }
 .title {
     color: white;
