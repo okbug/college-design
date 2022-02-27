@@ -45,6 +45,11 @@ module.exports = {
       filename: "index.html",
     }),
   ],
+  resolve: {
+    alias: {
+      ['@']: path.resolve(__dirname, 'src'),
+    }
+  },
   devServer: {
     static: {
       directory: path.join(__dirname, "public"),

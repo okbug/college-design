@@ -25,6 +25,8 @@ const fetchPPTContent = () => {
   console.log(id);
 };
 
+fetchPPTContent();
+
 const mainStore = useMainStore();
 const snapshotStore = useSnapshotStore();
 const { screening } = storeToRefs(useScreenStore());

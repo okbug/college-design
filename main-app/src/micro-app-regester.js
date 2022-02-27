@@ -1,5 +1,9 @@
 import { registerMicroApps, start } from "qiankun";
 
+import event from './utils/event';
+
+
+
 registerMicroApps([
   {
     name: "pptist", // 和子应用 package.json 中name字段相同
@@ -7,9 +11,7 @@ registerMicroApps([
     container: "#main",
     activeRule: "/ppt",
     props: {
-      a() {
-        console.log("this is a function in main app to ppt");
-      },
+      event
     },
   },
   {
@@ -18,9 +20,7 @@ registerMicroApps([
     container: "#main",
     activeRule: "/doc",
     props: {
-      a() {
-        console.log("this is a function in main app to doc");
-      },
+      event
     },
   },
   // {

@@ -1,3 +1,4 @@
+import { message } from 'antd';
 import axios from 'axios';
 
 const request = axios.create({
@@ -7,6 +8,8 @@ const request = axios.create({
 
 request.interceptors.response.use((res) => {
     return res.data
+}, err => {
+    // message.error(err);
 })
 
 export default request

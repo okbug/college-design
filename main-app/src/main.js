@@ -9,17 +9,17 @@ import Login from "./views/User/login";
 import "./micro-app-regester";
 import "antd/dist/antd.less";
 
-const BlankPage = () => <></>
+const BlankPage = () => (<div></div>);
+
 function Index() {
   return (
     <>
     <Router>
       <Routes>
         <Route path="/" element={<App />} >
-          <Route path="/user" element={<User />} />
+          <Route path="user" element={<User />} />
           <Route path="*" element={<BlankPage/>} />
         </Route>
-        
       </Routes>
     </Router>
     </>
