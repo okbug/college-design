@@ -3,24 +3,29 @@ import ReactDOM from "react-dom";
 import { HashRouter, Routes, Route } from "react-router-dom";
 import App from "./App";
 import './public-path';
+import context from './utils/context';
 
 async function render(props?: any) {
-  const event = props.event || {};
-  let res = Promise.all(event.emit('post', '/checkUserLogin', {
-    userName: 1,
-    userId: 2,
-  }))
-  res.then(a => {
-    console.log(a)
-  })
+  
+  const {Provider} = context;
+  // const event = props.event || {};
+  // let res = Promise.all(event.emit('post', '/checkUserLogin', {
+  //   userName: 1,
+  //   userId: 2,
+  // }))
+  // res.then(a => {
+  //   console.log(a)
+  // })
   ReactDOM.render(
+    <Provider value={props.event}>
     <HashRouter basename="/">
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/:id" element={<App />} />
         <Route path="/a" element={<div>a</div>} />
       </Routes>
-    </HashRouter>,
+    </HashRouter>
+    </Provider>,
     document.getElementById("root")
   );
 
@@ -38,7 +43,6 @@ export async function bootstrap() {
 }
 
 export async function mount(props: any) {
-  console.log("props from main app", props);
   render(props);
 }
 
