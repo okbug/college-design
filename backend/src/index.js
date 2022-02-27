@@ -71,6 +71,7 @@ route.post("/getUserInfo", async (ctx) => {
         lastLoginTime: Number(res.last_login_time),
         email: res.user_email,
         registerTime: Number(res.register_time),
+        docs: res.docs,
       },
       msg: '获取用户信息成功'
     };

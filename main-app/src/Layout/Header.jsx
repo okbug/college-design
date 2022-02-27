@@ -93,11 +93,21 @@ const Header = (props) => {
   return (
     <>
       <Layout>
-        <Layout.Header>
+        <Layout.Header className="header">
           <div className="left" onClick={() => navigate('/')}>
-            <span className="title">
+            <div className="title">
               在线协同文档系统
-            </span>
+            </div>
+          </div>
+          <div  className="nav-btn" onClick={() => navigate('/')}>
+            <Button type="primary">
+              + 新建文档
+            </Button>
+          </div>
+          <div className="nav-btn" onClick={() => navigate('/')}>
+            <Button type="primary">
+              + 新建演示文稿
+            </Button>
           </div>
           {isLogin ? (
             <Dropdown overlay={menu} placement="bottomLeft">

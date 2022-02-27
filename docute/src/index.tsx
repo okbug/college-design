@@ -9,6 +9,8 @@ async function render() {
     <HashRouter basename="/">
       <Routes>
         <Route path="/" element={<App />} />
+        <Route path="/:id" element={<App />} />
+        <Route path="/a" element={<div>xxxx</div>} />
       </Routes>
     </HashRouter>,
     document.getElementById("root")

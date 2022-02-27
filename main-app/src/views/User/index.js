@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { message } from 'antd';
+import { Button, message } from 'antd';
 import { checkUser, getUserInfo } from "../../common";
-
+import {Link} from 'react-router-dom'
 
 const User = () => {
   const userName = localStorage.getItem('username')
+  console.log(userName);
   const [userInfo, setUserInfo] = useState(null);
   const goBack = () => {
     message.error('请登录')
@@ -25,7 +26,11 @@ const User = () => {
     <>
       <h1>用户界面</h1>
       <div>
-        {userInfo && Object.keys(userInfo).map((item ,key) => <div key={key}>{item}: {userInfo[item]}</div>)}
+        {userInfo &&
+         (
+           <>{JSON.stringify(userInfo)}</>
+         )
+        }
       </div>
     </>
   );
