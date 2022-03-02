@@ -9,6 +9,11 @@ const getDocListByUser = (name) => {
     })
 }
 
+/**
+ * 
+ * @param {string} id 文档的ID
+ * @returns {documentDetail} 文档的信息
+ */
 const getDocDetail = async (id) => {
     const text = `select * from docs where id='${id}'`;
     const res = await query(text);
