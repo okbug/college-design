@@ -10,6 +10,8 @@ async function render(props?: any) {
   const { Provider } = context;
   ReactDOM.render(
     <Provider value={props.event || ''}>
+  ReactDOM.render(
+    <Provider value={props.event}>
     <HashRouter basename="/">
       <Routes>
         <Route path="/" element={<App />} />
