@@ -10,15 +10,13 @@ async function render(props?: any) {
   const { Provider } = context;
   ReactDOM.render(
     <Provider value={props.event || ''}>
-  ReactDOM.render(
-    <Provider value={props.event}>
-    <HashRouter basename="/">
-      <Routes>
-        <Route path="/" element={<App />} />
-        <Route path="/:id" element={<App />} />
-        <Route path="/a" element={<div>a</div>} />
-      </Routes>
-    </HashRouter>
+      <HashRouter basename="/">
+        <Routes>
+          <Route path="/" element={<App />} />
+          <Route path="/:id" element={<App />} />
+          <Route path="/a" element={<div>a</div>} />
+        </Routes>
+      </HashRouter>
     </Provider>,
     document.getElementById("root")
   );
