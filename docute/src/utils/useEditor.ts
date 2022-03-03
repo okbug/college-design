@@ -22,6 +22,7 @@ export const useEditor = (config: EditorOptions) => {
         }
         vditor.setValue(config.defaultText);
       },
+      placeholder: 'hahah',
       ...config.options,
     });
 

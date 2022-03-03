@@ -19,9 +19,9 @@ export default function Editor() {
     options: {
       width: 600,
       height: 600,
+      placeholder: id ? 'loading ... ' : 'Just Write Something!'
     },
     bindFn: setVditor,
-    defaultText: id ? id : 'Hello World!'
   });
 
   useEffect(() => {
@@ -29,9 +29,10 @@ export default function Editor() {
     Promise.all(event.emit('post', 'getDocDetail', {
       id
     })).then(([res]) => {
+      console.log(res);
       setTimeout(() => {
         vditor.setValue(res.content.text)
-      }, 50)
+      }, 500)
     })
   }, [event, id, vditor])
 

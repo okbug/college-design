@@ -7,17 +7,9 @@ import context from './utils/context';
 
 async function render(props?: any) {
   
-  const {Provider} = context;
-  // const event = props.event || {};
-  // let res = Promise.all(event.emit('post', '/checkUserLogin', {
-  //   userName: 1,
-  //   userId: 2,
-  // }))
-  // res.then(a => {
-  //   console.log(a)
-  // })
+  const { Provider } = context;
   ReactDOM.render(
-    <Provider value={props.event}>
+    <Provider value={props.event || ''}>
     <HashRouter basename="/">
       <Routes>
         <Route path="/" element={<App />} />
