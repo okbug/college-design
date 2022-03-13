@@ -7,3 +7,11 @@ export const debounce = (fn: (...args: any) => void, time: number = 30) => {
         }, time)
     }
 }
+
+export const replaceHTMLClass = (str: string, className: string = 'doc-title') => {
+    for (let level = 1; level < 7; level++) {
+        str = str.replaceAll(`<h${level}>`, `<h${level} class="${className}${level}">`)
+    }
+
+    return str;
+}

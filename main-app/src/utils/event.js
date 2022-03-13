@@ -11,6 +11,14 @@ class Event {
     this.map.set(name, arr);
   }
 
+  onOnce(name, fn) {
+    this.map.set(name, fn);
+  }
+
+  emitOnce(name, ...payload) {
+    const fn = this.map.get(name);
+  }
+
   emit(name, ...payload) {
     const arr = this.map.get(name) || [];
     return arr.map((fn) => {
@@ -28,4 +36,8 @@ event.on("post", (...args) => {
 event.on("get", (...args) => {
   return request.get(...args);
 });
+
+event.on('updateDocument', (data) => {
+  return request.post('/updateDocument', data)
+})
 export default event;

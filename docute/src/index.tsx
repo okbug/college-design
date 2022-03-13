@@ -2,17 +2,27 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { HashRouter, Routes, Route } from "react-router-dom";
 import App from "./App";
+
+
+import View from "@/components/View";
+
+import Editor from "@/components/Editor";
 import './public-path';
-import context from './utils/context';
+import context from '@/utils/context';
 
 async function render(props?: any) {
   
   const { Provider } = context;
   ReactDOM.render(
-    <Provider value={props.event || ''}>
+    <Provider value={{
+      event: props.event
+    }}>
       <HashRouter basename="/">
         <Routes>
-          <Route path="/" element={<App />} />
+          <Route path="/" element={<App />}>
+          <Route path="view/:id" element={<View></View>}></Route>
+          <Route path="edit/:id" element={<Editor></Editor>}></Route>
+          </Route>
           <Route path="/:id" element={<App />} />
           <Route path="/a" element={<div>a</div>} />
         </Routes>

@@ -39,7 +39,9 @@ declare const window: {
   __POWERED_BY_QIANKUN__: boolean;
 };
 
+let hasUmounted = false;
 const flag = window.__POWERED_BY_QIANKUN__;
+console.log(flag);
 const app = createApp(App);
 
 app.component('InputNumber', InputNumber);
@@ -78,26 +80,28 @@ app.use(createPinia());
 if (flag) {
   console.log('at qiankun!');
 }
-else {
-  app.mount('#app');
-}
 
 export async function bootstrap() {
   await console.log('vue app bootstraped');
 }
-
+const stopContextMenu = (e: Event) => e.preventDefault();
 export async function mount(props: any) {
+  hasUmounted && location.reload();
   console.log('props from main app', props);
   // render();
-  await app.mount('#app');
+  app.mount('#app');
+  document.addEventListener('contextmenu', stopContextMenu);
 
   const a = props.a;
-  a();
+  a?.();
 }
 
 export async function unmount() {
-  await app.unmount();
+  hasUmounted = true;
+  console.log('vue pptist unmount');
+  app.unmount();
+  document.removeEventListener('contextmenu', stopContextMenu);
 }
 export async function update(props: any) {
-  await console.log('update props', props);
+  console.log('update props', props);
 }

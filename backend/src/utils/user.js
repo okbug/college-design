@@ -1,5 +1,5 @@
 const { query } = require('./sql')
-const {genUserId} = require('../common/index')
+const {genUserId, genRandomString} = require('../common/index')
 /**
  * 返回数据库中所有用户的数组
  * @returns user[]
@@ -32,16 +32,15 @@ const register = async ({name, password, email}) => {
     }
     const checkMailString = `SELECT * from users where user_email='${email}'`;
     const x = await query(checkMailString);
-    console.log(x);
     if (x.length >= 1) {
         return {code:'邮箱已注册'};
     }
     
     const text = `
         INSERT INTO users
-        (username, user_password, user_email,docs, register_time, last_login_time, userid)
+        (username, user_password, user_email,docs, register_time, last_login_time, userid, token)
         VALUES
-        ("${name}", "${password}", "${email}", "[]", NOW(), NOW(), "${genUserId()}");
+        ("${name}", "${password}", "${email}", "[]", NOW(), NOW(), "${genUserId()}", "${genRandomString(40)}");
     `
 
     const res = await query(text);
@@ -102,18 +101,17 @@ const updatePassword = async ({username, nowPassWord,newPassword}) => {
     const text = `UPDATE users SET user_password='${newPassword}' WHERE username='${username}';`
 
     await query(text)
-    console.log('success')
 }
 
 
-const checkUser = async ({userName, userId}) => {
-    const text = `select * from users where username='${userName}' and userid='${userId}'`;
-    const res =  await getUserInfo({userName, userId})
+const checkUser = async ({userName, userId, token}) => {
+    const text = `select * from users where username='${userName}' and userid='${userId}' and token='${token}'`;
+    const res =  await getUserInfo({userName, userId, token})
     return !!res;
 }
 
-const getUserInfo = async ({userName, userId}) => {
-    const text = `select * from users where username='${userName}' and userid='${userId}'`;
+const getUserInfo = async ({userName, userId, token}) => {
+    const text = `select * from users where username='${userName}' and userid='${userId}' and token='${token}'`;
     const [res] =  await query(text)
     return res
 }

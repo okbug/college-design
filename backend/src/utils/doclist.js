@@ -1,4 +1,4 @@
-const {query} = require('./sql')
+const {query, execute} = require('./sql')
 
 const getDocListByUser = (name) => {
     const text = `select docs from users where username='${name}'`
@@ -26,7 +26,21 @@ const getDocDetail = async (id) => {
 
 // getDocDetail('testppt');
 
+const updateDoc = async (params) => {
+    const {content} = await getDocDetail(params.id);
+    content.text = params.content;
+    console.log(1, content);
+    const text = `update docs set content = ? WHERE id= ?`
+    console.log(2, text);
+    await execute(text, [JSON.stringify(content), params.id]);
+    // console.log(text);
+    // ok await query(`update docs set type='doc' where id='testdoc'`)
+    
+    return {ok: 1}
+}
+
 module.exports = {
     getDocListByUser,
     getDocDetail,
+    updateDoc,
 }

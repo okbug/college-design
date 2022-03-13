@@ -6,8 +6,44 @@ const route = new Router();
 const cors = require("./middleware/cors");
 
 const { login, register, checkUser, getUserInfo } = require("./utils/user");
-const {getDocDetail} = require('./utils/doclist');
+const { getDocDetail, updateDoc } = require("./utils/doclist");
 const { paramPaser } = require("./utils/parser");
+
+const server = require("./utils/ws");
+
+const set = new Set();
+server.on("connection", (socket) => {
+  set.add(socket);
+  // send a message to the client
+  socket.send(
+    JSON.stringify({
+      type: "hello from server",
+      content: [1, "2"],
+    })
+  );
+
+  // receive a message from the client
+  socket.on("message", (data) => {
+    const packet = JSON.parse(data);
+
+    switch (packet.type) {
+      case "hello from client":
+        // ...
+        console.log(packet.content);
+        set.forEach((socket) => {
+          socket.send(
+            JSON.stringify({
+              type: "hello from server",
+              content: packet.content,
+            })
+          );
+        });
+        break;
+      case "online": 
+        console.log(packet.content);
+    }
+  });
+});
 
 /**
  * 中间件设置
@@ -38,14 +74,17 @@ route.get("/", async (ctx) => {
 });
 
 route.post("/checkUserLogin", async (ctx) => {
-  const params = await paramPaser(ctx);
-  const res = await checkUser(params);
+  const res = await checkUser({
+    userName: ctx.cookies.get('userName'),
+    userId: ctx.cookies.get('userId'),
+    token: ctx.cookies.get("token"),
+  });
   if (!res) {
     ctx.body = {
       code: 0,
       msg: "已过期或者失效",
       data: {
-        e: 124
+        e: 124,
       },
     };
   } else
@@ -53,21 +92,23 @@ route.post("/checkUserLogin", async (ctx) => {
       code: 200,
       msg: "ok",
       data: {
-        name: 'test'
+        name: "test",
       },
     };
 });
 
 route.post("/getUserInfo", async (ctx) => {
-  const param = await paramPaser(ctx);
-  const res = await getUserInfo(param);
-  console.log(res, param);
+  const res = await getUserInfo({
+    userName: ctx.cookies.get('userName'),
+    userId: ctx.cookies.get('userId'),
+    token: ctx.cookies.get("token"),
+  });
   if (!res) {
     ctx.body = {
       code: 0,
       data: null,
-      msg: '获取用户信息错误'
-    }
+      msg: "获取用户信息错误",
+    };
   } else {
     ctx.body = {
       code: 200,
@@ -78,7 +119,7 @@ route.post("/getUserInfo", async (ctx) => {
         registerTime: Number(res.register_time),
         docs: res.docs,
       },
-      msg: '获取用户信息成功'
+      msg: "获取用户信息成功",
     };
   }
 });
@@ -86,14 +127,16 @@ route.post("/getUserInfo", async (ctx) => {
 route.post("/login", async (ctx) => {
   const data = await paramPaser(ctx);
   let code = 200;
-  const res = await login(data);
+  const res = await login({
+    ...data
+  });
 
   if (res.code !== "ok") {
     code = 0;
   } else {
-    ctx.cookies.set("username", "1", {
-      domain: "http://localhost",
-    });
+    ctx.cookies.set("token", res.data.token);
+    ctx.cookies.set('userId', res.data.userid);
+    ctx.cookies.set('userName', res.data.username);
   }
 
   ctx.body = {
@@ -123,12 +166,18 @@ route.post("/register", async (ctx) => {
   }
 });
 
-route.post('/getDocDetail', async (ctx) => {
+route.post("/getDocDetail", async (ctx) => {
   const params = await paramPaser(ctx);
-  console.log(params);
-  const res = await getDocDetail(params.id)
+  const res = await getDocDetail(params.id);
   ctx.body = res;
-})
+});
+
+// 更新文章
+route.post("/updateDocument", async (ctx) => {
+  const params = await paramPaser(ctx);
+  const res = await updateDoc(params);
+  ctx.body = res;
+});
 
 // 路由的注册
 app.use(route.routes()).use(route.allowedMethods());

@@ -18,7 +18,7 @@ const DocList = (props) => {
             renderItem={item => (
               <>
               <List.Item className="doc-link">
-                {item.id} <span><a onClick={() => navigate(`/${item.type}#/${item.id}`)}>详情</a></span>
+                {item.id} <span><a onClick={() => navigate(item.type === 'doc' ? `/${item.type}#/view/${item.id}` : `/${item.type}#/${item.id}`)}>详情</a></span>
               </List.Item>
               </>
             )}

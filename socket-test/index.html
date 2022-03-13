@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <input type="text" v-model="msg" @keyup.enter="send" />
+      <button @click="send">send</button>
+      <ul>
+          <li v-for="(item, index) in list" :key="index">
+              {{item}}
+          </li>
+      </ul>
+    </div>
+    <script src="//unpkg.com/vue@2"></script>
+    <script>
+      const vm = new Vue({
+        el: "#app",
+        data() {
+          return {
+            msg: "",
+            list: []
+          };
+        },
+        methods: {
+          send() {
+            socket.send(
+              JSON.stringify({
+                type: "hello from client",
+                content: this.msg,
+              })
+            );
+            this.msg = '';
+          },
+        },
+      });
+      const socket = new WebSocket("ws://localhost:3000");
+
+      socket.addEventListener("open", () => {
+        // send a message to the server
+      });
+
+      // receive a message from the server
+      socket.addEventListener("message", ({ data }) => {
+        const packet = JSON.parse(data);
+
+        switch (packet.type) {
+          case "hello from server":
+            // ...
+            console.log("from server", packet.content);
+            vm.list.push(packet.content)
+            break;
+        }
+      });
+    </script>
+  </body>
+</html>

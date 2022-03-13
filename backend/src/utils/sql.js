@@ -20,6 +20,11 @@ connection.connect(err => {
     }
 })
 
+/**
+ * 
+ * @param {string} str 查询语句
+ * @returns {Promise<Response>}查询后的结果或者报错信息
+ */
 const query = (str) => {
     return new Promise((resolve, reject) => {
         connection.query(str, (err, res) => {
@@ -31,6 +36,25 @@ const query = (str) => {
             }
         })
     })
+}
+
+/**
+ * 
+ * @param {string} str 查询语句
+ * @param {any[]} params 问号的代替值
+ * @returns {Promise<Response>} 查询的返回结果或者报错信息
+ */
+const execute = (str, params) => {
+    return new Promise((resolve, reject) => {
+        connection.query(str, params, (err, res) => {
+            if (err) {
+                reject(err);
+                return;
+            } else {
+                resolve(res);
+            }
+        })
+    }) 
 }
 
 /**
@@ -51,5 +75,6 @@ const insert = ({tableName, keys, values}) => {
 module.exports = {
     connection,
     query,
-    insert
+    insert,
+    execute
 }

@@ -25,6 +25,7 @@
     "style-loader": "^3.3.1"
   },
   "scripts": {
-    "dev": "webpack serve"
+    "dev": "webpack serve",
+    "build": "webpack"
   }
 }
