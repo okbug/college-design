@@ -1,4 +1,4 @@
-.playground {
+#react-app .playground {
     width: 100%;
     height: 500px;
     position: relative;
@@ -6,14 +6,14 @@
     left: 0;
 }
 
-.doc-list {
+#react-app .doc-list {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
 
-.doc-list .doc-link {
+#react-app .doc-list .doc-link {
     width: 200px;
     height: 40px;
     text-align: center;

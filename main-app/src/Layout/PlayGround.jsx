@@ -5,24 +5,31 @@ import { getUserInfo } from "../common";
 import { useNavigate } from "react-router-dom";
 const { Content } = Layout;
 
+const go = (item) =>
+  item.type === "doc"
+    ? `/${item.type}#/view/${item.id}`
+    : `/${item.type}?id=${item.id}`;
 const DocList = (props) => {
-    const navigate = useNavigate()
+  const navigate = useNavigate();
   return (
     <>
       <div className="doc-list">
         <Content>
           {props.docs ? (
             <List
-            bordered
-            dataSource={props.docs}
-            renderItem={item => (
-              <>
-              <List.Item className="doc-link">
-                {item.id} <span><a onClick={() => navigate(item.type === 'doc' ? `/${item.type}#/view/${item.id}` : `/${item.type}#/${item.id}`)}>详情</a></span>
-              </List.Item>
-              </>
-            )}
-          />
+              bordered
+              dataSource={props.docs}
+              renderItem={(item) => (
+                <>
+                  <List.Item className="doc-link">
+                    {item.id}{" "}
+                    <span>
+                      <a onClick={() => navigate(go(item))}>详情</a>
+                    </span>
+                  </List.Item>
+                </>
+              )}
+            />
           ) : (
             <div>暂无文档</div>
           )}

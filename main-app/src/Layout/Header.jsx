@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Button, Layout, Modal, Dropdown, Menu } from "antd";
-import {Link, useNavigate} from 'react-router-dom';
+import {Link, useNavigate, useParams} from 'react-router-dom';
 import Login from "../views/User/login";
 import Register from "../views/User/register";
 import { checkUser } from "../common";
-import "./header.css";
+import "./header.less";
 import { DownOutlined } from '@ant-design/icons';
 
 const Header = (props) => {
@@ -13,8 +13,6 @@ const Header = (props) => {
   const [username, setName] = useState("");
   const [isLoginModalShow, setLoginModal] = useState(false);
   const [isRegisterModalShow, setRegisterModal] = useState(false);
-
-  
 
   useEffect(() => {
     const userId = localStorage.getItem("userid");

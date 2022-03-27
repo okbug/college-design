@@ -1,6 +1,7 @@
 import React from 'react'
 import request from '../../api/index.js';
 import { Form, Input, Button, message } from 'antd';
+import {refreshPage} from '../../utils/index.js';
 import './login.css'
 
 const LoginModal = (props) => {
@@ -9,6 +10,7 @@ const LoginModal = (props) => {
     if (res.code === 200) {
       message.success('登录成功')
       props.success(res);
+      refreshPage()
     } else {
       console.log(props)
       message.error(res.msg)

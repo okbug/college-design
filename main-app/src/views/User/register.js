@@ -1,6 +1,6 @@
 import React from "react";
 import request from "../../api/index.js";
-import Header from "../../Layout/Header.jsx";
+import { refreshPage } from "../../utils/index.js";
 import { Form, Input, Button, message } from "antd";
 import "./login.css";
 
@@ -15,8 +15,8 @@ const RegisterModal = (props) => {
       const {data} = res;
       message.success("注册成功，快去登录吧！");
       props.success(data);
+      refreshPage();
     } else {
-      console.log(props);
       message.error(res.msg);
     }
   };

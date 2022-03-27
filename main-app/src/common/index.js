@@ -10,10 +10,7 @@ export const checkUser = () => {
       return Promise.resolve(false);
   }
   return request
-    .post("/checkUserLogin", {
-      userName,
-      userId
-    })
+    .post("/checkUserLogin")
     .then((res) => {
       if (res.code === 200) {
         return true;

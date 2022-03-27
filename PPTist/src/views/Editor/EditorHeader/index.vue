@@ -49,7 +49,7 @@
           <IconPpt size="18" fill="#666" style="margin-top: 2px;" />
         </div>
       </Tooltip>
-      <a href="https://github.com/pipipi-pikachu/PPTist" target="_blank">
+      <a href="https://github.com/okbug/collage-design" target="_blank">
         <div class="menu-item"><IconGithub size="18" fill="#666" /></div>
       </a>
     </div>
@@ -99,7 +99,7 @@ export default defineComponent({
     const hotkeyDrawerVisible = ref(false);
 
     const goIssues = () => {
-      window.open('https://github.com/pipipi-pikachu/PPTist/issues');
+      window.open('https://github.com/okbug');
     };
 
     return {

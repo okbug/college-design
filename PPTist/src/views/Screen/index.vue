@@ -84,6 +84,7 @@ import SlideThumbnails from './SlideThumbnails.vue';
 import WritingBoardTool from './WritingBoardTool.vue';
 
 const slidesStore = useSlidesStore();
+console.log('在演示了');
 const { slides, slideIndex, currentSlide, viewportRatio } = storeToRefs(slidesStore);
 
 const slideWidth = ref(0);

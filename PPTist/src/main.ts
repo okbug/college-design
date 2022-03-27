@@ -41,7 +41,6 @@ declare const window: {
 
 let hasUmounted = false;
 const flag = window.__POWERED_BY_QIANKUN__;
-console.log(flag);
 const app = createApp(App);
 
 app.component('InputNumber', InputNumber);

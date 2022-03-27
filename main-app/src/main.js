@@ -1,27 +1,36 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { BrowserRouter as Router, Routes, Route, Link, Outlet } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { loadMicroApp } from "qiankun";
 
-import Header from "./Layout/Header.jsx";
 import App from "./App.js";
 import User from "./views/User/index.js";
-import Login from "./views/User/login";
 import "./micro-app-regester";
 import "antd/dist/antd.less";
 
-const BlankPage = () => (<div></div>);
+function Test() {
+  loadMicroApp({
+    name: "pptist",
+    entry: "//localhost:8080",
+    container: "#app",
+  });
+  return <div id="app"></div>;
+}
+
+const BlankPage = () => <div></div>;
 
 function Index() {
   return (
     <>
-    <Router>
-      <Routes>
-        <Route path="/" element={<App />} >
-          <Route path="user" element={<User />} />
-          <Route path="*" element={<BlankPage/>} />
-        </Route>
-      </Routes>
-    </Router>
+      <Router>
+        <Routes>
+          <Route path="/" element={<App />}>
+            <Route path="user" element={<User />} />
+            <Route path="*" element={<BlankPage />} />
+          </Route>
+          <Route path="/ppt" element={<Test></Test>}></Route>
+        </Routes>
+      </Router>
     </>
   );
 }
