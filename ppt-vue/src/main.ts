@@ -72,7 +72,12 @@ app.use(Directive)
 
 app.use(createPinia())
 app.mount(flag ? '#main' : '#app')
+const stopContextMenu = (e: Event) => e.preventDefault();
 
-export const mount = async () => {}
-export const unmount = async () => {}
+export const mount = async () => {
+  document.addEventListener('contextmenu', stopContextMenu);
+}
+export const unmount = async () => {
+  document.removeEventListener('contextmenu', stopContextMenu);
+}
 export const bootstrap = async () => {}

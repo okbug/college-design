@@ -65,7 +65,6 @@ const Header = (props) => {
   const onLoginSuccess = (res) => {
     onModalCancal();
     const data = res.data.data;
-    console.log(data);
     const { userid, username } = data;
     localStorage.setItem("userid", userid);
     localStorage.setItem("username", username);
@@ -76,6 +75,11 @@ const Header = (props) => {
   const onRegisterSuccess = (data) => {
     console.log(data);
   };
+
+  const handleCreateNewDocument = () => {
+    console.log(1)
+    navigate('/doc#/create')
+  }
 
   const menu = (
     <Menu onClick={onMenuClick}>
@@ -97,7 +101,7 @@ const Header = (props) => {
               在线协同文档系统
             </div>
           </div>
-          <div  className="nav-btn" onClick={() => navigate('/')}>
+          <div  className="nav-btn" onClick={handleCreateNewDocument}>
             <Button type="primary">
               + 新建文档
             </Button>

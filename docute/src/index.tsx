@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { HashRouter, Routes, Route } from "react-router-dom";
 import App from "./App";
-
+import Create from '@/views/Create'
 
 import View from "@/components/View";
 
@@ -24,7 +24,7 @@ async function render(props?: any) {
           <Route path="edit/:id" element={<Editor></Editor>}></Route>
           </Route>
           <Route path="/:id" element={<App />} />
-          <Route path="/a" element={<div>a</div>} />
+          <Route path="/create" element={<Create />} />
         </Routes>
       </HashRouter>
     </Provider>,

@@ -32,7 +32,8 @@ function View() {
   const [text, setText] = useState<string>("");
   useDocContent(id!).then(([detail]) => {
     console.log(detail);
-    setText(detail.content.text);
+    setText(detail.content);
+    document.title = `查看 - ${detail.title}`
   });
 
   return (

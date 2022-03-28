@@ -5,8 +5,8 @@ import Vditor from "vditor";
 import { debounce } from "../../utils/common";
 import context from "@/utils/context";
 import { useEditor } from "../../utils/useEditor";
-import { Button } from "antd";
-import './index.scss';
+import { Button, Input, message } from "antd";
+import "./index.scss";
 
 export default function Editor() {
   const { event } = useContext(context);
@@ -15,6 +15,8 @@ export default function Editor() {
   const navigate = useNavigate();
   const [text, setText] = useState<string>("");
   const [vditor, setVditor] = useState<Vditor | null>(null);
+  const [title, setTitle] = useState<string>("");
+  const [editable, setEditable] = useState<boolean>(false);
 
   useEditor({
     options: {
@@ -32,8 +34,14 @@ export default function Editor() {
         id,
       })
     ).then(([res]) => {
-      setTimeout(() => {
-        vditor.setValue(res.content.text);
+      let timer = setInterval(() => {
+        if (document.querySelector("#editor")) {
+          vditor.setValue(res.content);
+          setTitle(res.title || "");
+          setEditable(true);
+          document.title = `编辑 - ${res.title}`;
+          clearInterval(timer);
+        }
       }, 500);
     });
   }, [event, id, vditor]);
@@ -44,27 +52,46 @@ export default function Editor() {
     }
 
     const text = vditor.getValue();
-    const html = vditor.getHTML();
     if (text.trim() === "") {
       return;
     }
-
-    console.log(text, html);
   }, 300);
 
   const finishEdit = () => {
-    event.emit('updateDocument', {
-      id,
-      content: vditor?.getValue(),
-    })
-    navigate(`/view/${id}`)
-  }
+    if (!title.trim()) {
+      message.error("请输入标题");
+      return;
+    }
+    // 更新文档
+    Promise.all([
+      event.emit("updateDocument", {
+        id,
+        content: vditor?.getValue(),
+        title,
+      }),
+    ])
+      .then(() => {
+        message.success("更新成功");
+        navigate(`/view/${id}`);
+      })
+      .catch(() => {
+        message.error("更新失败，请重试");
+      });
+  };
 
   return (
     <>
-      <Button type="primary" onClick={finishEdit}>
-        完成
+      <Button type="primary" onClick={finishEdit} disabled={!editable}>
+        {editable ? '完成' : '加载中'}
       </Button>
+      <Input
+        type="text"
+        className="title"
+        onChange={(event) => {
+          setTitle(event.target.value);
+        }}
+        value={title}
+      />
       <div id="editor" onInput={onInput}></div>
     </>
   );

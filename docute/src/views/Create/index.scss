@@ -1,0 +1,11 @@
+.create-document {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 100px;
+    width: 600px;
+    text-align: center;
+    input {
+        width: 300px;
+    }
+}

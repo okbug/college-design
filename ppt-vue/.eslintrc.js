@@ -32,6 +32,7 @@ module.exports = {
       'afterColon': true,
       'mode': 'strict',
     }],
+    'require-await': 'off',
     'no-empty': 'error',
     'no-else-return': 'error',
     'no-multi-spaces': 'error',
