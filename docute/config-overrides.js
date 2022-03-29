@@ -19,6 +19,7 @@ module.exports = {
   }),
   devServer: overrideDevServer((config) => {
     config.open = false;
+    config.port = 3001;
     config.headers = config.headers || {};
     config.headers["Access-Control-Allow-Origin"] = "*";
     config.historyApiFallback = true;

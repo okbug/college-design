@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { Input, Button, message } from "antd";
+import { Input, Button, Toast } from "@douyinfe/semi-ui";
 import "./index.scss";
 import context from "@/utils/context";
 
@@ -8,7 +8,7 @@ function Create() {
   const { event } = useContext(context);
   const handleCreateNewDocument = () => {
     if (!value) {
-      message.error("请输入标题");
+      Toast.error("请输入标题");
       return;
     }
 
@@ -28,7 +28,7 @@ function Create() {
     <div className="create-document">
       <Input
         value={value}
-        onChange={(event) => setValue(event.target.value)}
+        onChange={(v) => setValue(v)}
         placeholder="请输入标题"
       ></Input>
       <Button type="primary" onClick={handleCreateNewDocument}>

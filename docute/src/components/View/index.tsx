@@ -5,7 +5,7 @@ import { replaceHTMLClass } from "@/utils/common";
 import { useState, FC } from "react";
 import MD from "markdown-it";
 import './index.scss';
-import { Button } from "antd";
+import { Button } from "@douyinfe/semi-ui";
 
 const md = MD();
 

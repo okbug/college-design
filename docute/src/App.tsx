@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { Outlet, useNavigate, useParams } from "react-router-dom";
-import { Button } from 'antd';
+import { Button } from '@douyinfe/semi-ui';
 import context from "./utils/context";
 
 function App() {

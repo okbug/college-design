@@ -5,7 +5,7 @@ import Vditor from "vditor";
 import { debounce } from "../../utils/common";
 import context from "@/utils/context";
 import { useEditor } from "../../utils/useEditor";
-import { Button, Input, message } from "antd";
+import { Button, Input, Toast } from "@douyinfe/semi-ui";
 import "./index.scss";
 
 export default function Editor() {
@@ -59,7 +59,7 @@ export default function Editor() {
 
   const finishEdit = () => {
     if (!title.trim()) {
-      message.error("请输入标题");
+      Toast.error("请输入标题");
       return;
     }
     // 更新文档
@@ -71,24 +71,24 @@ export default function Editor() {
       }),
     ])
       .then(() => {
-        message.success("更新成功");
+        Toast.success("更新成功");
         navigate(`/view/${id}`);
       })
       .catch(() => {
-        message.error("更新失败，请重试");
+        Toast.error("更新失败，请重试");
       });
   };
 
   return (
     <>
       <Button type="primary" onClick={finishEdit} disabled={!editable}>
-        {editable ? '完成' : '加载中'}
+        {editable ? "完成" : "加载中"}
       </Button>
       <Input
         type="text"
         className="title"
-        onChange={(event) => {
-          setTitle(event.target.value);
+        onChange={(text) => {
+          setTitle(text);
         }}
         value={title}
       />
