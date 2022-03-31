@@ -1,19 +1,21 @@
 import React from 'react'
 import request from '../../api/index.js';
-import { Form, Input, Button, message } from 'antd';
+import { Form, Input  } from 'antd';
 import {refreshPage} from '../../utils/index.js';
 import './login.css'
+import { Button, Toast } from '@douyinfe/semi-ui';
+
 
 const LoginModal = (props) => {
   const onFinish = async (values) => {
     const res = await request.post('/login', values)
     if (res.code === 200) {
-      message.success('登录成功')
+      Toast.success('登录成功')
       props.success(res);
       refreshPage()
     } else {
       console.log(props)
-      message.error(res.msg)
+      Toast.error(res.msg)
     }
   };
 

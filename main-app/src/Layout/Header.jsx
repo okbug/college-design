@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from "react";
-import { Button, Layout, Modal, Dropdown, Menu } from "antd";
-import {Link, useNavigate, useParams} from 'react-router-dom';
+import { Layout, Dropdown, Menu } from "antd";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import Login from "../views/User/login";
 import Register from "../views/User/register";
 import { checkUser } from "../common";
 import "./header.less";
-import { DownOutlined } from '@ant-design/icons';
+import { DownOutlined } from "@ant-design/icons";
+import { Button, Modal, Input, Toast } from "@douyinfe/semi-ui";
 
 const Header = (props) => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [isLogin, setLoginStatus] = useState(false);
   const [username, setName] = useState("");
   const [isLoginModalShow, setLoginModal] = useState(false);
   const [isRegisterModalShow, setRegisterModal] = useState(false);
+  const [titleName, setTitleName] = useState('');
 
   useEffect(() => {
     const userId = localStorage.getItem("userid");
@@ -50,17 +52,17 @@ const Header = (props) => {
     setRegisterModal(true);
   };
 
-  const onMenuClick = ({key}) => {
+  const onMenuClick = ({ key }) => {
     console.log(key);
-    if (key === 'logout') {
-      onLogout()
+    if (key === "logout") {
+      onLogout();
       return;
     }
 
-    if (key === 'userInfo') {
-      navigate('/user')
+    if (key === "userInfo") {
+      navigate("/user");
     }
-  }
+  };
 
   const onLoginSuccess = (res) => {
     onModalCancal();
@@ -77,9 +79,24 @@ const Header = (props) => {
   };
 
   const handleCreateNewDocument = () => {
-    console.log(1)
-    navigate('/doc#/create')
+    console.log(1);
+    // navigate('/doc#/create')
+    setCreateModal(true);
+  };
+
+  const handleCloseCreateModal = () => {
+    setCreateModal(false);
   }
+
+  const handleCreateDocTitle = () => {
+    if (!titleName) {
+      Toast.error('请输入标题');
+      return;
+    }
+    console.log(titleName);
+  }
+
+  const [createModalShow, setCreateModal] = useState(false);
 
   const menu = (
     <Menu onClick={onMenuClick}>
@@ -90,43 +107,41 @@ const Header = (props) => {
         <span>退出登录</span>
       </Menu.Item>
     </Menu>
-  )
+  );
 
   return (
     <>
       <Layout>
         <Layout.Header className="header">
-          <div className="left" onClick={() => navigate('/')}>
-            <div className="title">
-              在线协同文档系统
-            </div>
+          <div className="left" onClick={() => navigate("/")}>
+            <div className="title">在线协同文档系统</div>
           </div>
-          <div  className="nav-btn" onClick={handleCreateNewDocument}>
-            <Button type="primary">
+          <div className="nav-btn" onClick={handleCreateNewDocument}>
+            <Button theme="solid" type="primary">
               + 新建文档
             </Button>
           </div>
-          <div className="nav-btn" onClick={() => navigate('/')}>
-            <Button type="primary">
+          <div className="nav-btn" onClick={() => navigate("/")}>
+            <Button theme="solid" type="primary">
               + 新建演示文稿
             </Button>
           </div>
           {isLogin ? (
             <Dropdown overlay={menu} placement="bottomLeft">
               <div className="login">
-                <a
-                  className="ant-dropdown-link"
-                >
+                <a className="ant-dropdown-link">
                   {username} <DownOutlined />
                 </a>
               </div>
             </Dropdown>
           ) : (
             <div className="login">
-              <Button type="primary" onClick={onLogin}>
+              <Button theme="solid" type="primary" onClick={onLogin}>
                 登录
               </Button>
-              <Button onClick={onRegister}>注册</Button>
+              <Button theme="solid" onClick={onRegister}>
+                注册
+              </Button>
             </div>
           )}
         </Layout.Header>
@@ -145,6 +160,15 @@ const Header = (props) => {
         onCancel={onRegisterModalCancal}
       >
         <Register success={onRegisterSuccess} />
+      </Modal>
+
+      <Modal
+        title="创建文档"
+        visible={createModalShow}
+        onCancel={handleCloseCreateModal}
+        onOk={handleCreateDocTitle}
+      >
+        <Input onChange={value => setTitleName(value)}></Input>
       </Modal>
     </>
   );
