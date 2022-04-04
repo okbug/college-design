@@ -1,0 +1,15 @@
+{
+  "0 debug pnpm:scope": {
+    "selected": 7,
+    "total": 7
+  },
+  "1 error pnpm": {
+    "code": "ERR_PNPM_RECURSIVE_RUN_NO_SCRIPT",
+    "err": {
+      "name": "pnpm",
+      "message": "None of the packages has a \"filter\" script",
+      "code": "ERR_PNPM_RECURSIVE_RUN_NO_SCRIPT",
+      "stack": "pnpm: None of the packages has a \"filter\" script\n    at exports2.default (/usr/local/lib/node_modules/pnpm/dist/pnpm.cjs:175799:17)\n    at async /usr/local/lib/node_modules/pnpm/dist/pnpm.cjs:180173:21\n    at async run (/usr/local/lib/node_modules/pnpm/dist/pnpm.cjs:180147:34)\n    at async runPnpm (/usr/local/lib/node_modules/pnpm/dist/pnpm.cjs:180358:5)\n    at async /usr/local/lib/node_modules/pnpm/dist/pnpm.cjs:180350:7"
+    }
+  }
+}

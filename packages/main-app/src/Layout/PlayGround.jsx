@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Layout, List } from "antd";
+import { Popconfirm, Toast } from "@douyinfe/semi-ui";
 import "./PlayGround.css";
-import { getUserInfo } from "../common";
+import { getUserInfo, deleteDoc } from "../common";
 import { useNavigate } from "react-router-dom";
 const { Content } = Layout;
 
@@ -9,22 +10,41 @@ const go = (item) =>
   item.type === "doc"
     ? `/${item.type}#/view/${item.id}`
     : `/${item.type}?id=${item.id}`;
+  
 const DocList = (props) => {
   const navigate = useNavigate();
+  const {user} = props;
   return (
     <>
       <div className="doc-list">
         <Content>
-          {props.docs ? (
+          {user.docs ? (
             <List
               bordered
-              dataSource={props.docs}
+              dataSource={user.docs}
               renderItem={(item) => (
                 <>
                   <List.Item className="doc-link">
-                    {item.id}{" "}
+                    {item.title}
+                    {"   "}
                     <span>
                       <a onClick={() => navigate(go(item))}>详情</a>
+                    </span>
+                    {"|"}
+                    <span>
+                      <Popconfirm title="确定确认要删除？" onConfirm={() => {
+                        deleteDoc({
+                          user,
+                          id: item.id,
+                        }).then(() => {
+                          Toast.success('删除成功');
+                          props.update()
+                        }).catch(err => {
+                          Toast.error(err.message);
+                        })
+                      }}>
+                        <a>删除</a>
+                      </Popconfirm>
                     </span>
                   </List.Item>
                 </>
@@ -40,18 +60,22 @@ const DocList = (props) => {
 };
 
 const PlayGround = function () {
-  const [userDocs, setUserDocs] = useState(null);
-  useEffect(() => {
+  const [user, setUser] = useState({});
+  function update() {
+    document.title = '用户中心';
     getUserInfo().then(({ data }) => {
       console.log(data);
       const { docs } = data;
-      setUserDocs(docs);
+      setUser(data);
     });
+  }
+  useEffect(() => {
+    update()
   }, []);
   return (
     <>
       <div className="playground">
-        <DocList docs={userDocs}></DocList>
+        <DocList user={user} update={update}></DocList>
       </div>
     </>
   );

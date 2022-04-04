@@ -3,7 +3,7 @@ import { Layout, Dropdown, Menu } from "antd";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import Login from "../views/User/login";
 import Register from "../views/User/register";
-import { checkUser } from "../common";
+import { checkUser, createDoc } from "../common";
 import "./header.less";
 import { DownOutlined } from "@ant-design/icons";
 import { Button, Modal, Input, Toast } from "@douyinfe/semi-ui";
@@ -94,6 +94,14 @@ const Header = (props) => {
       return;
     }
     console.log(titleName);
+    createDoc(titleName).then(res => {
+      Toast.success('创建成功');
+      const id = res.id;
+      setCreateModal(false)
+      navigate('/doc#/view/' + id);
+    }).catch(() => {
+      Toast.error('创建失败');
+    })
   }
 
   const [createModalShow, setCreateModal] = useState(false);

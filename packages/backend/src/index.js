@@ -6,7 +6,7 @@ const route = new Router();
 const cors = require("./middleware/cors");
 
 const { login, register, checkUser, getUserInfo } = require("./utils/user");
-const { getDocDetail, updateDoc } = require("./utils/doclist");
+const { getDocDetail, updateDoc, createDocument, deleteDocument } = require("./utils/doclist");
 const { paramPaser } = require("./utils/parser");
 
 const server = require("./utils/ws");
@@ -178,6 +178,40 @@ route.post("/updateDocument", async (ctx) => {
   const res = await updateDoc(params);
   ctx.body = res;
 });
+
+// 新建文档
+route.post('/createDocument', async ctx => {
+  const params = await paramPaser(ctx);
+  const res = await createDocument({
+    title: params.title,
+    userName: ctx.cookies.get('userName'),
+  });
+
+  if (res.ok !== 1) {
+    ctx.body = {
+      data: null,
+      result: 0,
+    }
+    return;
+  }
+  ctx.body = {
+    id: res.id,
+    ...params
+  }
+})
+
+route.post('/deleteDocument', async ctx => {
+  const params = await paramPaser(ctx);
+  const {userName} = params.user;
+  const id = params.id;
+  console.log(userName, id, 1);
+  deleteDocument({id, userName});
+
+  ctx.body = {
+    msg: 'ok',
+    data: 'ok',
+  }
+})
 
 // 路由的注册
 app.use(route.routes()).use(route.allowedMethods());

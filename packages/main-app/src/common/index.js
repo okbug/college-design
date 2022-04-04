@@ -32,3 +32,13 @@ export const getUserInfo = async () => {
 
       return request.post('/getUserInfo', {userName, userId});
 }
+
+
+export const createDoc = async (title) => {
+  return request.post('/createDocument', {title})
+}
+
+
+export const deleteDoc = async (id) => {
+  return request.post('/deleteDocument', id)
+}

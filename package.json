@@ -1,0 +1,20 @@
+{
+  "name": "bishe",
+  "version": "1.0.0",
+  "description": "毕设项目",
+  "main": "index.js",
+  "scripts": {
+    "dev": "pnpm -r -filter ./packages run dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/okbug/college-design.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/okbug/college-design/issues"
+  },
+  "homepage": "https://github.com/okbug/college-design#readme"
+}

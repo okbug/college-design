@@ -9,11 +9,11 @@ const genUserId = () => {
   return date + str;
 };
 
-const genRandomString = (len = 10, needSymbol = false) => {
+const genRandomString = ({len = 10, lower, needSymbol, number, upper} = {}) => {
   let res = "";
-  const a = new Array(10).fill(0).map((_, i) => i);
-  const b = new Array(26).fill(0).map((_, i) => String.fromCharCode(i + 65));
-  const c = new Array(26).fill(0).map((_, i) => String.fromCharCode(i + 97));
+  const a = !number ? [] : new Array(10).fill(0).map((_, i) => i);
+  const b = !upper ? [] : new Array(26).fill(0).map((_, i) => String.fromCharCode(i + 65));
+  const c = !lower ? [] : new Array(26).fill(0).map((_, i) => String.fromCharCode(i + 97));
   const d = needSymbol
     ? ["!", "@", "#", "$", " %", "^", "&", "*", ")", "(", "?", ",", ".", "~"]
     : [];
