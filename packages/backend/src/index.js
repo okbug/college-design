@@ -6,7 +6,13 @@ const route = new Router();
 const cors = require("./middleware/cors");
 
 const { login, register, checkUser, getUserInfo } = require("./utils/user");
-const { getDocDetail, updateDoc, createDocument, deleteDocument } = require("./utils/doclist");
+const {
+  getDocDetail,
+  updateDoc,
+  createDocument,
+  deleteDocument,
+  createPPT
+} = require("./utils/doclist");
 const { paramPaser } = require("./utils/parser");
 
 const server = require("./utils/ws");
@@ -39,7 +45,7 @@ server.on("connection", (socket) => {
           );
         });
         break;
-      case "online": 
+      case "online":
         console.log(packet.content);
     }
   });
@@ -75,8 +81,8 @@ route.get("/", async (ctx) => {
 
 route.post("/checkUserLogin", async (ctx) => {
   const res = await checkUser({
-    userName: ctx.cookies.get('userName'),
-    userId: ctx.cookies.get('userId'),
+    userName: ctx.cookies.get("userName"),
+    userId: ctx.cookies.get("userId"),
     token: ctx.cookies.get("token"),
   });
   if (!res) {
@@ -99,8 +105,8 @@ route.post("/checkUserLogin", async (ctx) => {
 
 route.post("/getUserInfo", async (ctx) => {
   const res = await getUserInfo({
-    userName: ctx.cookies.get('userName'),
-    userId: ctx.cookies.get('userId'),
+    userName: ctx.cookies.get("userName"),
+    userId: ctx.cookies.get("userId"),
     token: ctx.cookies.get("token"),
   });
   if (!res) {
@@ -128,15 +134,15 @@ route.post("/login", async (ctx) => {
   const data = await paramPaser(ctx);
   let code = 200;
   const res = await login({
-    ...data
+    ...data,
   });
 
   if (res.code !== "ok") {
     code = 0;
   } else {
     ctx.cookies.set("token", res.data.token);
-    ctx.cookies.set('userId', res.data.userid);
-    ctx.cookies.set('userName', res.data.username);
+    ctx.cookies.set("userId", res.data.userid);
+    ctx.cookies.set("userName", res.data.username);
   }
 
   ctx.body = {
@@ -180,38 +186,47 @@ route.post("/updateDocument", async (ctx) => {
 });
 
 // 新建文档
-route.post('/createDocument', async ctx => {
+route.post("/createDocument", async (ctx) => {
   const params = await paramPaser(ctx);
   const res = await createDocument({
     title: params.title,
-    userName: ctx.cookies.get('userName'),
+    userName: ctx.cookies.get("userName"),
   });
 
   if (res.ok !== 1) {
     ctx.body = {
       data: null,
       result: 0,
-    }
+    };
     return;
   }
   ctx.body = {
     id: res.id,
-    ...params
-  }
-})
+    ...params,
+  };
+});
 
-route.post('/deleteDocument', async ctx => {
+route.post("/createPowerPoint", async (ctx) => {
+  const { title } = await paramPaser(ctx);
+  const res = await createPPT({ title, userName: ctx.cookies.get("userName") });
+  ctx.body = {
+    title,
+    id: res.data.id
+  };
+});
+
+route.post("/deleteDocument", async (ctx) => {
   const params = await paramPaser(ctx);
-  const {userName} = params.user;
+  const { userName } = params.user;
   const id = params.id;
   console.log(userName, id, 1);
-  deleteDocument({id, userName});
+  deleteDocument({ id, userName });
 
   ctx.body = {
-    msg: 'ok',
-    data: 'ok',
-  }
-})
+    msg: "ok",
+    data: "ok",
+  };
+});
 
 // 路由的注册
 app.use(route.routes()).use(route.allowedMethods());

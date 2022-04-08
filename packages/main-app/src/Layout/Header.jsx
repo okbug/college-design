@@ -3,7 +3,7 @@ import { Layout, Dropdown, Menu } from "antd";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import Login from "../views/User/login";
 import Register from "../views/User/register";
-import { checkUser, createDoc } from "../common";
+import { checkUser, createDoc, createPPT } from "../common";
 import "./header.less";
 import { DownOutlined } from "@ant-design/icons";
 import { Button, Modal, Input, Toast } from "@douyinfe/semi-ui";
@@ -14,7 +14,7 @@ const Header = (props) => {
   const [username, setName] = useState("");
   const [isLoginModalShow, setLoginModal] = useState(false);
   const [isRegisterModalShow, setRegisterModal] = useState(false);
-  const [titleName, setTitleName] = useState('');
+  const [titleName, setTitleName] = useState("");
 
   useEffect(() => {
     const userId = localStorage.getItem("userid");
@@ -79,32 +79,54 @@ const Header = (props) => {
   };
 
   const handleCreateNewDocument = () => {
-    console.log(1);
-    // navigate('/doc#/create')
     setCreateModal(true);
+  };
+
+  const handleCreateNewPowerPoint = () => {
+    setPPTModalShow(true);
   };
 
   const handleCloseCreateModal = () => {
     setCreateModal(false);
-  }
+  };
+
+  const handleClosePPTModal = () => {
+    setPPTModalShow(false);
+    setTitleName("");
+  };
 
   const handleCreateDocTitle = () => {
     if (!titleName) {
-      Toast.error('请输入标题');
+      Toast.error("请输入标题");
       return;
     }
-    console.log(titleName);
-    createDoc(titleName).then(res => {
+    createDoc(titleName)
+      .then((res) => {
+        Toast.success("创建成功");
+        const id = res.id;
+        setCreateModal(false);
+        navigate("/doc#/view/" + id);
+      })
+      .catch(() => {
+        Toast.error("创建失败");
+      });
+  };
+
+  const handleCreatePPT = () => {
+    if (!titleName) {
+      Toast.error("请输入标题");
+      return;
+    }
+    createPPT(titleName).then(res => {
       Toast.success('创建成功');
-      const id = res.id;
-      setCreateModal(false)
-      navigate('/doc#/view/' + id);
-    }).catch(() => {
-      Toast.error('创建失败');
+      navigate('/ppt?id=' + res.id);
+    }).catch(err => {
+      Toast.error(err.message);
     })
-  }
+  };
 
   const [createModalShow, setCreateModal] = useState(false);
+  const [PPTModalShow, setPPTModalShow] = useState(false);
 
   const menu = (
     <Menu onClick={onMenuClick}>
@@ -129,7 +151,7 @@ const Header = (props) => {
               + 新建文档
             </Button>
           </div>
-          <div className="nav-btn" onClick={() => navigate("/")}>
+          <div className="nav-btn" onClick={handleCreateNewPowerPoint}>
             <Button theme="solid" type="primary">
               + 新建演示文稿
             </Button>
@@ -176,7 +198,15 @@ const Header = (props) => {
         onCancel={handleCloseCreateModal}
         onOk={handleCreateDocTitle}
       >
-        <Input onChange={value => setTitleName(value)}></Input>
+        <Input onChange={(value) => setTitleName(value)}></Input>
+      </Modal>
+      <Modal
+        visible={PPTModalShow}
+        title="创建演示文稿"
+        onOk={handleCreatePPT}
+        onCancel={handleClosePPTModal}
+      >
+        <Input onChange={(value) => setTitleName(value)}></Input>
       </Modal>
     </>
   );

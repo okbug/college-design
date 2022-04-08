@@ -1,5 +1,6 @@
 const { genRandomString } = require("../common");
 const { query, execute } = require("./sql");
+const { defaultPPTContent } = require("../common/constant");
 
 const getDocListByUser = (name) => {
   const text = `select docs from users where username='${name}'`;
@@ -58,38 +59,44 @@ const updateDoc = async (params) => {
 const createDocument = async (params) => {
   const { title, userName } = params;
   // 创建文档
-  const users = [{name: userName}];
+  const users = [{ name: userName }];
   const id = genRandomString({
-    number: true, 
-    lower: true, 
-    upper: true
+    number: true,
+    lower: true,
+    upper: true,
   });
-  console.log(0)
   const createSQL = `
   insert into docs
   (content, view_users, edit_users,type,id,title)
   values
   (?, ?,?,'doc', ?,?)
-  `
-  await execute(createSQL, [`""`,
-    JSON.stringify(users), JSON.stringify(users),id,
-    title
-  ])
+  `;
+  await execute(createSQL, [
+    `""`,
+    JSON.stringify(users),
+    JSON.stringify(users),
+    id,
+    title,
+  ]);
 
-  const [user] = await query(`select docs from users where username = '${userName}'`)
+  const [user] = await query(
+    `select docs from users where username = '${userName}'`
+  );
   const docs = user.docs;
   docs.push({
     id,
     title,
-    type: 'doc',
-  })
-  await execute(`update users set docs = ? where username = '${userName}'`, [JSON.stringify(docs)]);
+    type: "doc",
+  });
+  await execute(`update users set docs = ? where username = '${userName}'`, [
+    JSON.stringify(docs),
+  ]);
 
   return {
     ok: 1,
     id,
   };
-}
+};
 // createDocument({userName: 'a', title: 'now test'});
 
 /**
@@ -97,25 +104,83 @@ const createDocument = async (params) => {
  * 再把users中 拥有这个文档的用户的docs列表中删除该文档
  */
 const deleteDocument = async (params) => {
-  const {id, userName} = params
+  const { id, userName } = params;
   // 删除表
   const deleteFromDocs = `
     delete from docs where id='${id}'
   `;
   const getUserInfo = `
     select docs from users where username = '${userName}'
-  `
+  `;
 
   await query(deleteFromDocs);
-  const [user] = await query(getUserInfo)
+  const [user] = await query(getUserInfo);
   let docs = user.docs;
-  docs = docs.filter(item => item.id !== id);
-  await execute(`update users set docs = ? where username = ?`, [JSON.stringify(docs), userName]);
+  const users = JSON.stringify([{ name: userName }]);
+  docs = docs.filter((item) => item.id !== id);
+  await execute(`update users set docs = ? where username = ?`, [
+    JSON.stringify(docs),
+    userName,
+  ]);
 
   return {
-    ok: 1
+    ok: 1,
+  };
+};
+
+/**
+ * 在docs下set一个type为ppt的内容
+ * 在users中添加一个docs
+ */
+const createPPT = async ({ title, userName }) => {
+  const id = genRandomString({
+    number: true,
+    lower: true,
+    upper: true,
+  });
+  const users = JSON.stringify([{ name: userName }]);
+
+  const createSQL = `
+  insert into docs
+  (content, view_users, edit_users,type,id,title)
+  values
+  (?, ?,?,'ppt', ?,?)
+  `;
+  await execute(createSQL, [
+    JSON.stringify(defaultPPTContent),
+    users,
+    users,
+    id,
+    title,
+  ]);
+
+  const getUserInfo = `
+    select docs from users where username = '${userName}'
+  `;
+
+  const [user] = await query(getUserInfo);
+  let docs = user.docs;
+  docs.push({
+    id,
+    title,
+    type: "ppt",
+  })
+
+  await execute(`update users set docs = ? where username = ?`, [
+    JSON.stringify(docs),
+    userName,
+  ]);
+
+
+  return {
+    ok: 1,
+    data: {
+      id,
+      title
+    }
   }
-}
+};
+
 
 module.exports = {
   getDocListByUser,
@@ -123,4 +188,5 @@ module.exports = {
   updateDoc,
   createDocument,
   deleteDocument,
+  createPPT,
 };

@@ -42,3 +42,6 @@ export const createDoc = async (title) => {
 export const deleteDoc = async (id) => {
   return request.post('/deleteDocument', id)
 }
+
+export const createPPT = async (title) =>
+  request.post('/createPowerPoint', {title});

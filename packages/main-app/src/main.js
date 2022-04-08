@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Outlet } from "react-router-dom";
 import { loadMicroApp } from "qiankun";
 
 import App from "./App.js";
@@ -19,12 +19,22 @@ function Test() {
 
 const BlankPage = () => <div></div>;
 
+function Main() {
+  return <>
+  <h1 style={{
+    textAlign:'center',
+    marginTop: '30px',
+  }}>欢迎进入本系统</h1>
+  </>
+}
+
 function Index() {
   return (
     <>
       <Router>
         <Routes>
           <Route path="/" element={<App />}>
+            <Route path="/" element={<Main></Main>}></Route>
             <Route path="user" element={<User />} />
             <Route path="*" element={<BlankPage />} />
           </Route>

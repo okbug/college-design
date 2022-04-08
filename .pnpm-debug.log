@@ -1,15 +1,427 @@
 {
   "0 debug pnpm:scope": {
-    "selected": 7,
-    "total": 7
+    "selected": 4,
+    "total": 8
   },
-  "1 error pnpm": {
-    "code": "ERR_PNPM_RECURSIVE_RUN_NO_SCRIPT",
+  "1 debug pnpm:lifecycle": {
+    "depPath": "/Users/ajun/Desktop/study/bishe/packages/docute",
+    "optional": false,
+    "script": "BROWSER=none react-app-rewired start",
+    "stage": "dev",
+    "wd": "/Users/ajun/Desktop/study/bishe/packages/docute"
+  },
+  "2 debug pnpm:lifecycle": {
+    "depPath": "/Users/ajun/Desktop/study/bishe/packages/backend",
+    "optional": false,
+    "script": "nodemon src/index.js",
+    "stage": "dev",
+    "wd": "/Users/ajun/Desktop/study/bishe/packages/backend"
+  },
+  "3 debug pnpm:lifecycle": {
+    "depPath": "/Users/ajun/Desktop/study/bishe/packages/ppt-vue",
+    "optional": false,
+    "script": "vue-cli-service serve",
+    "stage": "dev",
+    "wd": "/Users/ajun/Desktop/study/bishe/packages/ppt-vue"
+  },
+  "4 debug pnpm:lifecycle": {
+    "depPath": "/Users/ajun/Desktop/study/bishe/packages/main-app",
+    "optional": false,
+    "script": "webpack serve",
+    "stage": "dev",
+    "wd": "/Users/ajun/Desktop/study/bishe/packages/main-app"
+  },
+  "5 debug pnpm:lifecycle": {
+    "depPath": "/Users/ajun/Desktop/study/bishe/packages/backend",
+    "line": "\u001b[33m[nodemon] 2.0.15\u001b[39m",
+    "stage": "dev",
+    "stdio": "stdout",
+    "wd": "/Users/ajun/Desktop/study/bishe/packages/backend"
+  },
+  "6 debug pnpm:lifecycle": {
+    "depPath": "/Users/ajun/Desktop/study/bishe/packages/backend",
+    "line": "\u001b[33m[nodemon] to restart at any time, enter `rs`\u001b[39m",
+    "stage": "dev",
+    "stdio": "stdout",
+    "wd": "/Users/ajun/Desktop/study/bishe/packages/backend"
+  },
+  "7 debug pnpm:lifecycle": {
+    "depPath": "/Users/ajun/Desktop/study/bishe/packages/backend",
+    "line": "\u001b[33m[nodemon] watching path(s): *.*\u001b[39m",
+    "stage": "dev",
+    "stdio": "stdout",
+    "wd": "/Users/ajun/Desktop/study/bishe/packages/backend"
+  },
+  "8 debug pnpm:lifecycle": {
+    "depPath": "/Users/ajun/Desktop/study/bishe/packages/backend",
+    "line": "\u001b[33m[nodemon] watching extensions: js,mjs,json\u001b[39m",
+    "stage": "dev",
+    "stdio": "stdout",
+    "wd": "/Users/ajun/Desktop/study/bishe/packages/backend"
+  },
+  "9 debug pnpm:lifecycle": {
+    "depPath": "/Users/ajun/Desktop/study/bishe/packages/backend",
+    "line": "\u001b[32m[nodemon] starting `node src/index.js`\u001b[39m",
+    "stage": "dev",
+    "stdio": "stdout",
+    "wd": "/Users/ajun/Desktop/study/bishe/packages/backend"
+  },
+  "10 debug pnpm:lifecycle": {
+    "depPath": "/Users/ajun/Desktop/study/bishe/packages/backend",
+    "line": "websocket server running at port: 9528",
+    "stage": "dev",
+    "stdio": "stdout",
+    "wd": "/Users/ajun/Desktop/study/bishe/packages/backend"
+  },
+  "11 debug pnpm:lifecycle": {
+    "depPath": "/Users/ajun/Desktop/study/bishe/packages/backend",
+    "line": "events.js:377",
+    "stage": "dev",
+    "stdio": "stderr",
+    "wd": "/Users/ajun/Desktop/study/bishe/packages/backend"
+  },
+  "12 debug pnpm:lifecycle": {
+    "depPath": "/Users/ajun/Desktop/study/bishe/packages/backend",
+    "line": "      throw er; // Unhandled 'error' event",
+    "stage": "dev",
+    "stdio": "stderr",
+    "wd": "/Users/ajun/Desktop/study/bishe/packages/backend"
+  },
+  "13 debug pnpm:lifecycle": {
+    "depPath": "/Users/ajun/Desktop/study/bishe/packages/backend",
+    "line": "      ^",
+    "stage": "dev",
+    "stdio": "stderr",
+    "wd": "/Users/ajun/Desktop/study/bishe/packages/backend"
+  },
+  "14 debug pnpm:lifecycle": {
+    "depPath": "/Users/ajun/Desktop/study/bishe/packages/backend",
+    "line": "Error: listen EADDRINUSE: address already in use :::9528",
+    "stage": "dev",
+    "stdio": "stderr",
+    "wd": "/Users/ajun/Desktop/study/bishe/packages/backend"
+  },
+  "15 debug pnpm:lifecycle": {
+    "depPath": "/Users/ajun/Desktop/study/bishe/packages/backend",
+    "line": "    at Server.setupListenHandle [as _listen2] (net.js:1320:16)",
+    "stage": "dev",
+    "stdio": "stderr",
+    "wd": "/Users/ajun/Desktop/study/bishe/packages/backend"
+  },
+  "16 debug pnpm:lifecycle": {
+    "depPath": "/Users/ajun/Desktop/study/bishe/packages/backend",
+    "line": "    at listenInCluster (net.js:1368:12)",
+    "stage": "dev",
+    "stdio": "stderr",
+    "wd": "/Users/ajun/Desktop/study/bishe/packages/backend"
+  },
+  "17 debug pnpm:lifecycle": {
+    "depPath": "/Users/ajun/Desktop/study/bishe/packages/backend",
+    "line": "    at Server.listen (net.js:1454:7)",
+    "stage": "dev",
+    "stdio": "stderr",
+    "wd": "/Users/ajun/Desktop/study/bishe/packages/backend"
+  },
+  "18 debug pnpm:lifecycle": {
+    "depPath": "/Users/ajun/Desktop/study/bishe/packages/backend",
+    "line": "    at new WebSocketServer (/Users/ajun/Desktop/study/bishe/packages/backend/node_modules/ws/lib/websocket-server.js:97:20)",
+    "stage": "dev",
+    "stdio": "stderr",
+    "wd": "/Users/ajun/Desktop/study/bishe/packages/backend"
+  },
+  "19 debug pnpm:lifecycle": {
+    "depPath": "/Users/ajun/Desktop/study/bishe/packages/backend",
+    "line": "    at Object.<anonymous> (/Users/ajun/Desktop/study/bishe/packages/backend/src/utils/ws.js:3:16)",
+    "stage": "dev",
+    "stdio": "stderr",
+    "wd": "/Users/ajun/Desktop/study/bishe/packages/backend"
+  },
+  "20 debug pnpm:lifecycle": {
+    "depPath": "/Users/ajun/Desktop/study/bishe/packages/backend",
+    "line": "    at Module._compile (internal/modules/cjs/loader.js:1072:14)",
+    "stage": "dev",
+    "stdio": "stderr",
+    "wd": "/Users/ajun/Desktop/study/bishe/packages/backend"
+  },
+  "21 debug pnpm:lifecycle": {
+    "depPath": "/Users/ajun/Desktop/study/bishe/packages/backend",
+    "line": "    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1101:10)",
+    "stage": "dev",
+    "stdio": "stderr",
+    "wd": "/Users/ajun/Desktop/study/bishe/packages/backend"
+  },
+  "22 debug pnpm:lifecycle": {
+    "depPath": "/Users/ajun/Desktop/study/bishe/packages/backend",
+    "line": "    at Module.load (internal/modules/cjs/loader.js:937:32)",
+    "stage": "dev",
+    "stdio": "stderr",
+    "wd": "/Users/ajun/Desktop/study/bishe/packages/backend"
+  },
+  "23 debug pnpm:lifecycle": {
+    "depPath": "/Users/ajun/Desktop/study/bishe/packages/backend",
+    "line": "    at Function.Module._load (internal/modules/cjs/loader.js:778:12)",
+    "stage": "dev",
+    "stdio": "stderr",
+    "wd": "/Users/ajun/Desktop/study/bishe/packages/backend"
+  },
+  "24 debug pnpm:lifecycle": {
+    "depPath": "/Users/ajun/Desktop/study/bishe/packages/backend",
+    "line": "    at Module.require (internal/modules/cjs/loader.js:961:19)",
+    "stage": "dev",
+    "stdio": "stderr",
+    "wd": "/Users/ajun/Desktop/study/bishe/packages/backend"
+  },
+  "25 debug pnpm:lifecycle": {
+    "depPath": "/Users/ajun/Desktop/study/bishe/packages/backend",
+    "line": "Emitted 'error' event on WebSocketServer instance at:",
+    "stage": "dev",
+    "stdio": "stderr",
+    "wd": "/Users/ajun/Desktop/study/bishe/packages/backend"
+  },
+  "26 debug pnpm:lifecycle": {
+    "depPath": "/Users/ajun/Desktop/study/bishe/packages/backend",
+    "line": "    at Server.emit (events.js:400:28)",
+    "stage": "dev",
+    "stdio": "stderr",
+    "wd": "/Users/ajun/Desktop/study/bishe/packages/backend"
+  },
+  "27 debug pnpm:lifecycle": {
+    "depPath": "/Users/ajun/Desktop/study/bishe/packages/backend",
+    "line": "    at emitErrorNT (net.js:1347:8)",
+    "stage": "dev",
+    "stdio": "stderr",
+    "wd": "/Users/ajun/Desktop/study/bishe/packages/backend"
+  },
+  "28 debug pnpm:lifecycle": {
+    "depPath": "/Users/ajun/Desktop/study/bishe/packages/backend",
+    "line": "    at processTicksAndRejections (internal/process/task_queues.js:82:21) {",
+    "stage": "dev",
+    "stdio": "stderr",
+    "wd": "/Users/ajun/Desktop/study/bishe/packages/backend"
+  },
+  "29 debug pnpm:lifecycle": {
+    "depPath": "/Users/ajun/Desktop/study/bishe/packages/backend",
+    "line": "  code: 'EADDRINUSE',",
+    "stage": "dev",
+    "stdio": "stderr",
+    "wd": "/Users/ajun/Desktop/study/bishe/packages/backend"
+  },
+  "30 debug pnpm:lifecycle": {
+    "depPath": "/Users/ajun/Desktop/study/bishe/packages/backend",
+    "line": "  errno: -48,",
+    "stage": "dev",
+    "stdio": "stderr",
+    "wd": "/Users/ajun/Desktop/study/bishe/packages/backend"
+  },
+  "31 debug pnpm:lifecycle": {
+    "depPath": "/Users/ajun/Desktop/study/bishe/packages/backend",
+    "line": "  syscall: 'listen',",
+    "stage": "dev",
+    "stdio": "stderr",
+    "wd": "/Users/ajun/Desktop/study/bishe/packages/backend"
+  },
+  "32 debug pnpm:lifecycle": {
+    "depPath": "/Users/ajun/Desktop/study/bishe/packages/backend",
+    "line": "  address: '::',",
+    "stage": "dev",
+    "stdio": "stderr",
+    "wd": "/Users/ajun/Desktop/study/bishe/packages/backend"
+  },
+  "33 debug pnpm:lifecycle": {
+    "depPath": "/Users/ajun/Desktop/study/bishe/packages/backend",
+    "line": "  port: 9528",
+    "stage": "dev",
+    "stdio": "stderr",
+    "wd": "/Users/ajun/Desktop/study/bishe/packages/backend"
+  },
+  "34 debug pnpm:lifecycle": {
+    "depPath": "/Users/ajun/Desktop/study/bishe/packages/backend",
+    "line": "}",
+    "stage": "dev",
+    "stdio": "stderr",
+    "wd": "/Users/ajun/Desktop/study/bishe/packages/backend"
+  },
+  "35 debug pnpm:lifecycle": {
+    "depPath": "/Users/ajun/Desktop/study/bishe/packages/backend",
+    "line": "\u001b[31m[nodemon] app crashed - waiting for file changes before starting...\u001b[39m",
+    "stage": "dev",
+    "stdio": "stdout",
+    "wd": "/Users/ajun/Desktop/study/bishe/packages/backend"
+  },
+  "36 debug pnpm:lifecycle": {
+    "depPath": "/Users/ajun/Desktop/study/bishe/packages/ppt-vue",
+    "line": " INFO  Starting development server...",
+    "stage": "dev",
+    "stdio": "stdout",
+    "wd": "/Users/ajun/Desktop/study/bishe/packages/ppt-vue"
+  },
+  "37 debug pnpm:lifecycle": {
+    "depPath": "/Users/ajun/Desktop/study/bishe/packages/main-app",
+    "line": "<i> [webpack-dev-server] [HPM] Proxy created: /api  -> http://localhost:9527",
+    "stage": "dev",
+    "stdio": "stderr",
+    "wd": "/Users/ajun/Desktop/study/bishe/packages/main-app"
+  },
+  "38 debug pnpm:lifecycle": {
+    "depPath": "/Users/ajun/Desktop/study/bishe/packages/main-app",
+    "line": "/Users/ajun/Desktop/study/bishe/packages/main-app/node_modules/webpack-dev-server/lib/Server.js:2431",
+    "stage": "dev",
+    "stdio": "stderr",
+    "wd": "/Users/ajun/Desktop/study/bishe/packages/main-app"
+  },
+  "39 debug pnpm:lifecycle": {
+    "depPath": "/Users/ajun/Desktop/study/bishe/packages/main-app",
+    "line": "        throw error;",
+    "stage": "dev",
+    "stdio": "stderr",
+    "wd": "/Users/ajun/Desktop/study/bishe/packages/main-app"
+  },
+  "40 debug pnpm:lifecycle": {
+    "depPath": "/Users/ajun/Desktop/study/bishe/packages/main-app",
+    "line": "        ^",
+    "stage": "dev",
+    "stdio": "stderr",
+    "wd": "/Users/ajun/Desktop/study/bishe/packages/main-app"
+  },
+  "41 debug pnpm:lifecycle": {
+    "depPath": "/Users/ajun/Desktop/study/bishe/packages/main-app",
+    "line": "Error: listen EADDRINUSE: address already in use :::9000",
+    "stage": "dev",
+    "stdio": "stderr",
+    "wd": "/Users/ajun/Desktop/study/bishe/packages/main-app"
+  },
+  "42 debug pnpm:lifecycle": {
+    "depPath": "/Users/ajun/Desktop/study/bishe/packages/main-app",
+    "line": "    at Server.setupListenHandle [as _listen2] (net.js:1320:16)",
+    "stage": "dev",
+    "stdio": "stderr",
+    "wd": "/Users/ajun/Desktop/study/bishe/packages/main-app"
+  },
+  "43 debug pnpm:lifecycle": {
+    "depPath": "/Users/ajun/Desktop/study/bishe/packages/main-app",
+    "line": "    at listenInCluster (net.js:1368:12)",
+    "stage": "dev",
+    "stdio": "stderr",
+    "wd": "/Users/ajun/Desktop/study/bishe/packages/main-app"
+  },
+  "44 debug pnpm:lifecycle": {
+    "depPath": "/Users/ajun/Desktop/study/bishe/packages/main-app",
+    "line": "    at Server.listen (net.js:1454:7)",
+    "stage": "dev",
+    "stdio": "stderr",
+    "wd": "/Users/ajun/Desktop/study/bishe/packages/main-app"
+  },
+  "45 debug pnpm:lifecycle": {
+    "depPath": "/Users/ajun/Desktop/study/bishe/packages/main-app",
+    "line": "    at READ_WRITE (/Users/ajun/Desktop/study/bishe/packages/main-app/node_modules/webpack-dev-server/lib/Server.js:3212:23)",
+    "stage": "dev",
+    "stdio": "stderr",
+    "wd": "/Users/ajun/Desktop/study/bishe/packages/main-app"
+  },
+  "46 debug pnpm:lifecycle": {
+    "depPath": "/Users/ajun/Desktop/study/bishe/packages/main-app",
+    "line": "    at new Promise (<anonymous>)",
+    "stage": "dev",
+    "stdio": "stderr",
+    "wd": "/Users/ajun/Desktop/study/bishe/packages/main-app"
+  },
+  "47 debug pnpm:lifecycle": {
+    "depPath": "/Users/ajun/Desktop/study/bishe/packages/main-app",
+    "line": "    at Server.start (/Users/ajun/Desktop/study/bishe/packages/main-app/node_modules/webpack-dev-server/lib/Server.js:3210:7)",
+    "stage": "dev",
+    "stdio": "stderr",
+    "wd": "/Users/ajun/Desktop/study/bishe/packages/main-app"
+  },
+  "48 debug pnpm:lifecycle": {
+    "depPath": "/Users/ajun/Desktop/study/bishe/packages/main-app",
+    "line": "    at async Command.<anonymous> (/Users/ajun/Desktop/study/bishe/packages/main-app/node_modules/@webpack-cli/serve/lib/index.js:255:25)",
+    "stage": "dev",
+    "stdio": "stderr",
+    "wd": "/Users/ajun/Desktop/study/bishe/packages/main-app"
+  },
+  "49 debug pnpm:lifecycle": {
+    "depPath": "/Users/ajun/Desktop/study/bishe/packages/main-app",
+    "line": "    at async Promise.all (index 1)",
+    "stage": "dev",
+    "stdio": "stderr",
+    "wd": "/Users/ajun/Desktop/study/bishe/packages/main-app"
+  },
+  "50 debug pnpm:lifecycle": {
+    "depPath": "/Users/ajun/Desktop/study/bishe/packages/main-app",
+    "line": "    at async Command.<anonymous> (/Users/ajun/Desktop/study/bishe/packages/main-app/node_modules/webpack-cli/lib/webpack-cli.js:1674:7) {",
+    "stage": "dev",
+    "stdio": "stderr",
+    "wd": "/Users/ajun/Desktop/study/bishe/packages/main-app"
+  },
+  "51 debug pnpm:lifecycle": {
+    "depPath": "/Users/ajun/Desktop/study/bishe/packages/main-app",
+    "line": "  code: 'EADDRINUSE',",
+    "stage": "dev",
+    "stdio": "stderr",
+    "wd": "/Users/ajun/Desktop/study/bishe/packages/main-app"
+  },
+  "52 debug pnpm:lifecycle": {
+    "depPath": "/Users/ajun/Desktop/study/bishe/packages/main-app",
+    "line": "  errno: -48,",
+    "stage": "dev",
+    "stdio": "stderr",
+    "wd": "/Users/ajun/Desktop/study/bishe/packages/main-app"
+  },
+  "53 debug pnpm:lifecycle": {
+    "depPath": "/Users/ajun/Desktop/study/bishe/packages/main-app",
+    "line": "  syscall: 'listen',",
+    "stage": "dev",
+    "stdio": "stderr",
+    "wd": "/Users/ajun/Desktop/study/bishe/packages/main-app"
+  },
+  "54 debug pnpm:lifecycle": {
+    "depPath": "/Users/ajun/Desktop/study/bishe/packages/main-app",
+    "line": "  address: '::',",
+    "stage": "dev",
+    "stdio": "stderr",
+    "wd": "/Users/ajun/Desktop/study/bishe/packages/main-app"
+  },
+  "55 debug pnpm:lifecycle": {
+    "depPath": "/Users/ajun/Desktop/study/bishe/packages/main-app",
+    "line": "  port: 9000",
+    "stage": "dev",
+    "stdio": "stderr",
+    "wd": "/Users/ajun/Desktop/study/bishe/packages/main-app"
+  },
+  "56 debug pnpm:lifecycle": {
+    "depPath": "/Users/ajun/Desktop/study/bishe/packages/main-app",
+    "line": "}",
+    "stage": "dev",
+    "stdio": "stderr",
+    "wd": "/Users/ajun/Desktop/study/bishe/packages/main-app"
+  },
+  "57 debug pnpm:lifecycle": {
+    "depPath": "/Users/ajun/Desktop/study/bishe/packages/main-app",
+    "exitCode": 1,
+    "optional": false,
+    "stage": "dev",
+    "wd": "/Users/ajun/Desktop/study/bishe/packages/main-app"
+  },
+  "58 info pnpm": {
+    "err": {
+      "name": "Error",
+      "message": "@ dev: `webpack serve`\nExit status 1",
+      "code": "ELIFECYCLE",
+      "stack": "Error: @ dev: `webpack serve`\nExit status 1\n    at EventEmitter.<anonymous> (/usr/local/lib/node_modules/pnpm/dist/pnpm.cjs:105376:20)\n    at EventEmitter.emit (events.js:400:28)\n    at ChildProcess.<anonymous> (/usr/local/lib/node_modules/pnpm/dist/pnpm.cjs:91963:18)\n    at ChildProcess.emit (events.js:400:28)\n    at maybeClose (internal/child_process.js:1055:16)\n    at Process.ChildProcess._handle.onexit (internal/child_process.js:288:5)"
+    }
+  },
+  "59 error pnpm": {
+    "errno": 1,
+    "code": "ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL",
+    "pkgid": "@",
+    "stage": "dev",
+    "script": "webpack serve",
+    "prefix": "/Users/ajun/Desktop/study/bishe/packages/main-app",
     "err": {
       "name": "pnpm",
-      "message": "None of the packages has a \"filter\" script",
-      "code": "ERR_PNPM_RECURSIVE_RUN_NO_SCRIPT",
-      "stack": "pnpm: None of the packages has a \"filter\" script\n    at exports2.default (/usr/local/lib/node_modules/pnpm/dist/pnpm.cjs:175799:17)\n    at async /usr/local/lib/node_modules/pnpm/dist/pnpm.cjs:180173:21\n    at async run (/usr/local/lib/node_modules/pnpm/dist/pnpm.cjs:180147:34)\n    at async runPnpm (/usr/local/lib/node_modules/pnpm/dist/pnpm.cjs:180358:5)\n    at async /usr/local/lib/node_modules/pnpm/dist/pnpm.cjs:180350:7"
+      "message": "@ dev: `webpack serve`\nExit status 1",
+      "code": "ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL",
+      "stack": "Error: @ dev: `webpack serve`\nExit status 1\n    at EventEmitter.<anonymous> (/usr/local/lib/node_modules/pnpm/dist/pnpm.cjs:105376:20)\n    at EventEmitter.emit (events.js:400:28)\n    at ChildProcess.<anonymous> (/usr/local/lib/node_modules/pnpm/dist/pnpm.cjs:91963:18)\n    at ChildProcess.emit (events.js:400:28)\n    at maybeClose (internal/child_process.js:1055:16)\n    at Process.ChildProcess._handle.onexit (internal/child_process.js:288:5)"
     }
   }
 }
