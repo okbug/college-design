@@ -26,13 +26,13 @@ const User = () => {
   return (
     <>
       <h1>用户界面</h1>
-      <div>
+      {/* <div>
         {userInfo &&
          (
            <>{JSON.stringify(userInfo)}</>
          )
         }
-      </div>
+      </div> */}
       <PlayGround />
     </>
   );

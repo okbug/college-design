@@ -8,7 +8,7 @@ import User from "./views/User/index.js";
 import "./micro-app-regester";
 import "antd/dist/antd.less";
 
-function Test() {
+function PPTPage() {
   loadMicroApp({
     name: "pptist",
     entry: "//localhost:8080",
@@ -38,7 +38,7 @@ function Index() {
             <Route path="user" element={<User />} />
             <Route path="*" element={<BlankPage />} />
           </Route>
-          <Route path="/ppt" element={<Test></Test>}></Route>
+          <Route path="/ppt" element={<PPTPage></PPTPage>}></Route>
         </Routes>
       </Router>
     </>
