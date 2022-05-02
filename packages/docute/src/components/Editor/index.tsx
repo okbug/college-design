@@ -35,7 +35,6 @@ export default function Editor() {
       })
     ).then(([res]) => {
       let timer = setInterval(() => {
-        console.log(document.querySelector("#editor"))
         if (document.querySelector("#editor")) {
           vditor.setValue(res.content);
           setTitle(res.title || "");
@@ -59,10 +58,12 @@ export default function Editor() {
   }, 300);
 
   const finishEdit = () => {
+    if (!vditor) return;
     if (!title.trim()) {
       Toast.error("请输入标题");
       return;
     }
+    console.log(vditor.getValue());
     // 更新文档
     Promise.all([
       event.emit("updateDocument", {

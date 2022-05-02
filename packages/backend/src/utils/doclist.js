@@ -65,18 +65,19 @@ const createDocument = async (params) => {
     lower: true,
     upper: true,
   });
+  console.log(id);
   const createSQL = `
   insert into docs
   (content, view_users, edit_users,type,id,title)
   values
-  (?, ?,?,'doc', ?,?)
+  (?, ?,?,'doc', ?, ?)
   `;
   await execute(createSQL, [
     `""`,
     JSON.stringify(users),
     JSON.stringify(users),
     id,
-    title,
+    title
   ]);
 
   const [user] = await query(
@@ -138,6 +139,7 @@ const createPPT = async ({ title, userName }) => {
     lower: true,
     upper: true,
   });
+  console.log(id);
   const users = JSON.stringify([{ name: userName }]);
 
   const createSQL = `
@@ -151,7 +153,7 @@ const createPPT = async ({ title, userName }) => {
     users,
     users,
     id,
-    title,
+    title
   ]);
 
   const getUserInfo = `
@@ -164,29 +166,33 @@ const createPPT = async ({ title, userName }) => {
     id,
     title,
     type: "ppt",
-  })
+  });
 
   await execute(`update users set docs = ? where username = ?`, [
     JSON.stringify(docs),
     userName,
   ]);
 
-
   return {
     ok: 1,
     data: {
       id,
-      title
-    }
+      title,
+    },
+  };
+};
+
+class Document {
+  controller() {
+    return {
+      getDocListByUser,
+      getDocDetail,
+      updateDoc,
+      createDocument,
+      deleteDocument,
+      createPPT,
+    };
   }
-};
+}
 
-
-module.exports = {
-  getDocListByUser,
-  getDocDetail,
-  updateDoc,
-  createDocument,
-  deleteDocument,
-  createPPT,
-};
+module.exports = new Document().controller();

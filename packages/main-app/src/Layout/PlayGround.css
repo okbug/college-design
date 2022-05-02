@@ -11,6 +11,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    display: flex;
 }
 
 #react-app .doc-list .doc-link {

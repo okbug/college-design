@@ -25,7 +25,7 @@ const User = () => {
   }, [userName])
   return (
     <>
-      <h1>用户界面</h1>
+      <h1 style={{textAlign: 'center'}}>用户界面</h1>
       {/* <div>
         {userInfo &&
          (

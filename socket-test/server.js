@@ -15,7 +15,7 @@
 
 const { WebSocketServer } = require("ws");
 
-const server = new WebSocketServer({ port: 3000 });
+const server = new WebSocketServer({ port: 4444 });
 const set = new Set()
 server.on("connection", (socket) => {
     set.add(socket);
@@ -26,20 +26,20 @@ server.on("connection", (socket) => {
   }));
 
   // receive a message from the client
-  socket.on("message", (data) => {
-    const packet = JSON.parse(data);
+  // socket.on("message", (data) => {
+  //   const packet = JSON.parse(data);
 
-    switch (packet.type) {
-      case "hello from client":
-        // ...
-        console.log(packet.content)
-        set.forEach(socket => {
-            socket.send(JSON.stringify({
-                type: "hello from server",
-                content: packet.content
-              }));
-        })
-        break;
-    }
-  });
+  //   switch (packet.type) {
+  //     case "hello from client":
+  //       // ...
+  //       console.log(packet.content)
+  //       set.forEach(socket => {
+  //           socket.send(JSON.stringify({
+  //               type: "hello from server",
+  //               content: packet.content
+  //             }));
+  //       })
+  //       break;
+  //   }
+  // });
 });
