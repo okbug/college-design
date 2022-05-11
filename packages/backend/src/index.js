@@ -5,13 +5,19 @@ const app = new Koa();
 const route = new Router();
 const cors = require("./middleware/cors");
 
-const { login, register, checkUser, getUserInfo } = require("./utils/user");
+const {
+  login,
+  register,
+  checkUser,
+  getUserInfo,
+  updateUserFavorite,
+} = require("./utils/user");
 const {
   getDocDetail,
   updateDoc,
   createDocument,
   deleteDocument,
-  createPPT
+  createPPT,
 } = require("./utils/doclist");
 const { paramPaser } = require("./utils/parser");
 
@@ -97,9 +103,7 @@ route.post("/checkUserLogin", async (ctx) => {
     ctx.body = {
       code: 200,
       msg: "ok",
-      data: {
-        name: "test",
-      },
+      data: res,
     };
 });
 
@@ -124,6 +128,7 @@ route.post("/getUserInfo", async (ctx) => {
         email: res.user_email,
         registerTime: Number(res.register_time),
         docs: res.docs,
+        favorite: res.favorite,
       },
       msg: "获取用户信息成功",
     };
@@ -211,7 +216,7 @@ route.post("/createPowerPoint", async (ctx) => {
   const res = await createPPT({ title, userName: ctx.cookies.get("userName") });
   ctx.body = {
     title,
-    id: res.data.id
+    id: res.data.id,
   };
 });
 
@@ -225,6 +230,16 @@ route.post("/deleteDocument", async (ctx) => {
   ctx.body = {
     msg: "ok",
     data: "ok",
+  };
+});
+
+route.post("/changeUserFavorite", async (ctx) => {
+  const params = await paramPaser(ctx);
+  console.log(params);
+  const res = await updateUserFavorite(params);
+  console.log(res);
+  ctx.body = {
+    data: "everything is ok",
   };
 });
 

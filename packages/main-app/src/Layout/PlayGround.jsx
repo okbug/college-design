@@ -7,7 +7,7 @@ import {
   TabPane,
 } from "@douyinfe/semi-ui";
 import "./PlayGround.css";
-import { getUserInfo, deleteDoc } from "../common";
+import { getUserInfo, deleteDoc, cancelFavorite as cancel } from "../common";
 import { useNavigate } from "react-router-dom";
 const { Content } = Layout;
 
@@ -23,6 +23,16 @@ const go = (item) =>
 const DocList = (props) => {
   const navigate = useNavigate();
   const { user } = props;
+  console.log(user);
+  console.log(user.favorite, user.docs);
+  const cancelFavorite = (id) => {
+    const {userName} = user;
+    console.log(userName, id);
+    cancel({
+      userName,
+      id,
+    })
+  }
   return (
     <>
       <div className="doc-list">
@@ -31,9 +41,21 @@ const DocList = (props) => {
             <Content>
               <List
                 bordered
-                dataSource={user.docs}
+                dataSource={user.favorite}
                 renderItem={(item) => (
-                  <List.Item className="doc-link">{item.title}</List.Item>
+                  <>
+                    <List.Item className="doc-link">
+                      <span>
+                        <a onClick={() => window.open(go(item))}>
+                          {item.title}
+                        </a>{" "}
+                        |{" "}
+                      </span>
+                      <span>
+                        <a onClick={() => cancelFavorite(item.id)}>取消收藏</a>
+                      </span>
+                    </List.Item>
+                  </>
                 )}
               ></List>
             </Content>
@@ -50,7 +72,7 @@ const DocList = (props) => {
                         {item.title}
                         {"   "}
                         <span>
-                          <a onClick={() => navigate(go(item))}>详情</a>
+                          <a onClick={() => window.open(go(item))}>详情</a>
                         </span>
                         {"|"}
                         <span>

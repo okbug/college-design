@@ -1,1 +1,10 @@
 **/node_modules
+
+
+./config.md
+./note.md
+./core.md
+./publish.sh
+./go-backend
+./rust-wasm
+**/rust-code

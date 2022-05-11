@@ -8,3 +8,5 @@ export const getPPTContent = (id: string) =>
 
 export const updatePPTContent = (data: any) => 
   request.post('updateDocument', data)
+
+

@@ -52,3 +52,8 @@ PPT的在线功能后端目前已用express搭建一个简单版本
 
 使用 pnpm -r -filter ./packages run dev
 可以一键启动packages 下面的所有项目
+
+
+WebSocket开启
+
+`HOST=localhost PORT=1234 npx y-websocket`

@@ -1,6 +1,6 @@
 export const locationInfo = window.location
 
-const useParmas = (): { id: string } => {
+const useParams = (): { id: string } => {
 
   const params = {
     id: ''
@@ -18,4 +18,4 @@ const useParmas = (): { id: string } => {
   return params;
 };
 
-export default useParmas;
+export default useParams;

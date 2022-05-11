@@ -1,6 +1,6 @@
 const { query, execute } = require("./sql");
 const { genUserId, genRandomString } = require("../common/index");
-
+const {getDocDetail} = require('./doclist');
 /**
  * 返回数据库中所有用户的数组
  * @returns user[]
@@ -109,7 +109,7 @@ const updatePassword = async ({ username, nowPassWord, newPassword }) => {
 const checkUser = async ({ userName, userId, token }) => {
   const text = `select * from users where username='${userName}' and userid='${userId}' and token='${token}'`;
   const res = await getUserInfo({ userName, userId, token });
-  return !!res;
+  return res;
 };
 
 const getUserInfo = async ({ userName, userId, token }) => {
@@ -118,6 +118,38 @@ const getUserInfo = async ({ userName, userId, token }) => {
   return res;
 };
 
+
+const updateUserFavorite = async ({userName, id, options}) => {
+  console.log(456);
+  const doc = await getDocDetail(id);
+  console.log(doc.title)
+  console.log(123);
+  const [user] = await getUser(userName);
+  let {favorite} = user;
+  if (!Array.isArray(favorite)) {
+    favorite = [];
+  }
+  const has = favorite.find(item => item.id === id);
+  if (!has) {
+    favorite.push({
+      id,
+      title: doc.title,
+      type: doc.type,
+    })
+  } else {
+    favorite = favorite.filter(item => item.id !== id);
+  }
+
+  // set favorite
+  const text = `update users set favorite = ? where username = ?`;
+  await execute(text, [JSON.stringify(favorite), userName]);
+
+  return {
+    title: doc.title,
+    id,
+  }
+}
+
 class UserManage {
     constructor() {
         this.register = register;
@@ -125,6 +157,7 @@ class UserManage {
         this.updatePassword = updatePassword;
         this.checkUser = checkUser;
         this.getUserInfo = getUserInfo;
+        this.updateUserFavorite = updateUserFavorite;
     }
 }
 

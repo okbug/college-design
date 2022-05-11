@@ -2,7 +2,9 @@
   <div class="editor-header">
     <div class="left">
       <Dropdown :trigger="['click']">
-        <div class="menu-item"><IconFolderClose /> <span class="text">文件</span></div>
+        <div class="menu-item">
+          <IconFolderClose /> <span class="text">文件</span>
+        </div>
         <template #overlay>
           <Menu>
             <MenuItem @click="exportJSON()">导出 JSON</MenuItem>
@@ -11,7 +13,9 @@
         </template>
       </Dropdown>
       <Dropdown :trigger="['click']">
-        <div class="menu-item"><IconEdit /> <span class="text">编辑</span></div>
+        <div class="menu-item">
+          <IconEdit /> <span class="text">编辑</span>
+        </div>
         <template #overlay>
           <Menu>
             <MenuItem @click="undo()">撤销</MenuItem>
@@ -24,7 +28,9 @@
         </template>
       </Dropdown>
       <Dropdown :trigger="['click']">
-        <div class="menu-item"><IconPpt /> <span class="text">演示</span></div>
+        <div class="menu-item">
+          <IconPpt /> <span class="text">演示</span>
+        </div>
         <template #overlay>
           <Menu>
             <MenuItem @click="enterScreeningFromStart()">从头开始</MenuItem>
@@ -33,7 +39,9 @@
         </template>
       </Dropdown>
       <Dropdown :trigger="['click']">
-        <div class="menu-item"><IconHelpcenter /> <span class="text">帮助</span></div>
+        <div class="menu-item">
+          <IconHelpcenter /> <span class="text">帮助</span>
+        </div>
         <template #overlay>
           <Menu>
             <MenuItem @click="goIssues()">意见反馈</MenuItem>
@@ -44,7 +52,11 @@
     </div>
 
     <div class="right">
-      <Button @click="goToHome" style="margin-right: 10px;">返回首页</Button>
+      <Button v-if="favored" type="primary" @click="toggleFavoriteState">已收藏</Button>
+      <Button v-else @click="toggleFavoriteState">收藏</Button>
+      <Button @click="goToHome" style="
+      margin-right: 10px;
+      margin-left: 10px;">返回首页</Button>
       <Button type="primary" @click="savePPT">保存</Button>
       <Tooltip :mouseLeaveDelay="0" title="幻灯片放映">
         <div class="menu-item" @click="enterScreening()">
@@ -52,16 +64,13 @@
         </div>
       </Tooltip>
       <a href="https://github.com/okbug/college-design" target="_blank">
-        <div class="menu-item"><IconGithub size="18" fill="#666" /></div>
+        <div class="menu-item">
+          <IconGithub size="18" fill="#666" />
+        </div>
       </a>
     </div>
 
-    <Drawer
-      width="320"
-      placement="right"
-      :visible="hotkeyDrawerVisible"
-      @close="hotkeyDrawerVisible = false"
-    >
+    <Drawer width="320" placement="right" :visible="hotkeyDrawerVisible" @close="hotkeyDrawerVisible = false">
       <HotkeyDoc />
     </Drawer>
 
@@ -83,6 +92,7 @@ import useParams from '@/hooks/useRoute'
 import { updatePPTContent } from '@/api/docs'
 
 import HotkeyDoc from './HotkeyDoc.vue'
+import { getUserInfo, setUserFavoriteState } from '@/api'
 
 export default defineComponent({
   name: 'editor-header',
@@ -90,6 +100,25 @@ export default defineComponent({
     HotkeyDoc,
   },
   setup() {
+    const params = useParams()
+    const favored = ref<boolean>(false);
+    const userInfo = ref()
+    const { id } = params;
+    const getDocFavoriteState = () => {
+      if (!id) return;
+      getUserInfo().then(res => {
+        if (!res.data) return;
+        const { favorite } = res.data;
+        if (favorite) {
+          favored.value = favorite.some((item: { id: string }) => id === item.id);
+        }
+
+        userInfo.value = res.data
+
+      })
+
+    }
+    getDocFavoriteState()
     const mainStore = useMainStore()
     const { showGridLines } = storeToRefs(mainStore)
 
@@ -123,6 +152,19 @@ export default defineComponent({
       location.href = location.origin
     }
 
+    const toggleFavoriteState = () => {
+      console.log(userInfo.value);
+      setUserFavoriteState(userInfo.value.username, id, !favored.value)
+        .then(res => {
+          console.log(res);
+          if (res) favored.value = !favored.value;
+          message.success('操作成功')
+        })
+        .catch(() => {
+          message.error('操作失败')
+        })
+    }
+
     return {
       redo,
       undo,
@@ -140,6 +182,9 @@ export default defineComponent({
       goIssues,
       savePPT,
       goToHome,
+      favored,
+      userInfo,
+      toggleFavoriteState,
     }
   },
 })
@@ -154,11 +199,14 @@ export default defineComponent({
   justify-content: space-between;
   padding: 0 10px;
 }
-.left, .right {
+
+.left,
+.right {
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
 .menu-item {
   height: 100%;
   display: flex;

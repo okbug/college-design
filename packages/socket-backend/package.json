@@ -1,0 +1,15 @@
+{
+  "name": "socket-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "HOST=localhost PORT=1234 y-websocket"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "y-websocket": "^1.4.3"
+  }
+}

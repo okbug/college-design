@@ -22,8 +22,8 @@ async function render(props?: any) {
         <Routes>
           <Route path="/" element={<App />}>
           <Route path="view/:id" element={<View></View>}></Route>
-          <Route path="edit/:id" element={<Editor></Editor>}></Route>
-          <Route path="edit1/:id" element={<SocketEditor></SocketEditor>}></Route>
+          <Route path="wysiwyw-edit/:id" element={<Editor></Editor>}></Route>
+          <Route path="edit/:id" element={<SocketEditor></SocketEditor>}></Route>
           </Route>
           <Route path="/:id" element={<App />} />
           <Route path="/create" element={<Create />} />

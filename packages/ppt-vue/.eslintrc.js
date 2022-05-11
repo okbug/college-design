@@ -16,6 +16,8 @@ module.exports = {
     ecmaVersion: 2020,
   },
   rules: {
+    'declaration-block-semicolon-newline-after': ['off'],
+    'declaration-block-trailing-semicolon': ['off'],
     'curly': ['off', 'multi-line'],
     'eqeqeq': ['off', 'always'],
     'semi': ['off', 'never'],

@@ -45,3 +45,7 @@ export const deleteDoc = async (id) => {
 
 export const createPPT = async (title) =>
   request.post('/createPowerPoint', {title});
+
+
+export const cancelFavorite = (options) =>
+  request.post('/changeUserFavorite', options)
