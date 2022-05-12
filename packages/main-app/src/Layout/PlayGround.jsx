@@ -31,6 +31,7 @@ const DocList = (props) => {
     cancel({
       userName,
       id,
+      options: 'false'
     })
   }
   return (

@@ -59,6 +59,7 @@ function load() {
   editor.on(
     "text-change",
     debounce(function (delta, oldDelta, source) {
+      console.log(delta)
       const text = editor.getText();
       if (source === "yjs") return;
       axios
