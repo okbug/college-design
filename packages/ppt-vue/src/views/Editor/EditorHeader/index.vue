@@ -89,7 +89,7 @@ import useHistorySnapshot from '@/hooks/useHistorySnapshot'
 import useExport from '@/hooks/useExport'
 import useImport from '@/hooks/useImport'
 import useParams from '@/hooks/useRoute'
-import { updatePPTContent } from '@/api/docs'
+import { getPPTContent, updatePPTContent } from '@/api/docs'
 
 import HotkeyDoc from './HotkeyDoc.vue'
 import { getUserInfo, setUserFavoriteState } from '@/api'
@@ -104,6 +104,11 @@ export default defineComponent({
     const favored = ref<boolean>(false);
     const userInfo = ref()
     const { id } = params;
+    const title = ref('');
+    getPPTContent(id).then(res => {
+      title.value = (res as any).title as string;
+      console.log(res, '123131221323')
+    })
     const getDocFavoriteState = () => {
       if (!id) return;
       getUserInfo().then(res => {
@@ -142,7 +147,8 @@ export default defineComponent({
       const { id } = useParams()
       updatePPTContent({
         content: slide.value,
-        id
+        id,
+        title: title.value,
       }).then(() => {
         message.success('保存成功')
       })

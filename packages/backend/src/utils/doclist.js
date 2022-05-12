@@ -23,6 +23,7 @@ const getDocDetail = async (id) => {
     return;
   }
   const [docDetail] = res;
+  console.log(docDetail, 'docDetail');
   return docDetail;
 };
 

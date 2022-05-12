@@ -42,7 +42,7 @@ const DocList = (props) => {
             <Content>
               <List
                 bordered
-                dataSource={user.favorite}
+                dataSource={user.favorite || []}
                 renderItem={(item) => (
                   <>
                     <List.Item className="doc-link">

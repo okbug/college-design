@@ -121,9 +121,10 @@ const getUserInfo = async ({ userName, userId, token }) => {
 
 const updateUserFavorite = async ({userName, id, options}) => {
   console.log(456);
-  const doc = await getDocDetail(id);
-  console.log(doc.title)
-  console.log(123);
+  let doc = await getDocDetail(id);
+  if (!doc) {
+    doc = {}
+  }
   const [user] = await getUser(userName);
   let {favorite} = user;
   if (!Array.isArray(favorite)) {
